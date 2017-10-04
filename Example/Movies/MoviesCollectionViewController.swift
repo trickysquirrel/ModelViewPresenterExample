@@ -8,13 +8,13 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "MovieCell"
 
 
 class MoviesCollectionViewController: UICollectionViewController {
 
 	private let presenter: MoviesPresenter
-	private let dataSource = CollectionViewDataSource<UICollectionViewCell, MoviesViewModel>()
+	private let dataSource: CollectionViewDataSource<MoviesCollectionViewCell, MoviesViewModel>
 
 
 	required init?(coder aDecoder: NSCoder) {
@@ -22,17 +22,17 @@ class MoviesCollectionViewController: UICollectionViewController {
 	}
 
 	
-	init(presenter: MoviesPresenter) {
+	init(presenter: MoviesPresenter, dataSource: CollectionViewDataSource<MoviesCollectionViewCell, MoviesViewModel>) {
 		self.presenter = presenter
+		self.dataSource = dataSource
 		super.init(nibName: "MoviesCollectionViewController", bundle: nil)
 	}
 
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.collectionView!.register(MoviesCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+		configureCollectionView()
 		dataSource.configure(collectionView: collectionView)
-		observeDataSourceChanges()
 		refreshView()
     }
 
@@ -40,12 +40,15 @@ class MoviesCollectionViewController: UICollectionViewController {
 	private func refreshView() {
 		presenter.updateView { (response) in
 			switch response {
+			case .loading(_):
+				break
 			case .success(let viewModels):
+				observeDataSourceChanges()
 				dataSource.resetRows(viewModels: viewModels, cellIdentifier: reuseIdentifier)
 				break
 			case .noResults:
 				break
-			case .error(let errorMsg):
+			case .error:
 				break
 			}
 		}
@@ -55,8 +58,7 @@ class MoviesCollectionViewController: UICollectionViewController {
 	private func observeDataSourceChanges() {
 
 		dataSource.onEventConfigureCell { cell, viewModel in
-			cell.backgroundView?.backgroundColor = UIColor.red
-			//cell.textLabel?.text = viewModel.title
+			cell.configure(viewModel: viewModel)
 		}
 
 		dataSource.onEventItemSelected(selectCell: { [weak self] (viewModel, indexPath) in
@@ -64,5 +66,19 @@ class MoviesCollectionViewController: UICollectionViewController {
 		})
 	}
 
+
+}
+
+// MARK:- Utils
+
+private extension MoviesCollectionViewController {
+
+	func configureCollectionView() {
+		let nib = UINib.init(nibName: "MoviesCollectionViewCell", bundle: nil)
+		self.collectionView?.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
+		let collectionViewLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout
+		collectionViewLayout?.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+		collectionViewLayout?.invalidateLayout()
+	}
 
 }

@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import SDWebImage
 
 class MoviesCollectionViewCell: UICollectionViewCell {
 
 	@IBOutlet weak var imageView: UIImageView!
 
 	func configure(viewModel: MoviesViewModel) {
-
+		imageView.sd_setImage(with: viewModel.imageUrl, completed: nil)
 	}
 
 }

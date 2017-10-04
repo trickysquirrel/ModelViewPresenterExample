@@ -15,7 +15,8 @@ struct ViewControllerFactory {
 		let dataLoader = DataLoader(resource: "movies")
 		let moviesDataLoader = MoviesDataLoader(dataLoader: dataLoader)
 		let presenter = MoviesPresenter(moviesDataLoader: moviesDataLoader)
-		return MoviesCollectionViewController(presenter: presenter)
+		let dataSource = CollectionViewDataSource<MoviesCollectionViewCell, MoviesViewModel>()
+		return MoviesCollectionViewController(presenter: presenter, dataSource: dataSource)
 	}
 
 }

@@ -14,6 +14,7 @@ struct MoviesViewModel {
 }
 
 enum MoviesPresenterResponse {
+	case loading(Bool)
 	case success([MoviesViewModel])
 	case noResults
 	case error(msg:String)
@@ -40,4 +41,5 @@ struct MoviesPresenter {
 			completion(.error(msg: "this is an error message"))
 		}
 	}
+
 }
