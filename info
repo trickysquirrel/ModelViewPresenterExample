@@ -1,0 +1,16 @@
+
+Split the app into a few distint parts
+
+View&VC | present stuff | get stuff | go somewhere
+
+tests are aranged around each area and only care about inputs and outputs, e.g
+
+get stuff: if I ask for data give me data, don't care too much wether its from db or network, exception being images
+present stuff: ask for the initial view state and check the returning view model struct, we don't care how it done.  Maybe its just one object, maybe its Redux, maybe you have view configurations, it does not matter.  Your free to refractor from redux to something else and the tests never change so you know you've not broken anything.  Also this area has no concept of how this information is to be displayed, e.g. maybe its a table, collection or stack view - should not matter
+View: are just dumb and just set stuff.
+VC: contain trigger points for features, knows how to display the viewmodel struct
+go somewhere: an object that takes the users to a different place in the app
+
+
+
+When writing code we tend to just, fix bugs or refactor, but 80%-90% of what we do is add/remove/change features.  If we also spend 80% just reading code thats already there so we know how to change it, it makes sense to really show to the read how the feature works.
