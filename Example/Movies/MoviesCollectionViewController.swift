@@ -15,6 +15,10 @@ class MoviesCollectionViewController: UICollectionViewController {
 
 	private let presenter: MoviesPresenter
 	private let dataSource: CollectionViewDataSource<MoviesCollectionViewCell, MoviesViewModel>
+	private let showMovieDetailAction: ShowMovieDetailsAction
+    private let reporter: MoviesReporter
+    private let loadingIndicator: LoadingIndicatorProtocol
+    private let alert: InformationAlertProtocol
 
 
 	required init?(coder aDecoder: NSCoder) {
@@ -22,9 +26,18 @@ class MoviesCollectionViewController: UICollectionViewController {
 	}
 
 	
-	init(presenter: MoviesPresenter, dataSource: CollectionViewDataSource<MoviesCollectionViewCell, MoviesViewModel>) {
+	init(presenter: MoviesPresenter,
+	     dataSource: CollectionViewDataSource<MoviesCollectionViewCell, MoviesViewModel>,
+         reporter: MoviesReporter,
+         loadingIndicator: LoadingIndicatorProtocol,
+         alert: InformationAlertProtocol,
+	     showMovieDetailAction: ShowMovieDetailsAction) {
 		self.presenter = presenter
 		self.dataSource = dataSource
+		self.showMovieDetailAction = showMovieDetailAction
+        self.reporter = reporter
+        self.loadingIndicator = loadingIndicator
+        self.alert = alert
 		super.init(nibName: "MoviesCollectionViewController", bundle: nil)
 	}
 
@@ -36,19 +49,26 @@ class MoviesCollectionViewController: UICollectionViewController {
 		refreshView()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        reporter.viewShown()
+    }
+
 
 	private func refreshView() {
-		presenter.updateView { (response) in
+		presenter.updateView { [weak self] response in
 			switch response {
-			case .loading(_):
-				break
+			case .loading(let show):
+                self?.loadingIndicator.show(show)
 			case .success(let viewModels):
 				observeDataSourceChanges()
 				dataSource.resetRows(viewModels: viewModels, cellIdentifier: reuseIdentifier)
 				break
-			case .noResults:
+			case .noResults(let title, let msg):
+                self?.alert.displayAlert(title: title, message: msg, presentingViewController: self)
 				break
-			case .error:
+			case .error(let title, let msg):
+                self?.alert.displayAlert(title: title, message: msg, presentingViewController: self)
 				break
 			}
 		}
@@ -62,7 +82,7 @@ class MoviesCollectionViewController: UICollectionViewController {
 		}
 
 		dataSource.onEventItemSelected(selectCell: { [weak self] (viewModel, indexPath) in
-			//self?.showRegistrationAction?.perform(location: viewModel.location)
+            self?.showMovieDetailAction.perform()
 		})
 	}
 

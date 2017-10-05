@@ -9,7 +9,7 @@
 import UIKit
 
 
-struct AppCoordinator {
+class AppCoordinator {
 
 	private let window: UIWindow
 	private let navigationController: UINavigationController
@@ -26,9 +26,18 @@ struct AppCoordinator {
 
 
 	func showRootViewController() {
-		let viewController = viewControllerFactory.makeMoviesViewController()
+        let action = ShowMovieDetailsAction(block: { [weak self] in
+            self?.showMovieDetailsViewController()
+        })
+		let viewController = viewControllerFactory.makeMoviesViewController(showMovieDetailAction: action)
 		pushOnViewController(viewController)
 	}
+
+    
+    private func showMovieDetailsViewController() {
+        let viewController = viewControllerFactory.makeDetailsViewController()
+        pushOnViewController(viewController)
+    }
 	
 }
 

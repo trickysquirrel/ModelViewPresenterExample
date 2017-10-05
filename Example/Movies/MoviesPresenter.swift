@@ -14,10 +14,10 @@ struct MoviesViewModel {
 }
 
 enum MoviesPresenterResponse {
-	case loading(Bool)
+    case loading(show: Bool)
 	case success([MoviesViewModel])
-	case noResults
-	case error(msg:String)
+    case noResults(title: String, msg:String)
+    case error(title: String, msg:String)
 }
 
 
@@ -28,18 +28,22 @@ struct MoviesPresenter {
 
 	func updateView(completion:(MoviesPresenterResponse)->()) {
 
+        completion(.loading(show: true))
+
 		if let moviesData = moviesDataLoader.load() {
 			let viewModels = moviesData.map { MoviesViewModel(imageUrl: $0.imageUrl) }
 			if viewModels.count == 0 {
-				completion(.noResults)
+                completion(.noResults(title:"title", msg:"no results try again later"))
 			}
 			else {
 				completion(.success(viewModels))
 			}
 		}
 		else {
-			completion(.error(msg: "this is an error message"))
+            completion(.error(title: "error", msg: "this is an error message"))
 		}
+
+        completion(.loading(show: false))
 	}
 
 }

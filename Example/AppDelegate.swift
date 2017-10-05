@@ -21,7 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		window = UIWindow(frame: UIScreen.main.bounds)
 		guard let window = window else { return true }
 
-		let viewControllerFactory = ViewControllerFactory()
+        let analyticsFactory = AnalyticsReporterFactory()
+        let viewControllerFactory = ViewControllerFactory(analyticsFactory: analyticsFactory)
 		let navigationController = UINavigationController()
 		appCoordinator = AppCoordinator(window: window, navigationController: navigationController, viewControllerFactory: viewControllerFactory)
 		appCoordinator?.showRootViewController()
