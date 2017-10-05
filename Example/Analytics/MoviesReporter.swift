@@ -11,6 +11,7 @@ import Foundation
 struct MoviesReporter {
 
     func viewShown() {
-        
+        // class should be preloaded with all static information
+        // create a dictionary and pass it somewhere
     }
 }

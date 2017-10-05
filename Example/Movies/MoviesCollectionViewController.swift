@@ -49,6 +49,7 @@ class MoviesCollectionViewController: UICollectionViewController {
 		refreshView()
     }
 
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         reporter.viewShown()
