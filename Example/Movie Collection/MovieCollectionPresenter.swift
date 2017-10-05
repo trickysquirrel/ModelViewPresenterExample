@@ -9,34 +9,34 @@
 import Foundation
 
 
-struct MoviesViewModel {
+struct MovieViewModel {
 	let imageUrl: URL
 }
 
-enum MoviesPresenterResponse {
+enum MovieCollectionPresenterResponse {
     case loading(show: Bool)
-	case success([MoviesViewModel])
+	case success([MovieViewModel])
     case noResults(title: String, msg:String)
     case error(title: String, msg:String)
 }
 
 
-struct MoviesPresenter {
+struct MovieCollectionPresenter {
 
 	let moviesDataLoader: MoviesDataLoader
 
 
-	func updateView(completion:(MoviesPresenterResponse)->()) {
+	func updateView(completion:(MovieCollectionPresenterResponse)->()) {
 
         completion(.loading(show: true))
 
 		if let moviesData = moviesDataLoader.load() {
-			let viewModels = moviesData.map { MoviesViewModel(imageUrl: $0.imageUrl) }
-			if viewModels.count == 0 {
-                completion(.noResults(title:"title", msg:"no results try again later"))
+			let viewModels = moviesData.map { MovieViewModel(imageUrl: $0.imageUrl) }
+			if viewModels.count > 0 {
+                completion(.success(viewModels))
 			}
 			else {
-				completion(.success(viewModels))
+                completion(.noResults(title:"title", msg:"no results try again later"))
 			}
 		}
 		else {

@@ -13,9 +13,9 @@ private let reuseIdentifier = "MovieCell"
 
 class MoviesCollectionViewController: UICollectionViewController {
 
-	private let presenter: MoviesPresenter
-	private let dataSource: CollectionViewDataSource<MoviesCollectionViewCell, MoviesViewModel>
-	private let showMovieDetailAction: ShowMovieDetailsAction
+	private let presenter: MovieCollectionPresenter
+	private let dataSource: CollectionViewDataSource<MoviesCollectionViewCell, MovieViewModel>
+	private let appActions: AppMovieCollectionActions
     private let reporter: MoviesReporter
     private let loadingIndicator: LoadingIndicatorProtocol
     private let alert: InformationAlertProtocol
@@ -26,15 +26,15 @@ class MoviesCollectionViewController: UICollectionViewController {
 	}
 
 	
-	init(presenter: MoviesPresenter,
-	     dataSource: CollectionViewDataSource<MoviesCollectionViewCell, MoviesViewModel>,
+	init(presenter: MovieCollectionPresenter,
+	     dataSource: CollectionViewDataSource<MoviesCollectionViewCell, MovieViewModel>,
          reporter: MoviesReporter,
          loadingIndicator: LoadingIndicatorProtocol,
          alert: InformationAlertProtocol,
-	     showMovieDetailAction: ShowMovieDetailsAction) {
+	     appActions: AppMovieCollectionActions) {
 		self.presenter = presenter
 		self.dataSource = dataSource
-		self.showMovieDetailAction = showMovieDetailAction
+		self.appActions = appActions
         self.reporter = reporter
         self.loadingIndicator = loadingIndicator
         self.alert = alert
@@ -83,7 +83,7 @@ class MoviesCollectionViewController: UICollectionViewController {
 		}
 
 		dataSource.onEventItemSelected(selectCell: { [weak self] (viewModel, indexPath) in
-            self?.showMovieDetailAction.perform()
+            self?.appActions.performShowDetails()
 		})
 	}
 

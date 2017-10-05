@@ -13,7 +13,7 @@ class MoviesCollectionViewCell: UICollectionViewCell {
 
 	@IBOutlet weak var imageView: UIImageView!
 
-	func configure(viewModel: MoviesViewModel) {
+	func configure(viewModel: MovieViewModel) {
 		imageView.sd_setImage(with: viewModel.imageUrl, completed: nil)
 	}
 

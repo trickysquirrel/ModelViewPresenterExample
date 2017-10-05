@@ -1,4 +1,25 @@
 
+Stuff evolves at different rates
+
+views   | view logic (presentation) | business logic | app navigation
+View&VC | present stuff             | get stuff      | go somewhere
+
+
+(you could argue about the order of bl and an but these are different for differnent apps and lifecycle of the app)
+
+Need to appreciate that there is no where in the business that actually describes how the app work, there are the stories we used to build the app, but they never contain all the information of the little things that we had to fix along the way.  How often do you see code and have no idea why its there "it looks wrong, but maybe it has a purpose", and your too scared to change it (enter code rot).  The only place that can describe how the app works are the tests.  And if we have all the tests then people naturally refactor stuff and in my experience alot happier.
+
+Things to bear in mind...
+
+1. Write tests that do not care about how the result was produced, we want tests that just check the result.  That way when we need to refactor the inner workings of a class we don't need to change the tests.
+2. You can write all the unit tests you like, but if some of those classes you are testing include public variables, you have introduce time, and unit tests are just a snapshot of time, so the tests no longer tell you if something works through the life cycle of the app.  By removing time, your unit test tell you exactly how the object works over the entire lifecycle of the app.
+3. If your business logic include a view (fastest changing object type) your going to have to change the business tests more, by disconnecting fast evolving objects from the slower one, less maintance will be needed.  By keeping objects that deal with a similar theme isolated we'll be maintaining the tests less.
+4. Isolate multithreading to keep test easier to read.
+
+
+
+
+
 Split the app into a few distint parts
 
 View&VC | present stuff | get stuff | go somewhere

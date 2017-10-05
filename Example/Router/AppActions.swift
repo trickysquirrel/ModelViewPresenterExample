@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct ShowMovieDetailsAction {
+struct AppMovieCollectionActions {
 
 	let block: (()->())
 
-	func perform() {
+	func performShowDetails() {
 		block()
 	}
 }
