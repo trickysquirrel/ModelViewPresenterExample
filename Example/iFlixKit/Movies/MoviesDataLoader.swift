@@ -30,11 +30,16 @@ extension MoviesDataLoader {
 	private func makeMovie(json: [String:Any]) -> MovieData? {
 		guard
 			let endpoint = json["imageUrl"],
-			let url = URL(string: "https:\(endpoint)") else {
+			let url = URL(string: "https:\(endpoint)")
+        else {
 				return nil
 		}
-
-		return MovieData(title: "test", imageUrl: url)
+/*
+         "title": {
+         "en_US": "Captain America: The First Avenger"
+         },
+ */
+		return MovieData(title: "test title", imageUrl: url)
 	}
 
 }

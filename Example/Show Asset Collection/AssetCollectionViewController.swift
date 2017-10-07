@@ -11,10 +11,10 @@ import UIKit
 private let reuseIdentifier = "MovieCell"
 
 
-class MoviesCollectionViewController: UICollectionViewController {
+class AssetCollectionViewController: UICollectionViewController {
 
-	private let presenter: MovieCollectionPresenter
-	private let dataSource: CollectionViewDataSource<MoviesCollectionViewCell, MovieViewModel>
+	private let presenter: AssetCollectionPresenting
+	private let dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>
 	private let appActions: AppMovieCollectionActions
     private let reporter: MoviesReporter
     private let loadingIndicator: LoadingIndicatorProtocol
@@ -26,8 +26,8 @@ class MoviesCollectionViewController: UICollectionViewController {
 	}
 
 	
-	init(presenter: MovieCollectionPresenter,
-	     dataSource: CollectionViewDataSource<MoviesCollectionViewCell, MovieViewModel>,
+	init(presenter: AssetCollectionPresenting,
+	     dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>,
          reporter: MoviesReporter,
          loadingIndicator: LoadingIndicatorProtocol,
          alert: InformationAlertProtocol,
@@ -38,7 +38,7 @@ class MoviesCollectionViewController: UICollectionViewController {
         self.reporter = reporter
         self.loadingIndicator = loadingIndicator
         self.alert = alert
-		super.init(nibName: "MoviesCollectionViewController", bundle: nil)
+		super.init(nibName: "AssetCollectionViewController", bundle: nil)
 	}
 
 	
@@ -92,10 +92,10 @@ class MoviesCollectionViewController: UICollectionViewController {
 
 // MARK:- Utils
 
-private extension MoviesCollectionViewController {
+private extension AssetCollectionViewController {
 
 	func configureCollectionView() {
-		let nib = UINib.init(nibName: "MoviesCollectionViewCell", bundle: nil)
+		let nib = UINib.init(nibName: "AssetCollectionViewCell", bundle: nil)
 		self.collectionView?.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
 		let collectionViewLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout
 		collectionViewLayout?.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)

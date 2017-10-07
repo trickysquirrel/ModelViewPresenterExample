@@ -9,29 +9,36 @@
 import Foundation
 
 
-struct MovieViewModel {
+struct AssetViewModel {
+    let title: String
 	let imageUrl: URL
 }
 
-enum MovieCollectionPresenterResponse {
+
+enum AssetCollectionPresenterResponse {
     case loading(show: Bool)
-	case success([MovieViewModel])
+	case success([AssetViewModel])
     case noResults(title: String, msg:String)
     case error(title: String, msg:String)
 }
 
 
-struct MovieCollectionPresenter {
+protocol AssetCollectionPresenting {
+    func updateView(completion:(AssetCollectionPresenterResponse)->())
+}
+
+
+struct AssetCollectionPresenter: AssetCollectionPresenting {
 
 	let moviesDataLoader: MoviesDataLoader
 
 
-	func updateView(completion:(MovieCollectionPresenterResponse)->()) {
+	func updateView(completion:(AssetCollectionPresenterResponse)->()) {
 
         completion(.loading(show: true))
 
 		if let moviesData = moviesDataLoader.load() {
-			let viewModels = moviesData.map { MovieViewModel(imageUrl: $0.imageUrl) }
+            let viewModels = moviesData.map { AssetViewModel(title: $0.title, imageUrl: $0.imageUrl) }
 			if viewModels.count > 0 {
                 completion(.success(viewModels))
 			}

@@ -9,12 +9,14 @@
 import UIKit
 import SDWebImage
 
-class MoviesCollectionViewCell: UICollectionViewCell {
+class AssetCollectionViewCell: UICollectionViewCell {
 
 	@IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var labelTitle: UILabel!
 
-	func configure(viewModel: MovieViewModel) {
+	func configure(viewModel: AssetViewModel) {
 		imageView.sd_setImage(with: viewModel.imageUrl, completed: nil)
+        labelTitle.text = viewModel.title
 	}
 
 }
