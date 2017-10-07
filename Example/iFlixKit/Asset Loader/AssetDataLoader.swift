@@ -28,9 +28,15 @@ struct AssetDataLoader {
             return
 		}
         let assetDataModelList = assetJson.flatMap { makeAssetData(json: $0) }
-        completionQueue.async {
-            completion(.success(assetDataModelList))
+
+        // adding in a delay before responding
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            completionQueue.async {
+                completion(.success(assetDataModelList))
+            }
         }
+
 	}
 }
 

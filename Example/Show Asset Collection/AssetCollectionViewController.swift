@@ -75,11 +75,9 @@ class AssetCollectionViewController: UICollectionViewController {
 
 
 	private func observeDataSourceChanges() {
-
 		dataSource.onEventConfigureCell { cell, viewModel in
 			cell.configure(viewModel: viewModel)
 		}
-
 		dataSource.onEventItemSelected(selectCell: { [weak self] (viewModel, indexPath) in
             self?.appActions.performShowDetails()
 		})
@@ -91,8 +89,9 @@ class AssetCollectionViewController: UICollectionViewController {
 
 private extension AssetCollectionViewController {
 
-    func showLoading(_ show: Bool) {
-        loadingIndicator.show(show)
+    func showLoading(_ loading: Bool) {
+        loadingIndicator.statusBar(loading)
+        loadingIndicator.view(view: self.view, loading: loading)
     }
 
     func reloadDataSource(viewModelList: [AssetViewModel]) {
@@ -116,5 +115,4 @@ private extension AssetCollectionViewController {
 		collectionViewLayout?.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
 		collectionViewLayout?.invalidateLayout()
 	}
-
 }

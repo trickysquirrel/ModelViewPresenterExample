@@ -7,16 +7,27 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 
 protocol LoadingIndicatorProtocol {
-    func show(_ show: Bool)
+    func statusBar(_ loading: Bool)
+    func view(view: UIView, loading: Bool)
 }
 
 
 struct LoadingIndicator: LoadingIndicatorProtocol {
 
-    func show(_ show: Bool) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = show
+    func statusBar(_ loading: Bool) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = loading
+    }
+
+    func view(view: UIView, loading: Bool) {
+        if loading {
+            MBProgressHUD.showAdded(to: view, animated: true)
+        }
+        else {
+            MBProgressHUD.hide(for: view, animated: true)
+        }
     }
 }

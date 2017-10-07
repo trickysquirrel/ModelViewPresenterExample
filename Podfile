@@ -7,7 +7,7 @@ target 'Example' do
 
   # Pods for Example
   pod 'SDWebImage', '~> 4.0'
-
+  pod 'MBProgressHUD', '~> 1.0.0'
 
   target 'ExampleTests' do
     inherit! :search_paths
