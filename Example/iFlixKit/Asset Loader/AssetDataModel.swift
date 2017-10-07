@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct MovieData {
+struct AssetDataModel {
 	let title: String
 	let imageUrl: URL
 }

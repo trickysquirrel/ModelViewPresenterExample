@@ -24,33 +24,58 @@ enum AssetCollectionPresenterResponse {
 
 
 protocol AssetCollectionPresenting {
-    func updateView(completion:(AssetCollectionPresenterResponse)->())
+    typealias CompletionAlias = (AssetCollectionPresenterResponse)->()
+    func updateView(updateHandler: @escaping CompletionAlias)
 }
 
 
-struct AssetCollectionPresenter: AssetCollectionPresenting {
+class AssetCollectionPresenter: AssetCollectionPresenting {
 
-	let moviesDataLoader: MoviesDataLoader
+	let assetDataLoader: AssetDataLoader
 
+    init(assetDataLoader: AssetDataLoader) {
+        self.assetDataLoader = assetDataLoader
+    }
 
-	func updateView(completion:(AssetCollectionPresenterResponse)->()) {
+    func updateView(updateHandler:@escaping CompletionAlias) {
 
-        completion(.loading(show: true))
+        updateHandler(.loading(show: true))
 
-		if let moviesData = moviesDataLoader.load() {
-            let viewModels = moviesData.map { AssetViewModel(title: $0.title, imageUrl: $0.imageUrl) }
-			if viewModels.count > 0 {
-                completion(.success(viewModels))
-			}
-			else {
-                completion(.noResults(title:"title", msg:"no results try again later"))
-			}
-		}
-		else {
-            completion(.error(title: "error", msg: "this is an error message"))
-		}
+        let backgroundQueue = DispatchQueue.global(qos: .background)
 
-        completion(.loading(show: false))
+        assetDataLoader.load(completionQueue: backgroundQueue) { [weak self] (response) in
+
+            guard let strongSelf = self else { return }
+            var presenterResponse: AssetCollectionPresenterResponse
+
+            switch response {
+            case .success(let assetDataModelList):
+                let viewModelList = strongSelf.makeViewModelsList(dataModelList: assetDataModelList)
+                if viewModelList.count == 0 {
+                    presenterResponse = .noResults(title:"title", msg:"no results try again later")
+                }
+                else {
+                    presenterResponse = .success(viewModelList)
+                }
+
+            case .error:
+                // do something better with the error here
+                presenterResponse = .error(title: "error", msg: "this is an error message")
+            }
+
+            DispatchQueue.main.async {
+                updateHandler(.loading(show: false))
+                updateHandler(presenterResponse)
+            }
+        }
 	}
+}
 
+// MARK: Utils
+
+extension AssetCollectionPresenter {
+
+    private func makeViewModelsList(dataModelList: [AssetDataModel]) -> [AssetViewModel] {
+        return dataModelList.map { AssetViewModel(title: $0.title, imageUrl: $0.imageUrl) }
+    }
 }

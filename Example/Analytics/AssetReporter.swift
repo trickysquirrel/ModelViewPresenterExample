@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MoviesReporter {
+struct AssetReporter {
 
     func viewShown() {
         // class should be preloaded with all static information

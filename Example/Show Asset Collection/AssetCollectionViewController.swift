@@ -16,7 +16,7 @@ class AssetCollectionViewController: UICollectionViewController {
 	private let presenter: AssetCollectionPresenting
 	private let dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>
 	private let appActions: AppMovieCollectionActions
-    private let reporter: MoviesReporter
+    private let reporter: AssetReporter
     private let loadingIndicator: LoadingIndicatorProtocol
     private let alert: InformationAlertProtocol
 
@@ -28,7 +28,7 @@ class AssetCollectionViewController: UICollectionViewController {
 	
 	init(presenter: AssetCollectionPresenting,
 	     dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>,
-         reporter: MoviesReporter,
+         reporter: AssetReporter,
          loadingIndicator: LoadingIndicatorProtocol,
          alert: InformationAlertProtocol,
 	     appActions: AppMovieCollectionActions) {
@@ -46,6 +46,7 @@ class AssetCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
 		configureCollectionView()
 		dataSource.configure(collectionView: collectionView)
+        observeDataSourceChanges()
 		refreshView()
     }
 
@@ -57,22 +58,19 @@ class AssetCollectionViewController: UICollectionViewController {
 
 
 	private func refreshView() {
-		presenter.updateView { [weak self] response in
+        presenter.updateView(updateHandler: { [weak self] response in
 			switch response {
 			case .loading(let show):
-                self?.loadingIndicator.show(show)
+                self?.showLoading(show)
 			case .success(let viewModels):
-				observeDataSourceChanges()
-				dataSource.resetRows(viewModels: viewModels, cellIdentifier: reuseIdentifier)
-				break
+                self?.reloadDataSource(viewModelList: viewModels)
 			case .noResults(let title, let msg):
-                self?.alert.displayAlert(title: title, message: msg, presentingViewController: self)
-				break
+                self?.showUserAlert(title: title, msg: msg)
 			case .error(let title, let msg):
-                self?.alert.displayAlert(title: title, message: msg, presentingViewController: self)
+                self?.showUserAlert(title: title, msg: msg)
 				break
 			}
-		}
+		})
 	}
 
 
@@ -86,9 +84,26 @@ class AssetCollectionViewController: UICollectionViewController {
             self?.appActions.performShowDetails()
 		})
 	}
-
-
 }
+
+
+// MARK:- Presenter updates
+
+private extension AssetCollectionViewController {
+
+    func showLoading(_ show: Bool) {
+        loadingIndicator.show(show)
+    }
+
+    func reloadDataSource(viewModelList: [AssetViewModel]) {
+        dataSource.resetRows(viewModels: viewModelList, cellIdentifier: reuseIdentifier)
+    }
+
+    func showUserAlert(title: String, msg: String) {
+        alert.displayAlert(title: title, message: msg, presentingViewController: self)
+    }
+}
+
 
 // MARK:- Utils
 
