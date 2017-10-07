@@ -10,9 +10,11 @@ import Foundation
 
 struct AppMovieCollectionActions {
 
+    // pre load with extra info so view controller does not need to know about it
 	let block: (()->())
 
 	func performShowDetails() {
+        // this could generate urls with are passed back rather than calling specific methods
 		block()
 	}
 }

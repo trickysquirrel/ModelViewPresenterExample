@@ -14,20 +14,23 @@ struct ViewControllerFactory {
 
     let analyticsFactory: AnalyticsReporterFactory
 
-	func makeMoviesViewController(showMovieDetailAction: AppMovieCollectionActions) -> UIViewController {
-		let dataLoader = DataLoader(resource: "movies")
-		let moviesDataLoader = AssetDataLoader(dataLoader: dataLoader)
-		let presenter = AssetCollectionPresenter(assetDataLoader: moviesDataLoader)
-		let dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()
-        return AssetCollectionViewController(presenter: presenter,
-		                                      dataSource: dataSource,
-                                              reporter: analyticsFactory.makeMoviesReporter(),
-                                              loadingIndicator: LoadingIndicator(),
-                                              alert: InformationAlert(),
-		                                      appActions: showMovieDetailAction)
-	}
+    func makeMoviesViewController(showMovieDetailAction: AppMovieCollectionActions) -> UIViewController {
+        let dataLoader = DataLoader(resource: "movies")
+        let moviesDataLoader = AssetDataLoader(dataLoader: dataLoader)
+        let presenter = AssetCollectionPresenter(assetDataLoader: moviesDataLoader)
+        let dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()
+        let configureCollectionView = ConfigureCollectionView()
+        return AssetCollectionViewController(
+            presenter: presenter,
+            configureCollectionView: configureCollectionView,
+            dataSource: dataSource,
+            reporter: analyticsFactory.makeAssetCollectionReporter(),
+            loadingIndicator: LoadingIndicator(),
+            alert: InformationAlert(),
+            appActions: showMovieDetailAction)
+    }
 
-	func makeDetailsViewController() -> UIViewController {
+    func makeDetailsViewController() -> UIViewController {
 		return UIViewController()
 	}
 

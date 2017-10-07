@@ -12,7 +12,7 @@ struct AnalyticsReporterFactory {
 
     // this should have access to 3rd party lib that can send info
 
-    func makeMoviesReporter() -> AssetReporter {
-        return AssetReporter()
+    func makeAssetCollectionReporter() -> AssetCollectionReporter {
+        return AssetCollectionReporter()
     }
 }

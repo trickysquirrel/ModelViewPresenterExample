@@ -16,9 +16,10 @@ class AssetCollectionViewController: UICollectionViewController {
 	private let presenter: AssetCollectionPresenting
 	private let dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>
 	private let appActions: AppMovieCollectionActions
-    private let reporter: AssetReporter
+    private let reporter: AssetCollectionReporter
     private let loadingIndicator: LoadingIndicatorProtocol
     private let alert: InformationAlertProtocol
+    private let configureCollectionView: CollectionViewConfigurable
 
 
 	required init?(coder aDecoder: NSCoder) {
@@ -27,12 +28,14 @@ class AssetCollectionViewController: UICollectionViewController {
 
 	
 	init(presenter: AssetCollectionPresenting,
+         configureCollectionView: CollectionViewConfigurable,
 	     dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>,
-         reporter: AssetReporter,
+         reporter: AssetCollectionReporter,
          loadingIndicator: LoadingIndicatorProtocol,
          alert: InformationAlertProtocol,
 	     appActions: AppMovieCollectionActions) {
 		self.presenter = presenter
+        self.configureCollectionView = configureCollectionView
 		self.dataSource = dataSource
 		self.appActions = appActions
         self.reporter = reporter
@@ -44,7 +47,7 @@ class AssetCollectionViewController: UICollectionViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		configureCollectionView()
+        configureCollectionView.configure(collectionView: collectionView, nibName: "AssetCollectionViewCell", reuseIdentifier: reuseIdentifier)
 		dataSource.configure(collectionView: collectionView)
         observeDataSourceChanges()
 		refreshView()
@@ -101,18 +104,4 @@ private extension AssetCollectionViewController {
     func showUserAlert(title: String, msg: String) {
         alert.displayAlert(title: title, message: msg, presentingViewController: self)
     }
-}
-
-
-// MARK:- Utils
-
-private extension AssetCollectionViewController {
-
-	func configureCollectionView() {
-		let nib = UINib.init(nibName: "AssetCollectionViewCell", bundle: nil)
-		self.collectionView?.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
-		let collectionViewLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout
-		collectionViewLayout?.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-		collectionViewLayout?.invalidateLayout()
-	}
 }

@@ -16,6 +16,8 @@
 		30115B121F84364A0042D614 /* info in Resources */ = {isa = PBXBuildFile; fileRef = 30115B111F84364A0042D614 /* info */; };
 		30115B141F8438A50042D614 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30115B131F8438A50042D614 /* AppCoordinator.swift */; };
 		30115B171F8438C20042D614 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30115B161F8438C20042D614 /* ViewControllerFactory.swift */; };
+		303AFCE51F8990D90068018E /* AssetCollectionAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AFCE41F8990D90068018E /* AssetCollectionAcceptanceTests.swift */; };
+		303AFCE71F8991770068018E /* CollectionViewConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AFCE61F8991770068018E /* CollectionViewConfigurable.swift */; };
 		308179101F84EAA6001F44FD /* AssetCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081790E1F84EAA6001F44FD /* AssetCollectionViewController.swift */; };
 		308179111F84EAA6001F44FD /* AssetCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3081790F1F84EAA6001F44FD /* AssetCollectionViewController.xib */; };
 		308179131F84EE8F001F44FD /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308179121F84EE8F001F44FD /* DataLoader.swift */; };
@@ -30,7 +32,7 @@
 		308179291F84FBCA001F44FD /* AssetCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 308179271F84FBCA001F44FD /* AssetCollectionViewCell.xib */; };
 		3081792C1F850DF7001F44FD /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081792B1F850DF7001F44FD /* AppActions.swift */; };
 		30C954201F85DF97000ABE33 /* AnalyticsReporterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C9541F1F85DF97000ABE33 /* AnalyticsReporterFactory.swift */; };
-		30C954221F85DFDC000ABE33 /* AssetReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C954211F85DFDC000ABE33 /* AssetReporter.swift */; };
+		30C954221F85DFDC000ABE33 /* AssetCollectionReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C954211F85DFDC000ABE33 /* AssetCollectionReporter.swift */; };
 		30C954271F863466000ABE33 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C954261F863466000ABE33 /* LoadingIndicator.swift */; };
 		30C954291F8635E4000ABE33 /* InformationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C954281F8635E4000ABE33 /* InformationAlert.swift */; };
 		4714E6A8967F041CB8CB5B96 /* Pods_ExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B9A04E4AC0BB2AC9476CA0 /* Pods_ExampleTests.framework */; };
@@ -61,6 +63,8 @@
 		30115B111F84364A0042D614 /* info */ = {isa = PBXFileReference; lastKnownFileType = text; path = info; sourceTree = "<group>"; };
 		30115B131F8438A50042D614 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		30115B161F8438C20042D614 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
+		303AFCE41F8990D90068018E /* AssetCollectionAcceptanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollectionAcceptanceTests.swift; sourceTree = "<group>"; };
+		303AFCE61F8991770068018E /* CollectionViewConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewConfigurable.swift; sourceTree = "<group>"; };
 		3081790E1F84EAA6001F44FD /* AssetCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollectionViewController.swift; sourceTree = "<group>"; };
 		3081790F1F84EAA6001F44FD /* AssetCollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetCollectionViewController.xib; sourceTree = "<group>"; };
 		308179121F84EE8F001F44FD /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
@@ -76,7 +80,7 @@
 		3081792A1F84FEDA001F44FD /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		3081792B1F850DF7001F44FD /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		30C9541F1F85DF97000ABE33 /* AnalyticsReporterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsReporterFactory.swift; sourceTree = "<group>"; };
-		30C954211F85DFDC000ABE33 /* AssetReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetReporter.swift; sourceTree = "<group>"; };
+		30C954211F85DFDC000ABE33 /* AssetCollectionReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollectionReporter.swift; sourceTree = "<group>"; };
 		30C954261F863466000ABE33 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		30C954281F8635E4000ABE33 /* InformationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationAlert.swift; sourceTree = "<group>"; };
 		66328599463B96ECFA56DBF6 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -151,6 +155,12 @@
 		30115B051F8436310042D614 /* ExampleTests */ = {
 			isa = PBXGroup;
 			children = (
+				303AFCDF1F8990240068018E /* Utils */,
+				303AFCE01F89902A0068018E /* Analytics */,
+				303AFCE11F8990880068018E /* Router */,
+				303AFCDE1F8990180068018E /* iFlixKit */,
+				303AFCE21F89909D0068018E /* Show Asset Collection */,
+				303AFCE31F8990A60068018E /* Show Asset Detail */,
 				30115B061F8436310042D614 /* ExampleTests.swift */,
 				30115B081F8436310042D614 /* Info.plist */,
 			);
@@ -165,6 +175,49 @@
 				3081792B1F850DF7001F44FD /* AppActions.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		303AFCDE1F8990180068018E /* iFlixKit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = iFlixKit;
+			sourceTree = "<group>";
+		};
+		303AFCDF1F8990240068018E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		303AFCE01F89902A0068018E /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
+		303AFCE11F8990880068018E /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		303AFCE21F89909D0068018E /* Show Asset Collection */ = {
+			isa = PBXGroup;
+			children = (
+				303AFCE41F8990D90068018E /* AssetCollectionAcceptanceTests.swift */,
+			);
+			path = "Show Asset Collection";
+			sourceTree = "<group>";
+		};
+		303AFCE31F8990A60068018E /* Show Asset Detail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Show Asset Detail";
 			sourceTree = "<group>";
 		};
 		3081790B1F84EA28001F44FD /* Show Asset Collection */ = {
@@ -206,6 +259,7 @@
 				308179241F84F9DF001F44FD /* Array+Safe.swift */,
 				30C954261F863466000ABE33 /* LoadingIndicator.swift */,
 				30C954281F8635E4000ABE33 /* InformationAlert.swift */,
+				303AFCE61F8991770068018E /* CollectionViewConfigurable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -214,7 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				30C9541F1F85DF97000ABE33 /* AnalyticsReporterFactory.swift */,
-				30C954211F85DFDC000ABE33 /* AssetReporter.swift */,
+				30C954211F85DFDC000ABE33 /* AssetCollectionReporter.swift */,
 			);
 			path = Analytics;
 			sourceTree = "<group>";
@@ -463,6 +517,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				303AFCE71F8991770068018E /* CollectionViewConfigurable.swift in Sources */,
 				308179251F84F9DF001F44FD /* Array+Safe.swift in Sources */,
 				30C954201F85DF97000ABE33 /* AnalyticsReporterFactory.swift in Sources */,
 				308179281F84FBCA001F44FD /* AssetCollectionViewCell.swift in Sources */,
@@ -470,7 +525,7 @@
 				30115B141F8438A50042D614 /* AppCoordinator.swift in Sources */,
 				308179231F84F9AE001F44FD /* CollectionViewDataSource.swift in Sources */,
 				30C954271F863466000ABE33 /* LoadingIndicator.swift in Sources */,
-				30C954221F85DFDC000ABE33 /* AssetReporter.swift in Sources */,
+				30C954221F85DFDC000ABE33 /* AssetCollectionReporter.swift in Sources */,
 				308179101F84EAA6001F44FD /* AssetCollectionViewController.swift in Sources */,
 				308179211F84F979001F44FD /* CollectionRowSections.swift in Sources */,
 				308179151F84EF2B001F44FD /* AssetDataLoader.swift in Sources */,
@@ -489,6 +544,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30115B071F8436310042D614 /* ExampleTests.swift in Sources */,
+				303AFCE51F8990D90068018E /* AssetCollectionAcceptanceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
