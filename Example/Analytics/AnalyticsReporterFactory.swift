@@ -8,7 +8,13 @@
 
 import Foundation
 
-struct AnalyticsReporterFactory {
+
+protocol AnalyticsReporterFactoryProtocol {
+    func makeAssetCollectionReporter() -> AssetCollectionReporter
+}
+
+
+struct AnalyticsReporterFactory: AnalyticsReporterFactoryProtocol {
 
     // this should have access to 3rd party lib that can send info
 

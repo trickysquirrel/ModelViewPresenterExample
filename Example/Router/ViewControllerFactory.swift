@@ -12,11 +12,11 @@ import UIKit
 
 struct ViewControllerFactory {
 
-    let analyticsFactory: AnalyticsReporterFactory
+    let iflixServiceFactory: IFlixServiceFactoryProtocol
+    let analyticsFactory: AnalyticsReporterFactoryProtocol
 
     func makeMoviesViewController(showMovieDetailAction: AppMovieCollectionActions) -> UIViewController {
-        let dataLoader = DataLoader(resource: "movies")
-        let moviesDataLoader = AssetDataLoader(dataLoader: dataLoader)
+        let moviesDataLoader = iflixServiceFactory.makeMoviesAssetCollectionDataLoader()
         let presenter = AssetCollectionPresenter(assetDataLoader: moviesDataLoader)
         let dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()
         let configureCollectionView = ConfigureCollectionView()

@@ -22,9 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		guard let window = window else { return true }
 
         let analyticsFactory = AnalyticsReporterFactory()
-        let viewControllerFactory = ViewControllerFactory(analyticsFactory: analyticsFactory)
+
+        let viewControllerFactory = ViewControllerFactory(iflixServiceFactory: IFlixServiceFactory(),
+                                                          analyticsFactory: analyticsFactory)
+
 		let navigationController = UINavigationController()
+
 		appCoordinator = AppCoordinator(window: window, navigationController: navigationController, viewControllerFactory: viewControllerFactory)
+        
 		appCoordinator?.showRootViewController()
 
 		return true
