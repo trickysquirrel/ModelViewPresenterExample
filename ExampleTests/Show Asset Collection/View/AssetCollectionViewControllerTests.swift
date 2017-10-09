@@ -10,68 +10,6 @@ import XCTest
 @testable import Example
 
 
-// move to its own files
-class StubConfigureCollectionView: CollectionViewConfigurable {
-
-    private(set) var didCallConfigure = false
-
-    func configure(collectionView: UICollectionView?, nibName: String, reuseIdentifier: String) {
-        didCallConfigure = true
-    }
-}
-
-
-class StubAdobeAnalyticsReporter: AdobeAnalyticsReporting {
-
-    private(set) var sentActionList: [(name: String, data: [String:Any]?)] = []
-
-    func sendAction(name: String, data: [String:Any]?) {
-        sentActionList.append((name:name, data:data))
-    }
-}
-
-
-class StubAssetCollectionPresenter: AssetCollectionPresenting {
-
-    var updateHandler: CompletionAlias?
-
-    func updateView(updateHandler: @escaping CompletionAlias) {
-        self.updateHandler = updateHandler
-    }
-}
-
-
-class StubInformationAlert: InformationAlertProtocol {
-
-    private(set) var title: String?
-    private(set) var message: String?
-    private(set) var presentingViewController: UIViewController?
-
-    func displayAlert(title: String, message: String, presentingViewController: UIViewController?) {
-        self.title = title
-        self.message = message
-        self.presentingViewController = presentingViewController
-    }
-}
-
-class StubLoadingIndicator: LoadingIndicatorProtocol {
-
-    var didCallStatusBarWithLoading: Bool?
-    var didCallViewWithLoading: Bool?
-    var didCallViewWithView: UIView?
-
-    func statusBar(_ loading: Bool) {
-        didCallStatusBarWithLoading = loading
-    }
-
-    func view(view: UIView, loading: Bool) {
-        didCallViewWithLoading = loading
-        didCallViewWithView = view
-    }
-
-}
-
-
 class AssetCollectionViewControllerTests: XCTestCase {
 
     var viewController: AssetCollectionViewController!
@@ -81,14 +19,17 @@ class AssetCollectionViewControllerTests: XCTestCase {
     var stubInformationAlert: StubInformationAlert!
     var dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>!
     var stubLoadingIndicator: StubLoadingIndicator!
+    var dummyAppActions: AppMovieCollectionActions!
 
     override func setUp() {
         super.setUp()
-        let appActions = AppMovieCollectionActions {}
-        viewController = makeViewController(appActions: appActions)
+        dummyAppActions = AppMovieCollectionActions {}
+        stubConfigureCollectionView = StubConfigureCollectionView()
+        viewController = makeViewController(appActions: dummyAppActions, configureCollectionView: stubConfigureCollectionView)
     }
     
     override func tearDown() {
+        dummyAppActions = nil
         stubLoadingIndicator = nil
         dataSource = nil
         stubInformationAlert = nil
@@ -99,16 +40,15 @@ class AssetCollectionViewControllerTests: XCTestCase {
         super.tearDown()
     }
 
-    private func makeViewController(appActions: AppMovieCollectionActions) -> AssetCollectionViewController {
+    private func makeViewController(appActions: AppMovieCollectionActions, configureCollectionView: CollectionViewConfigurable) -> AssetCollectionViewController {
         stubAdobeAnalyticsReporter = StubAdobeAnalyticsReporter()
         let analyticsFactory = AnalyticsReporterFactory(adobeAnalyticsReporter: stubAdobeAnalyticsReporter)
         stubPresenter = StubAssetCollectionPresenter()
         dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()
-        stubConfigureCollectionView = StubConfigureCollectionView()
         stubInformationAlert = StubInformationAlert()
         stubLoadingIndicator = StubLoadingIndicator()
         return AssetCollectionViewController(presenter: stubPresenter,
-                                             configureCollectionView: stubConfigureCollectionView,
+                                             configureCollectionView: configureCollectionView,
                                              dataSource: dataSource,
                                              reporter: analyticsFactory.makeAssetCollectionReporter(),
                                              loadingIndicator: stubLoadingIndicator,
@@ -125,8 +65,9 @@ class AssetCollectionViewControllerTests: XCTestCase {
     }
 
     private func makeTwoAssetViewModelList() -> [AssetViewModel] {
-        let assetViewModel = AssetViewModel(title: "", imageUrl: URL(string:"dummy")!)
-        return [assetViewModel, assetViewModel]
+        let assetViewModel1 = AssetViewModel(title: "a", imageUrl: URL(string:"dummyA")!)
+        let assetViewModel2 = AssetViewModel(title: "b", imageUrl: URL(string:"dummyB")!)
+        return [assetViewModel1, assetViewModel2]
     }
 }
 
@@ -148,6 +89,18 @@ extension AssetCollectionViewControllerTests {
         XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[0].name, "MoviesCollectionShown")
         XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[0].data?.keys.count, 1)
         XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[0].data?["test"] as! String, "something")
+    }
+
+
+    func test_onViewDidAppear_eachCall_sendCorrectAnalyticsActionAndData() {
+
+        startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
+        startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
+
+        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList.count, 2)
+        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[1].name, "MoviesCollectionShown")
+        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[1].data?.keys.count, 1)
+        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[1].data?["test"] as! String, "something")
     }
 }
 
@@ -176,7 +129,7 @@ extension AssetCollectionViewControllerTests {
         XCTAssertEqual(stubLoadingIndicator.didCallStatusBarWithLoading!, true)
         XCTAssertEqual(stubLoadingIndicator.didCallViewWithLoading!, true)
         XCTAssertEqual(stubLoadingIndicator.didCallViewWithView!, viewController.view!)
-}
+    }
 
 
     func test_onPresenterResponse_error_showAlertWithCorrectInformation() {
@@ -214,7 +167,7 @@ extension AssetCollectionViewControllerTests {
     }
 }
 
-// MARK: Presenter responses
+// MARK: Data source events
 
 extension AssetCollectionViewControllerTests {
 
@@ -225,12 +178,30 @@ extension AssetCollectionViewControllerTests {
             didCallAppAction = true
         }
 
-        let newViewController = makeViewController(appActions: newAppActions)
+        let newViewController = makeViewController(appActions: newAppActions, configureCollectionView: StubConfigureCollectionView())
+
         startViewControllerLifeCycle(newViewController, forceViewDidAppear: true)
         stubPresenter.updateHandler!(.success(makeTwoAssetViewModelList()))
 
         newViewController.collectionView!.delegate!.collectionView!(viewController.collectionView!, didSelectItemAt: IndexPath(row: 0, section: 0))
         XCTAssertTrue(didCallAppAction)
+    }
+
+
+    func test_onDataSource_cellForIndexPath_configuresCellCorrectly() {
+
+        let viewModelList = makeTwoAssetViewModelList()
+        let indexPath = IndexPath(row: 1, section: 0)
+
+        let configureCollectionView = ConfigureCollectionView()
+        let newViewController = makeViewController(appActions: dummyAppActions, configureCollectionView: configureCollectionView)
+        startViewControllerLifeCycle(newViewController, forceViewDidAppear: true)
+        stubPresenter.updateHandler!(.success(viewModelList))
+
+        let collectionView = newViewController.collectionView!
+        let cell = collectionView.dataSource?.collectionView(collectionView, cellForItemAt: indexPath) as! AssetCollectionViewCell
+
+        XCTAssertEqual(cell.labelTitle.text, viewModelList[1].title)
     }
 
 }

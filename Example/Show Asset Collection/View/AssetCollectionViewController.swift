@@ -79,7 +79,7 @@ class AssetCollectionViewController: UICollectionViewController {
 
 	private func observeDataSourceChanges() {
 		dataSource.onEventConfigureCell { cell, viewModel in
-			cell.configure(viewModel: viewModel)
+			cell.configure(viewModel: viewModel)    // not tested
 		}
 		dataSource.onEventItemSelected(selectCell: { [weak self] (viewModel, indexPath) in
             self?.appActions.performShowDetails()

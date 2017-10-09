@@ -51,6 +51,9 @@ class CollectionViewDataSource<CellType, DataType>: NSObject, UICollectionViewDe
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		guard let row = sections[safe:indexPath.section]?.rows[safe:indexPath.row] else { return UICollectionViewCell() }
+        print(row)
+        print(row.cellIdentifier)
+        print(indexPath)
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: row.cellIdentifier, for: indexPath) as? CellType else { return UICollectionViewCell() }
 		configureCellBlock?(cell, row.data)
 		return cell
