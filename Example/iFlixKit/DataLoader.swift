@@ -9,7 +9,12 @@
 import Foundation
 
 
-struct DataLoader {
+protocol DataLoading {
+    func load() -> [[String: Any]]?
+}
+
+
+struct DataLoader: DataLoading {
 
 	private let resource: String
 

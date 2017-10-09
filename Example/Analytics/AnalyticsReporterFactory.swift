@@ -16,9 +16,9 @@ protocol AnalyticsReporterFactoryProtocol {
 
 struct AnalyticsReporterFactory: AnalyticsReporterFactoryProtocol {
 
-    // this should have access to 3rd party lib that can send info
+    let adobeAnalyticsReporter: AdobeAnalyticsReporting
 
     func makeAssetCollectionReporter() -> AssetCollectionReporter {
-        return AssetCollectionReporter()
+        return AssetCollectionReporter(adobeAnalyticsReporter: adobeAnalyticsReporter)
     }
 }

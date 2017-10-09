@@ -12,7 +12,7 @@ import UIKit
 
 struct ViewControllerFactory {
 
-    let iflixServiceFactory: IFlixServiceFactoryProtocol
+    let iflixServiceFactory: IFlixServiceFactory
     let analyticsFactory: AnalyticsReporterFactoryProtocol
 
     func makeMoviesViewController(showMovieDetailAction: AppMovieCollectionActions) -> UIViewController {

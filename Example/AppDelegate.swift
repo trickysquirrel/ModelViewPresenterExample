@@ -21,9 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		window = UIWindow(frame: UIScreen.main.bounds)
 		guard let window = window else { return true }
 
-        let analyticsFactory = AnalyticsReporterFactory()
+        let adobeAnalyticsReporter = AdobeAnalyticsReporter()
+        let analyticsFactory = AnalyticsReporterFactory(adobeAnalyticsReporter: adobeAnalyticsReporter)
+        let dataLoaderFactory = DataLoaderFactory()
+        let iflixServiceFactory = IFlixServiceFactory(dataLoaderFactory: dataLoaderFactory)
 
-        let viewControllerFactory = ViewControllerFactory(iflixServiceFactory: IFlixServiceFactory(),
+        let viewControllerFactory = ViewControllerFactory(iflixServiceFactory: iflixServiceFactory,
                                                           analyticsFactory: analyticsFactory)
 
 		let navigationController = UINavigationController()
@@ -56,6 +59,5 @@ extension AppDelegate {
 
 	func applicationWillTerminate(_ application: UIApplication) {
 	}
-
 }
 

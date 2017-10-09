@@ -10,8 +10,9 @@ import Foundation
 
 struct AssetCollectionReporter {
 
+    let adobeAnalyticsReporter: AdobeAnalyticsReporting
+
     func viewShown() {
-        // class should be preloaded with all static information
-        // create a dictionary and pass it somewhere
+        adobeAnalyticsReporter.sendAction(name: "MoviesCollectionShown", data: ["test":"something"])
     }
 }

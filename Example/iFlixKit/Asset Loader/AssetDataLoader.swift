@@ -14,10 +14,13 @@ enum AssetDataLoaderResponse {
     case error(Error)
 }
 
+protocol AssetDataLoading {
+    func load(completionQueue: DispatchQueue, completion:@escaping (AssetDataLoaderResponse)->())
+}
 
-struct AssetDataLoader {
+struct AssetDataLoader: AssetDataLoading {
 
-	let dataLoader: DataLoader
+	let dataLoader: DataLoading
 
     func load(completionQueue: DispatchQueue, completion:@escaping (AssetDataLoaderResponse)->()) {
 		guard let assetJson = dataLoader.load() else {

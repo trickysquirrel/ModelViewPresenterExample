@@ -31,9 +31,9 @@ protocol AssetCollectionPresenting {
 
 class AssetCollectionPresenter: AssetCollectionPresenting {
 
-	let assetDataLoader: AssetDataLoader
+	let assetDataLoader: AssetDataLoading
 
-    init(assetDataLoader: AssetDataLoader) {
+    init(assetDataLoader: AssetDataLoading) {
         self.assetDataLoader = assetDataLoader
     }
 
