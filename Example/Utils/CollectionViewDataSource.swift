@@ -58,7 +58,6 @@ class CollectionViewDataSource<CellType, DataType>: NSObject, UICollectionViewDe
 
 
 	func objectAtIndexPath(_ indexPath: IndexPath) -> DataType? {
-
 		return sections[safe:indexPath.section]?.rows[safe:indexPath.row]?.data
 	}
 

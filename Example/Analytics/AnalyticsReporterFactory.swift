@@ -9,16 +9,11 @@
 import Foundation
 
 
-protocol AnalyticsReporterFactoryProtocol {
-    func makeAssetCollectionReporter() -> AssetCollectionReporter
-}
-
-
-struct AnalyticsReporterFactory: AnalyticsReporterFactoryProtocol {
+struct AnalyticsReporterFactory {
 
     let adobeAnalyticsReporter: AdobeAnalyticsReporting
 
-    func makeAssetCollectionReporter() -> AssetCollectionReporter {
-        return AssetCollectionReporter(adobeAnalyticsReporter: adobeAnalyticsReporter)
+    func makeAssetCollectionReporter() -> MovieCollectionReporter {
+        return MovieCollectionReporter(adobeAnalyticsReporter: adobeAnalyticsReporter)
     }
 }

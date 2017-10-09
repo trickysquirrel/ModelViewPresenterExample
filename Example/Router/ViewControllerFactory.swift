@@ -13,7 +13,7 @@ import UIKit
 struct ViewControllerFactory {
 
     let iflixServiceFactory: IFlixServiceFactory
-    let analyticsFactory: AnalyticsReporterFactoryProtocol
+    let analyticsFactory: AnalyticsReporterFactory
 
     func makeMoviesViewController(showMovieDetailAction: AppMovieCollectionActions) -> UIViewController {
         let moviesDataLoader = iflixServiceFactory.makeMoviesAssetCollectionDataLoader()

@@ -16,7 +16,7 @@ class AssetCollectionViewController: UICollectionViewController {
 	private let presenter: AssetCollectionPresenting
 	private let dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>
 	private let appActions: AppMovieCollectionActions
-    private let reporter: AssetCollectionReporter
+    private let reporter: MovieCollectionReporter
     private let loadingIndicator: LoadingIndicatorProtocol
     private let alert: InformationAlertProtocol
     private let configureCollectionView: CollectionViewConfigurable
@@ -30,7 +30,7 @@ class AssetCollectionViewController: UICollectionViewController {
 	init(presenter: AssetCollectionPresenting,
          configureCollectionView: CollectionViewConfigurable,
 	     dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>,
-         reporter: AssetCollectionReporter,
+         reporter: MovieCollectionReporter,
          loadingIndicator: LoadingIndicatorProtocol,
          alert: InformationAlertProtocol,
 	     appActions: AppMovieCollectionActions) {
