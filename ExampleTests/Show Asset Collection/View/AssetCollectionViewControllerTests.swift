@@ -78,16 +78,16 @@ extension AssetCollectionViewControllerTests {
 
     func test_onViewLoad_configuresCollectionView() {
         startViewControllerLifeCycle(viewController)
-        expect(self.stubConfigureCollectionView.didCallConfigure) == true
+        XCTAssertTrue(self.stubConfigureCollectionView.didCallConfigure)
     }
 
 
     func test_onViewDidAppear_sendCorrectAnalyticsActionAndData() {
         startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
-        expect(self.stubAdobeAnalyticsReporter.sentActionList.count) == 1
-        expect(self.stubAdobeAnalyticsReporter.sentActionList[0].name) == "MoviesCollectionShown"
-        expect(self.stubAdobeAnalyticsReporter.sentActionList[0].data?.keys.count) == 1
-        expect(self.stubAdobeAnalyticsReporter.sentActionList[0].data?["test"] as? String) == "something"
+        XCTAssertEqual(self.stubAdobeAnalyticsReporter.sentActionList.count, 1)
+        XCTAssertEqual(self.stubAdobeAnalyticsReporter.sentActionList[0].name, "MoviesCollectionShown")
+        XCTAssertEqual(self.stubAdobeAnalyticsReporter.sentActionList[0].data?.keys.count, 1)
+        XCTAssertEqual(self.stubAdobeAnalyticsReporter.sentActionList[0].data?["test"] as? String, "something")
     }
 
 
@@ -96,10 +96,10 @@ extension AssetCollectionViewControllerTests {
         startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
         startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
 
-        expect(self.stubAdobeAnalyticsReporter.sentActionList.count) == 2
-        expect(self.stubAdobeAnalyticsReporter.sentActionList[1].name) == "MoviesCollectionShown"
-        expect(self.stubAdobeAnalyticsReporter.sentActionList[1].data?.keys.count) == 1
-        expect(self.stubAdobeAnalyticsReporter.sentActionList[1].data?["test"] as? String) == "something"
+        XCTAssertEqual(self.stubAdobeAnalyticsReporter.sentActionList.count, 2)
+        XCTAssertEqual(self.stubAdobeAnalyticsReporter.sentActionList[1].name, "MoviesCollectionShown")
+        XCTAssertEqual(self.stubAdobeAnalyticsReporter.sentActionList[1].data?.keys.count, 1)
+        XCTAssertEqual(self.stubAdobeAnalyticsReporter.sentActionList[1].data?["test"] as? String, "something")
     }
 }
 

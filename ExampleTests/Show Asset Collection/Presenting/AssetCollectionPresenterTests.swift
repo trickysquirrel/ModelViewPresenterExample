@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import Nimble
 @testable import Example
 
 
@@ -22,7 +21,7 @@ class AssetCollectionPresenterTests: XCTestCase {
 
     override func setUp() {
         stubAssetDataLoader = StubAssetDataLoader()
-        presenter = AssetCollectionPresenter(assetDataLoader: stubAssetDataLoader)
+        presenter = AssetCollectionPresenter(assetDataLoader: stubAssetDataLoader, appDispatcher: FakeAppDispatcher())
         super.setUp()
     }
 
@@ -87,8 +86,9 @@ extension AssetCollectionPresenterTests {
         updateViewExpectLoading(presenter: presenter) { loading in
             isLoading = loading
         }
-        expect(isLoading).toEventually(beTrue())
+        XCTAssertTrue(isLoading)
     }
+    
 
     func test_updateView_onAssetDataLoadingCompletion_respondsWithShowLoadingFalse() {
         stubAssetDataLoader.stubResponse = AssetDataLoaderResponse.error(NSError())
@@ -96,7 +96,7 @@ extension AssetCollectionPresenterTests {
         updateViewExpectLoading(presenter: presenter) { loading in
             isLoading = loading
         }
-        expect(isLoading).toEventually(beFalse())
+        XCTAssertFalse(isLoading)
     }
 }
 
@@ -111,12 +111,12 @@ extension AssetCollectionPresenterTests {
             errorTitle = title
             errorMsg = msg
         }
-        expect(errorTitle).toEventually(equal("error"))
-        expect(errorMsg).toEventually(equal("this is an error message"))
+        XCTAssertEqual(errorTitle, "error")
+        XCTAssertEqual(errorMsg, "this is an error message")
     }
 }
 
-// MARK: No Results
+// MARK: Reponse No Results
 
 extension AssetCollectionPresenterTests {
 
@@ -127,8 +127,8 @@ extension AssetCollectionPresenterTests {
             errorTitle = title
             errorMsg = msg
         }
-        expect(errorTitle).toEventually(equal("title"))
-        expect(errorMsg).toEventually(equal("no results try again later"))
+        XCTAssertEqual(errorTitle, "title")
+        XCTAssertEqual(errorMsg, "no results try again later")
     }
 }
 
@@ -142,8 +142,9 @@ extension AssetCollectionPresenterTests {
         updateViewExpectSuccess(presenter: presenter) { viewModels in
             viewModelList = viewModels
         }
-        expect(viewModelList?.count).toEventually(equal(2))
+        XCTAssertEqual(viewModelList?.count, 2)
     }
+
 
     func test_updateView_onDataLoadingSuccess_respondsWithViewModelProperties() {
         stubAssetDataLoader.stubResponse = AssetDataLoaderResponse.success([fakeDataModel1, fakeDataModel2])
@@ -152,13 +153,13 @@ extension AssetCollectionPresenterTests {
             viewModelList = viewModels
         }
 
-        expect(viewModelList?.first?.id).toEventually(equal(fakeDataModel1.id))
-        expect(viewModelList?.first?.title).toEventually(equal(fakeDataModel1.title))
-        expect(viewModelList?.first?.imageUrl).toEventually(equal(fakeDataModel1.imageUrl))
+        XCTAssertEqual(viewModelList?.first?.id, fakeDataModel1.id)
+        XCTAssertEqual(viewModelList?.first?.title, fakeDataModel1.title)
+        XCTAssertEqual(viewModelList?.first?.imageUrl, fakeDataModel1.imageUrl)
 
-        expect(viewModelList?.last?.id).toEventually(equal(fakeDataModel2.id))
-        expect(viewModelList?.last?.title).toEventually(equal(fakeDataModel2.title))
-        expect(viewModelList?.last?.imageUrl).toEventually(equal(fakeDataModel2.imageUrl))
-}
+        XCTAssertEqual(viewModelList?.last?.id, fakeDataModel2.id)
+        XCTAssertEqual(viewModelList?.last?.title, fakeDataModel2.title)
+        XCTAssertEqual(viewModelList?.last?.imageUrl, fakeDataModel2.imageUrl)
+    }
 }
 

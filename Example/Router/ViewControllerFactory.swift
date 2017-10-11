@@ -17,7 +17,7 @@ struct ViewControllerFactory {
 
     func makeMoviesViewController(showMovieDetailAction: AppMovieCollectionActions) -> UIViewController {
         let moviesDataLoader = iflixServiceFactory.makeMoviesAssetCollectionDataLoader()
-        let presenter = AssetCollectionPresenter(assetDataLoader: moviesDataLoader)
+        let presenter = AssetCollectionPresenter(assetDataLoader: moviesDataLoader, appDispatcher: AppDispatcher())
         let dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()
         let configureCollectionView = ConfigureCollectionView()
         return AssetCollectionViewController(

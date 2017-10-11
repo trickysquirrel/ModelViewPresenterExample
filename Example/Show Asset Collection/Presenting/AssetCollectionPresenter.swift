@@ -33,16 +33,20 @@ protocol AssetCollectionPresenting {
 class AssetCollectionPresenter: AssetCollectionPresenting {
 
 	let assetDataLoader: AssetDataLoading
+    let appDispatcher: AppDispatching
 
-    init(assetDataLoader: AssetDataLoading) {
+    
+    init(assetDataLoader: AssetDataLoading, appDispatcher: AppDispatching) {
         self.assetDataLoader = assetDataLoader
+        self.appDispatcher = appDispatcher
     }
+
 
     func updateView(updateHandler:@escaping CompletionAlias) {
 
         updateHandler(.loading(show: true))
 
-        let backgroundQueue = DispatchQueue.global(qos: .background)
+        let backgroundQueue = appDispatcher.makeBackgroundQueue()
 
         assetDataLoader.load(completionQueue: backgroundQueue) { [weak self] (response) in
 
@@ -64,7 +68,7 @@ class AssetCollectionPresenter: AssetCollectionPresenting {
                 presenterResponse = .error(title: "error", msg: "this is an error message")
             }
 
-            DispatchQueue.mainAsync {
+            strongSelf.appDispatcher.runMainAsync {
                 updateHandler(.loading(show: false))
                 updateHandler(presenterResponse)
             }
