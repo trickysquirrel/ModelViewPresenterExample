@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Nimble
 @testable import Example
 
 
@@ -15,6 +16,8 @@ class AssetCollectionPresenterTests: XCTestCase {
     typealias responseHandlerType = (AssetCollectionPresenterResponse)->()
     var stubAssetDataLoader: StubAssetDataLoader!
     var presenter: AssetCollectionPresenter!
+    var fakeDataModel1 = AssetDataModel(id: 1, title: "1", imageUrl: URL(string:"dummy1")!)
+    var fakeDataModel2 = AssetDataModel(id: 2, title: "2", imageUrl: URL(string:"dummy2")!)
 
 
     override func setUp() {
@@ -29,31 +32,48 @@ class AssetCollectionPresenterTests: XCTestCase {
         super.tearDown()
     }
 
-    private func updateViewExpectLoading(presenter: AssetCollectionPresenter) -> Bool? {
-        var isLoading: Bool?
+    private func updateViewExpectLoading(presenter: AssetCollectionPresenter, completion:@escaping (Bool)->Void) {
         presenter.updateView { response in
             switch response {
             case .loading(let show):
-                isLoading = show
+                completion(show)
             default:
                 break
             }
         }
-        return isLoading
     }
 
-    private func updateViewExpectError(presenter: AssetCollectionPresenter) -> (title:String, msg:String)? {
-        var result: (title:String, msg:String)?
+    private func updateViewExpectError(presenter: AssetCollectionPresenter, completion:@escaping (String, String)->Void) {
         presenter.updateView { response in
             switch response {
             case .error(let title, let msg):
-                result?.title = title
-                result?.msg = msg
+                completion(title, msg)
             default:
                 break
             }
         }
-        return result
+    }
+
+    private func updateViewExpectNoResults(presenter: AssetCollectionPresenter, completion:@escaping (String, String)->Void) {
+        presenter.updateView { response in
+            switch response {
+            case .noResults(let title, let msg):
+                completion(title, msg)
+            default:
+                break
+            }
+        }
+    }
+
+    private func updateViewExpectSuccess(presenter: AssetCollectionPresenter, completion:@escaping ([AssetViewModel])->Void) {
+        presenter.updateView { response in
+            switch response {
+            case .success(let viewModelList):
+                completion(viewModelList)
+            default:
+                break
+            }
+        }
     }
 
 }
@@ -63,14 +83,20 @@ class AssetCollectionPresenterTests: XCTestCase {
 extension AssetCollectionPresenterTests {
 
     func test_updateView_respondsWithShowLoadingTrue() {
-        let isLoading = updateViewExpectLoading(presenter: presenter)
-        XCTAssertTrue(isLoading!)
+        var isLoading = false
+        updateViewExpectLoading(presenter: presenter) { loading in
+            isLoading = loading
+        }
+        expect(isLoading).toEventually(beTrue())
     }
 
     func test_updateView_onAssetDataLoadingCompletion_respondsWithShowLoadingFalse() {
         stubAssetDataLoader.stubResponse = AssetDataLoaderResponse.error(NSError())
-        let isLoading = updateViewExpectLoading(presenter: presenter)
-        XCTAssertFalse(isLoading!)
+        var isLoading = true
+        updateViewExpectLoading(presenter: presenter) { loading in
+            isLoading = loading
+        }
+        expect(isLoading).toEventually(beFalse())
     }
 }
 
@@ -78,22 +104,61 @@ extension AssetCollectionPresenterTests {
 
 extension AssetCollectionPresenterTests {
 
-//    func test_updateView_onDataLoadingError_respondsWithError() {
-//        stubAssetDataLoader.stubResponse = AssetDataLoaderResponse.error(NSError())
-//
-//        var result: (title:String, msg:String)?
-//        presenter.updateView { response in
-//            switch response {
-//            case .error(let title, let msg):
-//                result?.title = title
-//                result?.msg = msg
-//            default:
-//                break
-//            }
-//        }
-//
-//        XCTAssertEqual(result?.title, "error")
-//        XCTAssertEqual(result?.msg, "this is an error message")
-//    }
-
+    func test_updateView_onDataLoadingError_respondsWithError() {
+        stubAssetDataLoader.stubResponse = AssetDataLoaderResponse.error(NSError())
+        var errorTitle = "", errorMsg = ""
+        updateViewExpectError(presenter: presenter) { title, msg in
+            errorTitle = title
+            errorMsg = msg
+        }
+        expect(errorTitle).toEventually(equal("error"))
+        expect(errorMsg).toEventually(equal("this is an error message"))
+    }
 }
+
+// MARK: No Results
+
+extension AssetCollectionPresenterTests {
+
+    func test_updateView_onDataLoadingNoResults_respondsWithError() {
+        stubAssetDataLoader.stubResponse = AssetDataLoaderResponse.success([])
+        var errorTitle = "", errorMsg = ""
+        updateViewExpectNoResults(presenter: presenter) { title, msg in
+            errorTitle = title
+            errorMsg = msg
+        }
+        expect(errorTitle).toEventually(equal("title"))
+        expect(errorMsg).toEventually(equal("no results try again later"))
+    }
+}
+
+// MARK: Response Success
+
+extension AssetCollectionPresenterTests {
+
+    func test_updateView_onDataLoadingSuccess_respondsWithCorrectNumberOfViewModels() {
+        stubAssetDataLoader.stubResponse = AssetDataLoaderResponse.success([fakeDataModel1, fakeDataModel2])
+        var viewModelList: [AssetViewModel]?
+        updateViewExpectSuccess(presenter: presenter) { viewModels in
+            viewModelList = viewModels
+        }
+        expect(viewModelList?.count).toEventually(equal(2))
+    }
+
+    func test_updateView_onDataLoadingSuccess_respondsWithViewModelProperties() {
+        stubAssetDataLoader.stubResponse = AssetDataLoaderResponse.success([fakeDataModel1, fakeDataModel2])
+        var viewModelList: [AssetViewModel]?
+        updateViewExpectSuccess(presenter: presenter) { viewModels in
+            viewModelList = viewModels
+        }
+        
+        expect(viewModelList?.first?.id).toEventually(equal(fakeDataModel1.id))
+        expect(viewModelList?.first?.title).toEventually(equal(fakeDataModel1.title))
+        expect(viewModelList?.first?.imageUrl).toEventually(equal(fakeDataModel1.imageUrl))
+
+        expect(viewModelList?.last?.id).toEventually(equal(fakeDataModel2.id))
+        expect(viewModelList?.last?.title).toEventually(equal(fakeDataModel2.title))
+        expect(viewModelList?.last?.imageUrl).toEventually(equal(fakeDataModel2.imageUrl))
+}
+}
+

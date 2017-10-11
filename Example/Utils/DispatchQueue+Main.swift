@@ -9,6 +9,7 @@
 import Foundation
 
 extension DispatchQueue {
+
     static func mainAsync(_ block:@escaping ()->()) {
         if Thread.isMainThread {
             block()
@@ -19,4 +20,16 @@ extension DispatchQueue {
             }
         }
     }
+
+    static func mainSync(_ block:@escaping ()->()) {
+        if Thread.isMainThread {
+            block()
+        }
+        else {
+            DispatchQueue.main.sync {
+                block()
+            }
+        }
+    }
+
 }
