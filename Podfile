@@ -12,7 +12,6 @@ target 'Example' do
 
   target 'ExampleTests' do
     inherit! :search_paths
-    pod 'Nimble'
   end
 
 end

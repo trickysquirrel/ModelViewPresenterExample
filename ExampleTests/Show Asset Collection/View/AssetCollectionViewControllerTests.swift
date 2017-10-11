@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import Nimble
 @testable import Example
 
 
@@ -113,9 +112,9 @@ extension AssetCollectionViewControllerTests {
 
         stubPresenter.updateHandler!(.loading(show: false))
 
-        expect(self.stubLoadingIndicator.didCallStatusBarWithLoading!) == false
-        expect(self.stubLoadingIndicator.didCallViewWithLoading!) == false
-        expect(self.stubLoadingIndicator.didCallViewWithView!) == viewController.view!
+        XCTAssertFalse(self.stubLoadingIndicator.didCallStatusBarWithLoading!)
+        XCTAssertFalse(self.stubLoadingIndicator.didCallViewWithLoading!)
+        XCTAssertEqual(self.stubLoadingIndicator.didCallViewWithView!, viewController.view!)
     }
 
 
@@ -125,9 +124,9 @@ extension AssetCollectionViewControllerTests {
 
         stubPresenter.updateHandler!(.loading(show: true))
 
-        expect(self.stubLoadingIndicator.didCallStatusBarWithLoading!) == true
-        expect(self.stubLoadingIndicator.didCallViewWithLoading!) == true
-        expect(self.stubLoadingIndicator.didCallViewWithView!) == viewController.view!
+        XCTAssertTrue(self.stubLoadingIndicator.didCallStatusBarWithLoading!)
+        XCTAssertTrue(self.stubLoadingIndicator.didCallViewWithLoading!)
+        XCTAssertEqual(self.stubLoadingIndicator.didCallViewWithView!, viewController.view!)
     }
 
 
@@ -137,9 +136,9 @@ extension AssetCollectionViewControllerTests {
 
         stubPresenter.updateHandler!(.error(title:"test title", msg:"test msg"))
         
-        expect(self.stubInformationAlert.title!) == "test title"
-        expect(self.stubInformationAlert.message!) == "test msg"
-        expect(self.stubInformationAlert.presentingViewController!) == viewController
+        XCTAssertEqual(self.stubInformationAlert.title!, "test title")
+        XCTAssertEqual(self.stubInformationAlert.message!, "test msg")
+        XCTAssertEqual(self.stubInformationAlert.presentingViewController!, viewController)
     }
 
 
@@ -149,9 +148,9 @@ extension AssetCollectionViewControllerTests {
 
         stubPresenter.updateHandler!(.noResults(title:"test results", msg:"a msg"))
 
-        expect(self.stubInformationAlert.title!) == "test results"
-        expect(self.stubInformationAlert.message!) == "a msg"
-        expect(self.stubInformationAlert.presentingViewController!) == viewController
+        XCTAssertEqual(self.stubInformationAlert.title!, "test results")
+        XCTAssertEqual(self.stubInformationAlert.message!, "a msg")
+        XCTAssertEqual(self.stubInformationAlert.presentingViewController!, viewController)
     }
 
 
@@ -161,8 +160,8 @@ extension AssetCollectionViewControllerTests {
 
         stubPresenter.updateHandler!(.success(makeTwoAssetViewModelList()))
 
-        expect(self.dataSource.numberOfSections(in: self.viewController.collectionView!)) == 1
-        expect(self.dataSource.collectionView(self.viewController.collectionView!, numberOfItemsInSection: 0)) == 2
+        XCTAssertEqual(self.dataSource.numberOfSections(in: self.viewController.collectionView!), 1)
+        XCTAssertEqual(self.dataSource.collectionView(self.viewController.collectionView!, numberOfItemsInSection: 0), 2)
     }
 }
 
@@ -183,7 +182,7 @@ extension AssetCollectionViewControllerTests {
         stubPresenter.updateHandler!(.success(makeTwoAssetViewModelList()))
 
         newViewController.collectionView!.delegate!.collectionView!(viewController.collectionView!, didSelectItemAt: IndexPath(row: 1, section: 0))
-        expect(didCallAppActionWithId) == 2
+        XCTAssertEqual(didCallAppActionWithId, 2)
     }
 
 
@@ -200,7 +199,7 @@ extension AssetCollectionViewControllerTests {
         let collectionView = newViewController.collectionView!
         let cell = collectionView.dataSource?.collectionView(collectionView, cellForItemAt: indexPath) as! AssetCollectionViewCell
 
-        expect(cell.labelTitle.text) == viewModelList[1].title
+        XCTAssertEqual(cell.labelTitle.text, viewModelList[1].title)
     }
 
 }
