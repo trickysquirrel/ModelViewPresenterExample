@@ -64,7 +64,7 @@ class AssetCollectionPresenter: AssetCollectionPresenting {
                 presenterResponse = .error(title: "error", msg: "this is an error message")
             }
 
-            DispatchQueue.main.async {
+            DispatchQueue.mainAsync {
                 updateHandler(.loading(show: false))
                 updateHandler(presenterResponse)
             }

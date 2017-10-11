@@ -10,6 +10,19 @@ import Foundation
 @testable import Example
 
 
+class StubAssetDataLoader: AssetDataLoading {
+
+    var stubResponse: AssetDataLoaderResponse?
+
+    func load(completionQueue: DispatchQueue, completion:@escaping (AssetDataLoaderResponse)->()) {
+        if let response = stubResponse {
+            completion(response)
+        }
+    }
+}
+
+
+// todo check we are using these
 class StubDataLoader: DataLoading {
 
     var responseDictionary: [[String:Any]]?
