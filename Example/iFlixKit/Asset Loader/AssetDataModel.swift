@@ -10,6 +10,7 @@ import Foundation
 
 
 struct AssetDataModel {
+    let id: Int
 	let title: String
 	let imageUrl: URL
 }

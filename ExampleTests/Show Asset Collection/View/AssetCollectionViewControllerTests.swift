@@ -23,7 +23,7 @@ class AssetCollectionViewControllerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        dummyAppActions = AppMovieCollectionActions {}
+        dummyAppActions = AppMovieCollectionActions { _ in }
         stubConfigureCollectionView = StubConfigureCollectionView()
         viewController = makeViewController(appActions: dummyAppActions, configureCollectionView: stubConfigureCollectionView)
     }
@@ -65,8 +65,8 @@ class AssetCollectionViewControllerTests: XCTestCase {
     }
 
     private func makeTwoAssetViewModelList() -> [AssetViewModel] {
-        let assetViewModel1 = AssetViewModel(title: "a", imageUrl: URL(string:"dummyA")!)
-        let assetViewModel2 = AssetViewModel(title: "b", imageUrl: URL(string:"dummyB")!)
+        let assetViewModel1 = AssetViewModel(id: 1, title: "a", imageUrl: URL(string:"dummyA")!)
+        let assetViewModel2 = AssetViewModel(id: 2, title: "b", imageUrl: URL(string:"dummyB")!)
         return [assetViewModel1, assetViewModel2]
     }
 }
@@ -173,9 +173,9 @@ extension AssetCollectionViewControllerTests {
 
     func test_onDataSource_onCellSelected_callsAppAction() {
 
-        var didCallAppAction = false
-        let newAppActions = AppMovieCollectionActions {
-            didCallAppAction = true
+        var didCallAppActionWithId: Int?
+        let newAppActions = AppMovieCollectionActions { id in
+            didCallAppActionWithId = id
         }
 
         let newViewController = makeViewController(appActions: newAppActions, configureCollectionView: StubConfigureCollectionView())
@@ -183,8 +183,8 @@ extension AssetCollectionViewControllerTests {
         startViewControllerLifeCycle(newViewController, forceViewDidAppear: true)
         stubPresenter.updateHandler!(.success(makeTwoAssetViewModelList()))
 
-        newViewController.collectionView!.delegate!.collectionView!(viewController.collectionView!, didSelectItemAt: IndexPath(row: 0, section: 0))
-        XCTAssertTrue(didCallAppAction)
+        newViewController.collectionView!.delegate!.collectionView!(viewController.collectionView!, didSelectItemAt: IndexPath(row: 1, section: 0))
+        XCTAssertEqual(didCallAppActionWithId!, 2)
     }
 
 

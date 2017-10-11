@@ -26,7 +26,7 @@ class AppCoordinator {
 
 
 	func showRootViewController() {
-        let action = AppMovieCollectionActions(block: { [weak self] in
+        let action = AppMovieCollectionActions(block: { [weak self] id in
             self?.showMovieDetailsViewController()
         })
 		let viewController = viewControllerFactory.makeMoviesViewController(showMovieDetailAction: action)

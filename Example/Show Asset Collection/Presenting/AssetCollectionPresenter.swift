@@ -10,6 +10,7 @@ import Foundation
 
 
 struct AssetViewModel {
+    let id: Int
     let title: String
 	let imageUrl: URL
 }
@@ -76,6 +77,6 @@ class AssetCollectionPresenter: AssetCollectionPresenting {
 extension AssetCollectionPresenter {
 
     private func makeViewModelsList(dataModelList: [AssetDataModel]) -> [AssetViewModel] {
-        return dataModelList.map { AssetViewModel(title: $0.title, imageUrl: $0.imageUrl) }
+        return dataModelList.map { AssetViewModel(id: $0.id, title: $0.title, imageUrl: $0.imageUrl) }
     }
 }

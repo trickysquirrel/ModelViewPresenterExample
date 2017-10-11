@@ -49,6 +49,7 @@ extension AssetDataLoader {
 
 	private func makeAssetData(json: [String:Any]) -> AssetDataModel? {
 		guard
+            let id = json["id"] as? Int,
 			let endpoint = json["imageUrl"],
 			let url = URL(string: "https:\(endpoint)"),
             let title = json["title"] as? [String:Any],
@@ -57,7 +58,7 @@ extension AssetDataLoader {
 				return nil
 		}
 
-        return AssetDataModel(title: usTitle, imageUrl: url)
+        return AssetDataModel(id: id, title: usTitle, imageUrl: url)
 	}
 
 }
