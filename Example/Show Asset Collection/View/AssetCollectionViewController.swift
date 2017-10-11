@@ -27,7 +27,8 @@ class AssetCollectionViewController: UICollectionViewController {
 	}
 
 	
-	init(presenter: AssetCollectionPresenting,
+    init(title: String,
+         presenter: AssetCollectionPresenting,
          configureCollectionView: CollectionViewConfigurable,
 	     dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>,
          reporter: MovieCollectionReporter,
@@ -42,6 +43,7 @@ class AssetCollectionViewController: UICollectionViewController {
         self.loadingIndicator = loadingIndicator
         self.alert = alert
 		super.init(nibName: "AssetCollectionViewController", bundle: nil)
+        self.title = title
 	}
 
 	

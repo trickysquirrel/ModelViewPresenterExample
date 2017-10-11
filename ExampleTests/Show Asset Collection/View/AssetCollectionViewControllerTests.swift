@@ -47,13 +47,15 @@ class AssetCollectionViewControllerTests: XCTestCase {
         dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()
         stubInformationAlert = StubInformationAlert()
         stubLoadingIndicator = StubLoadingIndicator()
-        return AssetCollectionViewController(presenter: stubPresenter,
-                                             configureCollectionView: configureCollectionView,
-                                             dataSource: dataSource,
-                                             reporter: analyticsFactory.makeAssetCollectionReporter(),
-                                             loadingIndicator: stubLoadingIndicator,
-                                             alert: stubInformationAlert,
-                                             appActions: appActions)
+        return AssetCollectionViewController(
+            title: "Movies",
+            presenter: stubPresenter,
+            configureCollectionView: configureCollectionView,
+            dataSource: dataSource,
+            reporter: analyticsFactory.makeAssetCollectionReporter(),
+            loadingIndicator: stubLoadingIndicator,
+            alert: stubInformationAlert,
+            appActions: appActions)
 
     }
 
@@ -75,18 +77,24 @@ class AssetCollectionViewControllerTests: XCTestCase {
 
 extension AssetCollectionViewControllerTests {
 
+    func test_onViewLoad_navigationTitleCorrect() {
+        startViewControllerLifeCycle(viewController)
+        XCTAssertEqual(viewController.title, "Movies")
+    }
+
+
     func test_onViewLoad_configuresCollectionView() {
         startViewControllerLifeCycle(viewController)
-        XCTAssertTrue(self.stubConfigureCollectionView.didCallConfigure)
+        XCTAssertTrue(stubConfigureCollectionView.didCallConfigure)
     }
 
 
     func test_onViewDidAppear_sendCorrectAnalyticsActionAndData() {
         startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
-        XCTAssertEqual(self.stubAdobeAnalyticsReporter.sentActionList.count, 1)
-        XCTAssertEqual(self.stubAdobeAnalyticsReporter.sentActionList[0].name, "MoviesCollectionShown")
-        XCTAssertEqual(self.stubAdobeAnalyticsReporter.sentActionList[0].data?.keys.count, 1)
-        XCTAssertEqual(self.stubAdobeAnalyticsReporter.sentActionList[0].data?["test"] as? String, "something")
+        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList.count, 1)
+        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[0].name, "MoviesCollectionShown")
+        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[0].data?.keys.count, 1)
+        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[0].data?["test"] as? String, "something")
     }
 
 
@@ -95,10 +103,10 @@ extension AssetCollectionViewControllerTests {
         startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
         startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
 
-        XCTAssertEqual(self.stubAdobeAnalyticsReporter.sentActionList.count, 2)
-        XCTAssertEqual(self.stubAdobeAnalyticsReporter.sentActionList[1].name, "MoviesCollectionShown")
-        XCTAssertEqual(self.stubAdobeAnalyticsReporter.sentActionList[1].data?.keys.count, 1)
-        XCTAssertEqual(self.stubAdobeAnalyticsReporter.sentActionList[1].data?["test"] as? String, "something")
+        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList.count, 2)
+        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[1].name, "MoviesCollectionShown")
+        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[1].data?.keys.count, 1)
+        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[1].data?["test"] as? String, "something")
     }
 }
 
@@ -112,9 +120,9 @@ extension AssetCollectionViewControllerTests {
 
         stubPresenter.updateHandler!(.loading(show: false))
 
-        XCTAssertFalse(self.stubLoadingIndicator.didCallStatusBarWithLoading!)
-        XCTAssertFalse(self.stubLoadingIndicator.didCallViewWithLoading!)
-        XCTAssertEqual(self.stubLoadingIndicator.didCallViewWithView!, viewController.view!)
+        XCTAssertFalse(stubLoadingIndicator.didCallStatusBarWithLoading!)
+        XCTAssertFalse(stubLoadingIndicator.didCallViewWithLoading!)
+        XCTAssertEqual(stubLoadingIndicator.didCallViewWithView!, viewController.view!)
     }
 
 
@@ -124,9 +132,9 @@ extension AssetCollectionViewControllerTests {
 
         stubPresenter.updateHandler!(.loading(show: true))
 
-        XCTAssertTrue(self.stubLoadingIndicator.didCallStatusBarWithLoading!)
-        XCTAssertTrue(self.stubLoadingIndicator.didCallViewWithLoading!)
-        XCTAssertEqual(self.stubLoadingIndicator.didCallViewWithView!, viewController.view!)
+        XCTAssertTrue(stubLoadingIndicator.didCallStatusBarWithLoading!)
+        XCTAssertTrue(stubLoadingIndicator.didCallViewWithLoading!)
+        XCTAssertEqual(stubLoadingIndicator.didCallViewWithView!, viewController.view!)
     }
 
 
@@ -136,9 +144,9 @@ extension AssetCollectionViewControllerTests {
 
         stubPresenter.updateHandler!(.error(title:"test title", msg:"test msg"))
         
-        XCTAssertEqual(self.stubInformationAlert.title!, "test title")
-        XCTAssertEqual(self.stubInformationAlert.message!, "test msg")
-        XCTAssertEqual(self.stubInformationAlert.presentingViewController!, viewController)
+        XCTAssertEqual(stubInformationAlert.title!, "test title")
+        XCTAssertEqual(stubInformationAlert.message!, "test msg")
+        XCTAssertEqual(stubInformationAlert.presentingViewController!, viewController)
     }
 
 
@@ -148,9 +156,9 @@ extension AssetCollectionViewControllerTests {
 
         stubPresenter.updateHandler!(.noResults(title:"test results", msg:"a msg"))
 
-        XCTAssertEqual(self.stubInformationAlert.title!, "test results")
-        XCTAssertEqual(self.stubInformationAlert.message!, "a msg")
-        XCTAssertEqual(self.stubInformationAlert.presentingViewController!, viewController)
+        XCTAssertEqual(stubInformationAlert.title!, "test results")
+        XCTAssertEqual(stubInformationAlert.message!, "a msg")
+        XCTAssertEqual(stubInformationAlert.presentingViewController!, viewController)
     }
 
 
@@ -160,8 +168,8 @@ extension AssetCollectionViewControllerTests {
 
         stubPresenter.updateHandler!(.success(makeTwoAssetViewModelList()))
 
-        XCTAssertEqual(self.dataSource.numberOfSections(in: self.viewController.collectionView!), 1)
-        XCTAssertEqual(self.dataSource.collectionView(self.viewController.collectionView!, numberOfItemsInSection: 0), 2)
+        XCTAssertEqual(dataSource.numberOfSections(in: self.viewController.collectionView!), 1)
+        XCTAssertEqual(dataSource.collectionView(self.viewController.collectionView!, numberOfItemsInSection: 0), 2)
     }
 }
 

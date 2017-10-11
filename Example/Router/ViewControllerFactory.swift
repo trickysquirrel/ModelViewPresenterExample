@@ -21,6 +21,7 @@ struct ViewControllerFactory {
         let dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()
         let configureCollectionView = ConfigureCollectionView()
         return AssetCollectionViewController(
+            title: "Movies",
             presenter: presenter,
             configureCollectionView: configureCollectionView,
             dataSource: dataSource,
@@ -31,7 +32,10 @@ struct ViewControllerFactory {
     }
 
     func makeDetailsViewController() -> UIViewController {
-		return UIViewController()
+		let viewController = UIViewController()
+        viewController.title = "Details"
+        viewController.view.backgroundColor = .white
+        return viewController
 	}
 
 }

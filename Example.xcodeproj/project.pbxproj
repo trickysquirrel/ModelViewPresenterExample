@@ -93,7 +93,6 @@
 		308179241F84F9DF001F44FD /* Array+Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Safe.swift"; sourceTree = "<group>"; };
 		308179261F84FBCA001F44FD /* AssetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollectionViewCell.swift; sourceTree = "<group>"; };
 		308179271F84FBCA001F44FD /* AssetCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetCollectionViewCell.xib; sourceTree = "<group>"; };
-		3081792A1F84FEDA001F44FD /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		3081792B1F850DF7001F44FD /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		30C9541F1F85DF97000ABE33 /* AnalyticsReporterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsReporterFactory.swift; sourceTree = "<group>"; };
 		30C954211F85DFDC000ABE33 /* MovieCollectionReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionReporter.swift; sourceTree = "<group>"; };
@@ -136,7 +135,6 @@
 		30115AE51F8436310042D614 = {
 			isa = PBXGroup;
 			children = (
-				3081792A1F84FEDA001F44FD /* Podfile */,
 				30115B111F84364A0042D614 /* info */,
 				30115AF01F8436310042D614 /* Example */,
 				30115B051F8436310042D614 /* ExampleTests */,
