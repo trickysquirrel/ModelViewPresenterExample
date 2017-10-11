@@ -151,7 +151,7 @@ extension AssetCollectionPresenterTests {
         updateViewExpectSuccess(presenter: presenter) { viewModels in
             viewModelList = viewModels
         }
-        
+
         expect(viewModelList?.first?.id).toEventually(equal(fakeDataModel1.id))
         expect(viewModelList?.first?.title).toEventually(equal(fakeDataModel1.title))
         expect(viewModelList?.first?.imageUrl).toEventually(equal(fakeDataModel1.imageUrl))

@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Nimble
 @testable import Example
 
 
@@ -77,18 +78,16 @@ extension AssetCollectionViewControllerTests {
 
     func test_onViewLoad_configuresCollectionView() {
         startViewControllerLifeCycle(viewController)
-        XCTAssertTrue(stubConfigureCollectionView.didCallConfigure)
+        expect(self.stubConfigureCollectionView.didCallConfigure) == true
     }
 
 
     func test_onViewDidAppear_sendCorrectAnalyticsActionAndData() {
-
         startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
-
-        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList.count, 1)
-        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[0].name, "MoviesCollectionShown")
-        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[0].data?.keys.count, 1)
-        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[0].data?["test"] as! String, "something")
+        expect(self.stubAdobeAnalyticsReporter.sentActionList.count) == 1
+        expect(self.stubAdobeAnalyticsReporter.sentActionList[0].name) == "MoviesCollectionShown"
+        expect(self.stubAdobeAnalyticsReporter.sentActionList[0].data?.keys.count) == 1
+        expect(self.stubAdobeAnalyticsReporter.sentActionList[0].data?["test"] as? String) == "something"
     }
 
 
@@ -97,10 +96,10 @@ extension AssetCollectionViewControllerTests {
         startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
         startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
 
-        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList.count, 2)
-        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[1].name, "MoviesCollectionShown")
-        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[1].data?.keys.count, 1)
-        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[1].data?["test"] as! String, "something")
+        expect(self.stubAdobeAnalyticsReporter.sentActionList.count) == 2
+        expect(self.stubAdobeAnalyticsReporter.sentActionList[1].name) == "MoviesCollectionShown"
+        expect(self.stubAdobeAnalyticsReporter.sentActionList[1].data?.keys.count) == 1
+        expect(self.stubAdobeAnalyticsReporter.sentActionList[1].data?["test"] as? String) == "something"
     }
 }
 
@@ -114,9 +113,9 @@ extension AssetCollectionViewControllerTests {
 
         stubPresenter.updateHandler!(.loading(show: false))
 
-        XCTAssertEqual(stubLoadingIndicator.didCallStatusBarWithLoading!, false)
-        XCTAssertEqual(stubLoadingIndicator.didCallViewWithLoading!, false)
-        XCTAssertEqual(stubLoadingIndicator.didCallViewWithView!, viewController.view!)
+        expect(self.stubLoadingIndicator.didCallStatusBarWithLoading!) == false
+        expect(self.stubLoadingIndicator.didCallViewWithLoading!) == false
+        expect(self.stubLoadingIndicator.didCallViewWithView!) == viewController.view!
     }
 
 
@@ -126,9 +125,9 @@ extension AssetCollectionViewControllerTests {
 
         stubPresenter.updateHandler!(.loading(show: true))
 
-        XCTAssertEqual(stubLoadingIndicator.didCallStatusBarWithLoading!, true)
-        XCTAssertEqual(stubLoadingIndicator.didCallViewWithLoading!, true)
-        XCTAssertEqual(stubLoadingIndicator.didCallViewWithView!, viewController.view!)
+        expect(self.stubLoadingIndicator.didCallStatusBarWithLoading!) == true
+        expect(self.stubLoadingIndicator.didCallViewWithLoading!) == true
+        expect(self.stubLoadingIndicator.didCallViewWithView!) == viewController.view!
     }
 
 
@@ -138,9 +137,9 @@ extension AssetCollectionViewControllerTests {
 
         stubPresenter.updateHandler!(.error(title:"test title", msg:"test msg"))
         
-        XCTAssertEqual(stubInformationAlert.title!, "test title")
-        XCTAssertEqual(stubInformationAlert.message!, "test msg")
-        XCTAssertEqual(stubInformationAlert.presentingViewController!, viewController)
+        expect(self.stubInformationAlert.title!) == "test title"
+        expect(self.stubInformationAlert.message!) == "test msg"
+        expect(self.stubInformationAlert.presentingViewController!) == viewController
     }
 
 
@@ -150,9 +149,9 @@ extension AssetCollectionViewControllerTests {
 
         stubPresenter.updateHandler!(.noResults(title:"test results", msg:"a msg"))
 
-        XCTAssertEqual(stubInformationAlert.title!, "test results")
-        XCTAssertEqual(stubInformationAlert.message!, "a msg")
-        XCTAssertEqual(stubInformationAlert.presentingViewController!, viewController)
+        expect(self.stubInformationAlert.title!) == "test results"
+        expect(self.stubInformationAlert.message!) == "a msg"
+        expect(self.stubInformationAlert.presentingViewController!) == viewController
     }
 
 
@@ -162,8 +161,8 @@ extension AssetCollectionViewControllerTests {
 
         stubPresenter.updateHandler!(.success(makeTwoAssetViewModelList()))
 
-        XCTAssertEqual(dataSource.numberOfSections(in: viewController.collectionView!), 1)
-        XCTAssertEqual(dataSource.collectionView(viewController.collectionView!, numberOfItemsInSection: 0), 2)
+        expect(self.dataSource.numberOfSections(in: self.viewController.collectionView!)) == 1
+        expect(self.dataSource.collectionView(self.viewController.collectionView!, numberOfItemsInSection: 0)) == 2
     }
 }
 
@@ -184,7 +183,7 @@ extension AssetCollectionViewControllerTests {
         stubPresenter.updateHandler!(.success(makeTwoAssetViewModelList()))
 
         newViewController.collectionView!.delegate!.collectionView!(viewController.collectionView!, didSelectItemAt: IndexPath(row: 1, section: 0))
-        XCTAssertEqual(didCallAppActionWithId!, 2)
+        expect(didCallAppActionWithId) == 2
     }
 
 
@@ -201,7 +200,7 @@ extension AssetCollectionViewControllerTests {
         let collectionView = newViewController.collectionView!
         let cell = collectionView.dataSource?.collectionView(collectionView, cellForItemAt: indexPath) as! AssetCollectionViewCell
 
-        XCTAssertEqual(cell.labelTitle.text, viewModelList[1].title)
+        expect(cell.labelTitle.text) == viewModelList[1].title
     }
 
 }
