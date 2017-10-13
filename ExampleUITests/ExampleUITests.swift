@@ -24,15 +24,16 @@ class ExampleUITests: UITestCase {
     // Plain XCTAssert can also work well here instead of the above tools
 
 
-    func test_movieCollection_showsAndSelectsItems() {
+    func test_userCanNavigate_fromAssetCollectionToDetailsAndBack() {
 
         launchApp()
 
         AssetCollectionScreenObjectModel(context: context)
             .waitForScreenAppearanceToBeHitable()
-            .verifyNavigationTitle("Movies")
+            .verify(navigationTitle: "Movies")
             .navigateToAssetDetailsByTappingCell(atIndex: 0)
             .waitForScreenAppearance()
+            .verify(navigationTitle: "Details")
             .tapBackButton()
             .waitForScreenAppearanceToBeHitable()
     }

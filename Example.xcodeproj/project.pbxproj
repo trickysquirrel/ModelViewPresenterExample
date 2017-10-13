@@ -26,7 +26,6 @@
 		3070C5391F8EBFCB00F97C17 /* FakeAppDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3070C5381F8EBFCB00F97C17 /* FakeAppDispatcher.swift */; };
 		3070C5411F8EC92E00F97C17 /* ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3070C5401F8EC92E00F97C17 /* ExampleUITests.swift */; };
 		3070C54A1F8ECA1900F97C17 /* UITestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3070C5491F8ECA1900F97C17 /* UITestCase.swift */; };
-		3070C54C1F8ECA4E00F97C17 /* ObjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3070C54B1F8ECA4E00F97C17 /* ObjectModel.swift */; };
 		3070C54E1F8ECA7500F97C17 /* ScreenObjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3070C54D1F8ECA7500F97C17 /* ScreenObjectModel.swift */; };
 		3070C5511F8ECB7B00F97C17 /* AssetCollectionScreenObjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3070C5501F8ECB7B00F97C17 /* AssetCollectionScreenObjectModel.swift */; };
 		3070C5531F8ECD9500F97C17 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3070C5521F8ECD9500F97C17 /* AccessibilityIdentifiers.swift */; };
@@ -103,7 +102,6 @@
 		3070C5401F8EC92E00F97C17 /* ExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleUITests.swift; sourceTree = "<group>"; };
 		3070C5421F8EC92E00F97C17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3070C5491F8ECA1900F97C17 /* UITestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestCase.swift; sourceTree = "<group>"; };
-		3070C54B1F8ECA4E00F97C17 /* ObjectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectModel.swift; sourceTree = "<group>"; };
 		3070C54D1F8ECA7500F97C17 /* ScreenObjectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenObjectModel.swift; sourceTree = "<group>"; };
 		3070C5501F8ECB7B00F97C17 /* AssetCollectionScreenObjectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollectionScreenObjectModel.swift; sourceTree = "<group>"; };
 		3070C5521F8ECD9500F97C17 /* AccessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifiers.swift; sourceTree = "<group>"; };
@@ -300,7 +298,6 @@
 			isa = PBXGroup;
 			children = (
 				3070C5491F8ECA1900F97C17 /* UITestCase.swift */,
-				3070C54B1F8ECA4E00F97C17 /* ObjectModel.swift */,
 				3070C54D1F8ECA7500F97C17 /* ScreenObjectModel.swift */,
 			);
 			path = Utils;
@@ -736,7 +733,6 @@
 				3070C5511F8ECB7B00F97C17 /* AssetCollectionScreenObjectModel.swift in Sources */,
 				3070C5411F8EC92E00F97C17 /* ExampleUITests.swift in Sources */,
 				30910C6D1F9012E700440731 /* AssetDetailsScreenObjectModel.swift in Sources */,
-				3070C54C1F8ECA4E00F97C17 /* ObjectModel.swift in Sources */,
 				3070C5541F8ECDBC00F97C17 /* AccessibilityIdentifiers.swift in Sources */,
 				3070C54E1F8ECA7500F97C17 /* ScreenObjectModel.swift in Sources */,
 				3070C54A1F8ECA1900F97C17 /* UITestCase.swift in Sources */,
