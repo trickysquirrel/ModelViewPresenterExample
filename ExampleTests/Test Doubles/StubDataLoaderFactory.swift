@@ -22,7 +22,18 @@ class StubAssetDataLoader: AssetDataLoading {
 }
 
 
+
+class StubIFlixServiceFactory: IFlixServiceFactoryProtocol {
+
+    func makeMoviesAssetCollectionDataLoader() -> AssetDataLoading {
+        return StubAssetDataLoader()
+    }
+}
+
+
 // todo check we are using these
+
+
 class StubDataLoader: DataLoading {
 
     var responseDictionary: [[String:Any]]?

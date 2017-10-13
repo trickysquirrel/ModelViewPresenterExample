@@ -21,6 +21,7 @@
 		303AFCFF1F8B22550068018E /* StubDataLoaderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AFCFE1F8B22550068018E /* StubDataLoaderFactory.swift */; };
 		303AFD011F8B23FB0068018E /* DataLoaderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AFD001F8B23FB0068018E /* DataLoaderFactory.swift */; };
 		303AFD031F8B2BE50068018E /* AdobeAnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AFD021F8B2BE50068018E /* AdobeAnalyticsReporter.swift */; };
+		3066DD901F90AF1E002A70D7 /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3066DD8F1F90AF1E002A70D7 /* AppCoordinatorTests.swift */; };
 		3070C5371F8EBEF400F97C17 /* AppDispatching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3070C5361F8EBEF400F97C17 /* AppDispatching.swift */; };
 		3070C5391F8EBFCB00F97C17 /* FakeAppDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3070C5381F8EBFCB00F97C17 /* FakeAppDispatcher.swift */; };
 		3070C5411F8EC92E00F97C17 /* ExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3070C5401F8EC92E00F97C17 /* ExampleUITests.swift */; };
@@ -95,6 +96,7 @@
 		303AFCFE1F8B22550068018E /* StubDataLoaderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubDataLoaderFactory.swift; sourceTree = "<group>"; };
 		303AFD001F8B23FB0068018E /* DataLoaderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderFactory.swift; sourceTree = "<group>"; };
 		303AFD021F8B2BE50068018E /* AdobeAnalyticsReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdobeAnalyticsReporter.swift; sourceTree = "<group>"; };
+		3066DD8F1F90AF1E002A70D7 /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
 		3070C5361F8EBEF400F97C17 /* AppDispatching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDispatching.swift; sourceTree = "<group>"; };
 		3070C5381F8EBFCB00F97C17 /* FakeAppDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAppDispatcher.swift; sourceTree = "<group>"; };
 		3070C53E1F8EC92E00F97C17 /* ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -255,6 +257,7 @@
 		303AFCE11F8990880068018E /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				3066DD8F1F90AF1E002A70D7 /* AppCoordinatorTests.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -713,6 +716,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3066DD901F90AF1E002A70D7 /* AppCoordinatorTests.swift in Sources */,
 				303AFCFF1F8B22550068018E /* StubDataLoaderFactory.swift in Sources */,
 				30E7621B1F8C223A00864D07 /* StubAssetCollectionPresenter.swift in Sources */,
 				30E7621D1F8C226000864D07 /* StubInformationAlert.swift in Sources */,

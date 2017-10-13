@@ -30,20 +30,22 @@ class AppCoordinator {
             self?.showMovieDetailsViewController()
         })
 		let viewController = viewControllerFactory.makeMoviesViewController(showMovieDetailAction: action)
-		pushOnViewController(viewController)
+		pushOnViewController(viewController, animated: false)
 	}
 
     
     private func showMovieDetailsViewController() {
         let viewController = viewControllerFactory.makeDetailsViewController()
-        pushOnViewController(viewController)
+        pushOnViewController(viewController, animated: true)
     }
 	
 }
 
 
 private extension AppCoordinator {
-	func pushOnViewController(_ viewController:UIViewController) {
-		navigationController.pushViewController(viewController, animated: true)
+    func pushOnViewController(_ viewController:UIViewController, animated: Bool) {
+        let isRunningTests = NSClassFromString("XCTestCase") != nil
+        let shouldAnimate = isRunningTests ? false : animated
+		navigationController.pushViewController(viewController, animated: shouldAnimate)
 	}
 }
