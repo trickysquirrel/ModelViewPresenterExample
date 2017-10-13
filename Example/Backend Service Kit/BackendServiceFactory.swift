@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol IFlixServiceFactoryProtocol {
+protocol BackendServiceFactoryProtocol {
     func makeMoviesAssetCollectionDataLoader() -> AssetDataLoading
 }
 
-struct IFlixServiceFactory: IFlixServiceFactoryProtocol {
+struct BackendServiceFactory: BackendServiceFactoryProtocol {
 
     let dataLoaderFactory: DataLoaderFactoryProtocol
 

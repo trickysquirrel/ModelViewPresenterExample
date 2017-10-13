@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let adobeAnalyticsReporter = AdobeAnalyticsReporter()
         let analyticsFactory = AnalyticsReporterFactory(adobeAnalyticsReporter: adobeAnalyticsReporter)
         let dataLoaderFactory = DataLoaderFactory()
-        let iflixServiceFactory = IFlixServiceFactory(dataLoaderFactory: dataLoaderFactory)
+        let iflixServiceFactory = BackendServiceFactory(dataLoaderFactory: dataLoaderFactory)
 
         let viewControllerFactory = ViewControllerFactory(iflixServiceFactory: iflixServiceFactory,
                                                           analyticsFactory: analyticsFactory)
