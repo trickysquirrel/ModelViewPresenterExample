@@ -13,6 +13,7 @@ protocol CollectionViewConfigurable {
     func configure(collectionView: UICollectionView?, nibName: String, reuseIdentifier: String)
 }
 
+
 struct ConfigureCollectionView: CollectionViewConfigurable {
 
     func configure(collectionView: UICollectionView?, nibName: String, reuseIdentifier: String) {

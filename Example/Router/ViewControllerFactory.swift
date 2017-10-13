@@ -27,14 +27,11 @@ struct ViewControllerFactory {
             dataSource: dataSource,
             reporter: analyticsFactory.makeAssetCollectionReporter(),
             loadingIndicator: LoadingIndicator(),
-            alert: InformationAlert(),
             appActions: showMovieDetailAction)
     }
 
     func makeDetailsViewController() -> UIViewController {
-		let viewController = UIViewController()
-        viewController.title = "Details"
-        viewController.view.backgroundColor = .white
+		let viewController = AssetDetailsViewController()
         return viewController
 	}
 

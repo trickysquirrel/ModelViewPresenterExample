@@ -46,7 +46,7 @@ class UITestCase : XCTestCase {
     }
 
     // Wait for an element to exist and be hittable (visible and on screen)
-    func waitForElementToExistAndVisibleAndOnScreen(_ element: XCUIElement, waitSeconds: TimeInterval = 10, file: String, line: UInt) {
+    func waitForElementToExistAndVisibleAndHittable(_ element: XCUIElement, waitSeconds: TimeInterval = 10, file: String, line: UInt) {
 
         let existsPredicate = NSPredicate(format: "hittable == true")
         expectation(for: existsPredicate, evaluatedWith: element, handler: nil)
@@ -58,5 +58,21 @@ class UITestCase : XCTestCase {
             }
         }
     }
+
+
+    func waitForElementToExist(_ element: XCUIElement, waitSeconds: TimeInterval = 10.0, file: String, line: UInt) {
+
+        let existsPredicate = NSPredicate(format: "exists == true")
+        expectation(for: existsPredicate, evaluatedWith: element, handler: nil)
+
+        waitForExpectations(timeout: waitSeconds) { error in
+            if error != nil {
+                let message = "Failed to find \(element) after waiting \(waitSeconds) seconds."
+                self.recordFailure(withDescription: message, inFile: file, atLine: Int(line), expected: true)
+            }
+        }
+    }
+
+
 
 }

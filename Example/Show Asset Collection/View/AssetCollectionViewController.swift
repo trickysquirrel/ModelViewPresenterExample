@@ -18,7 +18,6 @@ class AssetCollectionViewController: UICollectionViewController {
 	private let appActions: AppMovieCollectionActions
     private let reporter: MovieCollectionReporter
     private let loadingIndicator: LoadingIndicatorProtocol
-    private let alert: InformationAlertProtocol
     private let configureCollectionView: CollectionViewConfigurable
 
 
@@ -33,7 +32,6 @@ class AssetCollectionViewController: UICollectionViewController {
 	     dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>,
          reporter: MovieCollectionReporter,
          loadingIndicator: LoadingIndicatorProtocol,
-         alert: InformationAlertProtocol,
 	     appActions: AppMovieCollectionActions) {
 		self.presenter = presenter
         self.configureCollectionView = configureCollectionView
@@ -41,7 +39,6 @@ class AssetCollectionViewController: UICollectionViewController {
 		self.appActions = appActions
         self.reporter = reporter
         self.loadingIndicator = loadingIndicator
-        self.alert = alert
 		super.init(nibName: "AssetCollectionViewController", bundle: nil)
         self.title = title
 	}
@@ -94,13 +91,13 @@ private extension AssetCollectionViewController {
             cell.configure(viewModel: viewModel)
         }
         dataSource.onEventItemSelected(selectCell: { [weak self] (viewModel, indexPath) in
-            self?.appActions.performShowDetails(id: viewModel.id)
+            self?.appActions.showDetails(id: viewModel.id)
         })
         dataSource.resetRows(viewModels: viewModelList, cellIdentifier: reuseIdentifier)
     }
 
 
     func showUserAlert(title: String, msg: String) {
-        alert.displayAlert(title: title, message: msg, presentingViewController: self)
+        appActions.showAlertOK(title: title, msg: msg, presentingViewController: self)
     }
 }

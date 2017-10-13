@@ -29,14 +29,11 @@ class ExampleUITests: UITestCase {
         launchApp()
 
         AssetCollectionScreenObjectModel(context: context)
-            .waitForScreenAppearance()
- //           .waitForJobsToLoad()
-//            .verifyCell(atIndex: 0, jobTitle: "Link Group")
-//            .verifyCell(atIndex: 0, advertiser: "Link Group")
-//            .verifyCell(atIndex: 1, jobTitle: "MEMBERSHIP OFFICER (CUSTOMER SERVICE)")
-//            .verifyCell(atIndex: 1, advertiser: "Priority Appointments")
-
-        // etc
+            .waitForScreenAppearanceToBeHitable()
+            .verifyNavigationTitle("Movies")
+            .navigateToAssetDetailsByTapCell(atIndex: 0)
+            //.waitForScreenAppearance()
+            //.verifyNavigationTitle("Details")
     }
 
     

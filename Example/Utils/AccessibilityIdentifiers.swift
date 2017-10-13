@@ -9,7 +9,9 @@
 import Foundation
 
 enum Access: String {
+    
     case assetCollectionView
+    case assetDetailsView
 
     var id: String {
         return self.rawValue

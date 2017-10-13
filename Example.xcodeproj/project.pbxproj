@@ -43,6 +43,8 @@
 		308179281F84FBCA001F44FD /* AssetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308179261F84FBCA001F44FD /* AssetCollectionViewCell.swift */; };
 		308179291F84FBCA001F44FD /* AssetCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 308179271F84FBCA001F44FD /* AssetCollectionViewCell.xib */; };
 		3081792C1F850DF7001F44FD /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081792B1F850DF7001F44FD /* AppActions.swift */; };
+		30910C6D1F9012E700440731 /* AssetDetailsScreenObjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30910C6C1F9012E700440731 /* AssetDetailsScreenObjectModel.swift */; };
+		30910C701F90159900440731 /* AssetDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30910C6F1F90159900440731 /* AssetDetailsViewController.swift */; };
 		30C954201F85DF97000ABE33 /* AnalyticsReporterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C9541F1F85DF97000ABE33 /* AnalyticsReporterFactory.swift */; };
 		30C954221F85DFDC000ABE33 /* MovieCollectionReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C954211F85DFDC000ABE33 /* MovieCollectionReporter.swift */; };
 		30C954271F863466000ABE33 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C954261F863466000ABE33 /* LoadingIndicator.swift */; };
@@ -116,6 +118,8 @@
 		308179261F84FBCA001F44FD /* AssetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollectionViewCell.swift; sourceTree = "<group>"; };
 		308179271F84FBCA001F44FD /* AssetCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetCollectionViewCell.xib; sourceTree = "<group>"; };
 		3081792B1F850DF7001F44FD /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
+		30910C6C1F9012E700440731 /* AssetDetailsScreenObjectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDetailsScreenObjectModel.swift; sourceTree = "<group>"; };
+		30910C6F1F90159900440731 /* AssetDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDetailsViewController.swift; sourceTree = "<group>"; };
 		30C9541F1F85DF97000ABE33 /* AnalyticsReporterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsReporterFactory.swift; sourceTree = "<group>"; };
 		30C954211F85DFDC000ABE33 /* MovieCollectionReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionReporter.swift; sourceTree = "<group>"; };
 		30C954261F863466000ABE33 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
@@ -192,6 +196,7 @@
 				30115B151F8438AC0042D614 /* Router */,
 				308179161F84EF73001F44FD /* iFlixKit */,
 				3081790B1F84EA28001F44FD /* Show Asset Collection */,
+				30910C6E1F90157700440731 /* Show Asset Details */,
 				30115AF11F8436310042D614 /* AppDelegate.swift */,
 				30115AF31F8436310042D614 /* ViewController.swift */,
 				30115AF51F8436310042D614 /* Main.storyboard */,
@@ -302,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				3070C5501F8ECB7B00F97C17 /* AssetCollectionScreenObjectModel.swift */,
+				30910C6C1F9012E700440731 /* AssetDetailsScreenObjectModel.swift */,
 			);
 			path = "Screen Object Model";
 			sourceTree = "<group>";
@@ -349,6 +355,14 @@
 				3070C5521F8ECD9500F97C17 /* AccessibilityIdentifiers.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		30910C6E1F90157700440731 /* Show Asset Details */ = {
+			isa = PBXGroup;
+			children = (
+				30910C6F1F90159900440731 /* AssetDetailsViewController.swift */,
+			);
+			path = "Show Asset Details";
 			sourceTree = "<group>";
 		};
 		30C9541E1F85DF81000ABE33 /* Analytics */ = {
@@ -679,6 +693,7 @@
 				30C954271F863466000ABE33 /* LoadingIndicator.swift in Sources */,
 				30C954221F85DFDC000ABE33 /* MovieCollectionReporter.swift in Sources */,
 				308179101F84EAA6001F44FD /* AssetCollectionViewController.swift in Sources */,
+				30910C701F90159900440731 /* AssetDetailsViewController.swift in Sources */,
 				308179211F84F979001F44FD /* CollectionRowSections.swift in Sources */,
 				308179151F84EF2B001F44FD /* AssetDataLoader.swift in Sources */,
 				3070C5371F8EBEF400F97C17 /* AppDispatching.swift in Sources */,
@@ -716,6 +731,7 @@
 			files = (
 				3070C5511F8ECB7B00F97C17 /* AssetCollectionScreenObjectModel.swift in Sources */,
 				3070C5411F8EC92E00F97C17 /* ExampleUITests.swift in Sources */,
+				30910C6D1F9012E700440731 /* AssetDetailsScreenObjectModel.swift in Sources */,
 				3070C54C1F8ECA4E00F97C17 /* ObjectModel.swift in Sources */,
 				3070C5541F8ECDBC00F97C17 /* AccessibilityIdentifiers.swift in Sources */,
 				3070C54E1F8ECA7500F97C17 /* ScreenObjectModel.swift in Sources */,

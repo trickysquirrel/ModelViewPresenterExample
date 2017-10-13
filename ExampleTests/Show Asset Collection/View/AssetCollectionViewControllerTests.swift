@@ -23,7 +23,8 @@ class AssetCollectionViewControllerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        dummyAppActions = AppMovieCollectionActions { _ in }
+        stubInformationAlert = StubInformationAlert()
+        dummyAppActions = AppMovieCollectionActions(alert: stubInformationAlert, block: { _ in })
         stubConfigureCollectionView = StubConfigureCollectionView()
         viewController = makeViewController(appActions: dummyAppActions, configureCollectionView: stubConfigureCollectionView)
     }
@@ -45,7 +46,6 @@ class AssetCollectionViewControllerTests: XCTestCase {
         let analyticsFactory = AnalyticsReporterFactory(adobeAnalyticsReporter: stubAdobeAnalyticsReporter)
         stubPresenter = StubAssetCollectionPresenter()
         dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()
-        stubInformationAlert = StubInformationAlert()
         stubLoadingIndicator = StubLoadingIndicator()
         return AssetCollectionViewController(
             title: "Movies",
@@ -54,7 +54,6 @@ class AssetCollectionViewControllerTests: XCTestCase {
             dataSource: dataSource,
             reporter: analyticsFactory.makeAssetCollectionReporter(),
             loadingIndicator: stubLoadingIndicator,
-            alert: stubInformationAlert,
             appActions: appActions)
 
     }
@@ -180,9 +179,9 @@ extension AssetCollectionViewControllerTests {
     func test_onDataSource_onCellSelected_callsAppAction() {
 
         var didCallAppActionWithId: Int?
-        let newAppActions = AppMovieCollectionActions { id in
+        let newAppActions = AppMovieCollectionActions(alert: StubInformationAlert(), block: { id in
             didCallAppActionWithId = id
-        }
+        })
 
         let newViewController = makeViewController(appActions: newAppActions, configureCollectionView: StubConfigureCollectionView())
 
