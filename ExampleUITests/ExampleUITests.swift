@@ -31,9 +31,10 @@ class ExampleUITests: UITestCase {
         AssetCollectionScreenObjectModel(context: context)
             .waitForScreenAppearanceToBeHitable()
             .verifyNavigationTitle("Movies")
-            .navigateToAssetDetailsByTapCell(atIndex: 0)
-            //.waitForScreenAppearance()
-            //.verifyNavigationTitle("Details")
+            .navigateToAssetDetailsByTappingCell(atIndex: 0)
+            .waitForScreenAppearance()
+            .tapBackButton()
+            .waitForScreenAppearanceToBeHitable()
     }
 
     

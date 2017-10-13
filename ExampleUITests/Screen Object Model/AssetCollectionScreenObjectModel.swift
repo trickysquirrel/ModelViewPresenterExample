@@ -32,11 +32,11 @@ class AssetCollectionScreenObjectModel: ScreenObjectModel {
     // MARK: actions
 
     @discardableResult
-    func navigateToAssetDetailsByTapCell(atIndex index: Int, fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> AssetDetailsScreenObjectModel {
+    func navigateToAssetDetailsByTappingCell(atIndex index: Int, fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> AssetDetailsScreenObjectModel {
         let cell = cellAtIndex(index)
         XCTAssertTrue(cell.exists, "asset collection cell not found", file: fileStatic, line: line)
         cell.tap()
-        return AssetDetailsScreenObjectModel(context: context)
+        return AssetDetailsScreenObjectModel(context: context, parent: self)
     }
 
 }

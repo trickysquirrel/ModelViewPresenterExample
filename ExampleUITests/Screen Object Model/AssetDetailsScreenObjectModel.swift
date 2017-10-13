@@ -13,20 +13,27 @@ class AssetDetailsScreenObjectModel: ScreenObjectModel {
 
     // MARK: - UI Elements
 
-    private var view: XCUIElement {
-        return app.collectionViews[Access.assetDetailsView.id]
+    private var assetTitle: XCUIElement {
+        return app.staticTexts[Access.assetDetailsView.id]
     }
 
     // MARK: - UI Elements to identiy screen when navigating and waiting for screen to appear
 
     override func screenIdentifyingElements() -> [XCUIElement] {
-        return [view]
+        return [assetTitle]
     }
 
     // MARK: verifications
 
 
     // MARK: actions
+
+//    @discardableResult
+//    func tapBack(fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> ScreenObjectModel {
+//        return NavigationBarObjectModel(context: context, parent: parent).tapBackButton(fileStatic: fileStatic, file: file, line: line)
+//    }
+
+
 
 }
 
