@@ -1,7 +1,4 @@
 //
-//  AppDispatching.swift
-//  Example
-//
 //  Created by Richard Moult on 12/10/17.
 //  Copyright © 2017 Richard Moult. All rights reserved.
 //

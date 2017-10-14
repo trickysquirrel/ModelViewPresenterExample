@@ -1,7 +1,4 @@
 //
-//  ScreenObjectModel.swift
-//  ExampleUITests
-//
 //  Created by Richard Moult on 12/10/17.
 //  Copyright © 2017 Richard Moult. All rights reserved.
 //
@@ -9,9 +6,9 @@
 import XCTest
 
 
-class ScreenObjectModel {
+class ViewControllerModel {
 
-    var parent: ScreenObjectModel?
+    var parent: ViewControllerModel?
 
     let context: UITestContext
 
@@ -24,7 +21,7 @@ class ScreenObjectModel {
     }
 
     @discardableResult
-    init(context: UITestContext, parent: ScreenObjectModel? = nil) {
+    init(context: UITestContext, parent: ViewControllerModel? = nil) {
         self.context = context
         self.parent = parent
     }
@@ -45,7 +42,7 @@ class ScreenObjectModel {
         return []
     }
 
-    // MARK: - Verifications
+    // MARK: Verifications
 
     @discardableResult
     func waitForScreenAppearance(fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> Self {
@@ -75,8 +72,10 @@ class ScreenObjectModel {
         return self
     }
 
+    // MARK: Actions
+
     @discardableResult
-    func tapBackButton(file: StaticString = #file, line: UInt = #line) -> ScreenObjectModel {
+    func tapBackButton(file: StaticString = #file, line: UInt = #line) -> ViewControllerModel {
         navigationBackButton.tap()
         XCTAssertNotNil(parent, "screen object does not have parent to back up to", file: file, line: line)
         return parent!

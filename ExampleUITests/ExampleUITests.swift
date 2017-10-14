@@ -1,7 +1,4 @@
 //
-//  ExampleUITests.swift
-//  ExampleUITests
-//
 //  Created by Richard Moult on 12/10/17.
 //  Copyright © 2017 Richard Moult. All rights reserved.
 //
@@ -28,7 +25,7 @@ class ExampleUITests: UITestCase {
 
         launchApp()
 
-        AssetCollectionScreenObjectModel(context: context)
+        AssetCollectionViewControllerModel(context: context)
             .waitForScreenAppearanceToBeHitable()
             .verify(navigationTitle: "Movies")
             .navigateToAssetDetailsByTappingCell(atIndex: 0)

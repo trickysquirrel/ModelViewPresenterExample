@@ -1,7 +1,4 @@
 //
-//  AssetCollectionScreenObjectModel.swift
-//  ExampleUITests
-//
 //  Created by Richard Moult on 12/10/17.
 //  Copyright © 2017 Richard Moult. All rights reserved.
 //
@@ -9,7 +6,7 @@
 import XCTest
 @testable import Example
 
-class AssetCollectionScreenObjectModel: ScreenObjectModel {
+class AssetCollectionViewControllerModel: ViewControllerModel {
 
     // MARK: - UI Elements
 
@@ -27,16 +24,16 @@ class AssetCollectionScreenObjectModel: ScreenObjectModel {
         return [collectionView]
     }
 
-    // MARK: verifications
+    // MARK: Verifications
 
-    // MARK: actions
+    // MARK: Actions
 
     @discardableResult
-    func navigateToAssetDetailsByTappingCell(atIndex index: Int, fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> AssetDetailsScreenObjectModel {
+    func navigateToAssetDetailsByTappingCell(atIndex index: Int, fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> AssetDetailsViewControllerModel {
         let cell = cellAtIndex(index)
         XCTAssertTrue(cell.exists, "asset collection cell not found", file: fileStatic, line: line)
         cell.tap()
-        return AssetDetailsScreenObjectModel(context: context, parent: self)
+        return AssetDetailsViewControllerModel(context: context, parent: self)
     }
 
 }
