@@ -50,11 +50,13 @@ extension AppCoordinatorTests {
         XCTAssertTrue(navigationController.viewControllers[0] is AssetCollectionViewController)
     }
 
+    // not ideal perhaps we should have a coordinator for each view controller, much easier to test
     func test_performShowDetailsAppAction_addCorrectViewControllerToNavigationController() {
         UIView.setAnimationsEnabled(false)
         appCoordinator.showRootViewController()
         let viewController = navigationController.viewControllers[0] as! AssetCollectionViewController
         viewController._appActions.showDetails(id: 0)
         XCTAssertEqual(navigationController.viewControllers.count, 2)
+        XCTAssertTrue(navigationController.viewControllers[1] is AssetDetailsViewController)
     }
 }
