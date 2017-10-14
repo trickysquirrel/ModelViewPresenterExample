@@ -13,7 +13,7 @@ private let reuseIdentifier = "MovieCell"
 
 class AssetCollectionViewController: UICollectionViewController {
 
-    let appActions: AppMovieCollectionActions   // exposed for router testing could add in appActions factory to solve this
+    private let appActions: AppMovieCollectionActions   // exposed for router testing could add in appActions factory to solve this
 	private let presenter: AssetCollectionPresenting
 	private let dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>
     private let reporter: MovieCollectionReporter
@@ -101,3 +101,14 @@ private extension AssetCollectionViewController {
         appActions.showAlertOK(title: title, msg: msg, presentingViewController: self)
     }
 }
+
+
+#if TEST_TARGET
+    extension AssetCollectionViewController {
+        var _appActions: AppMovieCollectionActions {
+            get {
+                return appActions
+            }
+        }
+    }
+#endif

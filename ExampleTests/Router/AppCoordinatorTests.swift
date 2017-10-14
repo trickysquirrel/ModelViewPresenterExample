@@ -54,7 +54,7 @@ extension AppCoordinatorTests {
         UIView.setAnimationsEnabled(false)
         appCoordinator.showRootViewController()
         let viewController = navigationController.viewControllers[0] as! AssetCollectionViewController
-        viewController.appActions.showDetails(id: 0)
+        viewController._appActions.showDetails(id: 0)
         XCTAssertEqual(navigationController.viewControllers.count, 2)
     }
 }
