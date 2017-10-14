@@ -16,26 +16,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		// Override point for customization after application launch.
+        // Override point for customization after application launch.
 
-		window = UIWindow(frame: UIScreen.main.bounds)
-		guard let window = window else { return true }
+        window = UIWindow(frame: UIScreen.main.bounds)
+        guard let window = window else { return true }
 
         let thirdPartyAnalyticsReporter = ThirdyPartyAnalyticsReporter()
         let analyticsFactory = AnalyticsReporterFactory(thirdPartyAnalyticsReporter: thirdPartyAnalyticsReporter)
         let dataLoaderFactory = DataLoaderFactory()
-        let iflixServiceFactory = GetDataServiceFactory(dataLoaderFactory: dataLoaderFactory)
+        let getDataServiceFactory = GetDataServiceFactory(dataLoaderFactory: dataLoaderFactory)
 
-        let viewControllerFactory = ViewControllerFactory(iflixServiceFactory: iflixServiceFactory,
+        let viewControllerFactory = ViewControllerFactory(getDataServiceFactory: getDataServiceFactory,
                                                           analyticsFactory: analyticsFactory)
 
-		let navigationController = UINavigationController()
+        let navigationController = UINavigationController()
 
-		appCoordinator = AppCoordinator(window: window, navigationController: navigationController, viewControllerFactory: viewControllerFactory)
+        appCoordinator = AppCoordinator(window: window, navigationController: navigationController, viewControllerFactory: viewControllerFactory)
         
-		appCoordinator?.showRootViewController()
+        appCoordinator?.showRootViewController()
 
-		return true
+        return true
 	}
 }
 

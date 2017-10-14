@@ -196,7 +196,7 @@
 				3081791F1F84F970001F44FD /* Utils */,
 				30C9541E1F85DF81000ABE33 /* Analytics */,
 				30115B151F8438AC0042D614 /* Router */,
-				308179161F84EF73001F44FD /* Get Data Kit */,
+				308179161F84EF73001F44FD /* Get Data */,
 				3081790B1F84EA28001F44FD /* Show Asset Collection */,
 				30910C6E1F90157700440731 /* Show Asset Details */,
 				30115AF11F8436310042D614 /* AppDelegate.swift */,
@@ -212,10 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				303AFCFD1F8B223F0068018E /* Test Doubles */,
-				303AFCDF1F8990240068018E /* Utils */,
-				303AFCE01F89902A0068018E /* Analytics */,
 				303AFCE11F8990880068018E /* Router */,
-				303AFCDE1F8990180068018E /* iFlixKit */,
 				303AFCE21F89909D0068018E /* Show Asset Collection */,
 				30115B081F8436310042D614 /* Info.plist */,
 			);
@@ -230,27 +227,6 @@
 				3081792B1F850DF7001F44FD /* AppActions.swift */,
 			);
 			path = Router;
-			sourceTree = "<group>";
-		};
-		303AFCDE1F8990180068018E /* iFlixKit */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = iFlixKit;
-			sourceTree = "<group>";
-		};
-		303AFCDF1F8990240068018E /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
-		303AFCE01F89902A0068018E /* Analytics */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Analytics;
 			sourceTree = "<group>";
 		};
 		303AFCE11F8990880068018E /* Router */ = {
@@ -323,7 +299,7 @@
 			path = "Show Asset Collection";
 			sourceTree = "<group>";
 		};
-		308179161F84EF73001F44FD /* Get Data Kit */ = {
+		308179161F84EF73001F44FD /* Get Data */ = {
 			isa = PBXGroup;
 			children = (
 				3081791E1F84F6EC001F44FD /* Asset Loader */,
@@ -331,7 +307,7 @@
 				303AFD001F8B23FB0068018E /* DataLoaderFactory.swift */,
 				303AFCE81F8996C00068018E /* GetDataServiceFactory.swift */,
 			);
-			path = "Get Data Kit";
+			path = "Get Data";
 			sourceTree = "<group>";
 		};
 		3081791E1F84F6EC001F44FD /* Asset Loader */ = {
