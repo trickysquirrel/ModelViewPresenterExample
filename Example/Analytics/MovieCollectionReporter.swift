@@ -7,9 +7,9 @@ import Foundation
 
 struct MovieCollectionReporter {
 
-    let adobeAnalyticsReporter: AdobeAnalyticsReporting
+    let thirdPartyAnalyticsReporter: ThirdPartyAnalyticsReporting
 
     func viewShown() {
-        adobeAnalyticsReporter.sendAction(name: "MoviesCollectionShown", data: ["test":"something"])
+        thirdPartyAnalyticsReporter.sendAction(name: "MoviesCollectionShown", data: ["test":"something"])
     }
 }

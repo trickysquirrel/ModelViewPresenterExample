@@ -11,7 +11,7 @@ class AssetCollectionViewControllerTests: XCTestCase {
 
     var viewController: AssetCollectionViewController!
     var stubConfigureCollectionView: StubConfigureCollectionView!
-    var stubAdobeAnalyticsReporter: StubAdobeAnalyticsReporter!
+    var stubThirdyPartytAnalyticsReporter: StubThirdPartyAnalyticsReporter!
     var stubPresenter: StubAssetCollectionPresenter!
     var stubInformationAlert: StubInformationAlert!
     var dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>!
@@ -32,15 +32,15 @@ class AssetCollectionViewControllerTests: XCTestCase {
         dataSource = nil
         stubInformationAlert = nil
         stubPresenter = nil
-        stubAdobeAnalyticsReporter = nil
+        stubThirdyPartytAnalyticsReporter = nil
         stubConfigureCollectionView = nil
         viewController = nil
         super.tearDown()
     }
 
     private func makeViewController(appActions: AppMovieCollectionActions, configureCollectionView: CollectionViewConfigurable) -> AssetCollectionViewController {
-        stubAdobeAnalyticsReporter = StubAdobeAnalyticsReporter()
-        let analyticsFactory = AnalyticsReporterFactory(adobeAnalyticsReporter: stubAdobeAnalyticsReporter)
+        stubThirdyPartytAnalyticsReporter = StubThirdPartyAnalyticsReporter()
+        let analyticsFactory = AnalyticsReporterFactory(thirdPartyAnalyticsReporter: stubThirdyPartytAnalyticsReporter)
         stubPresenter = StubAssetCollectionPresenter()
         dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()
         stubLoadingIndicator = StubLoadingIndicator()
@@ -87,10 +87,10 @@ extension AssetCollectionViewControllerTests {
 
     func test_onViewDidAppear_sendCorrectAnalyticsActionAndData() {
         startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
-        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList.count, 1)
-        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[0].name, "MoviesCollectionShown")
-        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[0].data?.keys.count, 1)
-        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[0].data?["test"] as? String, "something")
+        XCTAssertEqual(stubThirdyPartytAnalyticsReporter.sentActionList.count, 1)
+        XCTAssertEqual(stubThirdyPartytAnalyticsReporter.sentActionList[0].name, "MoviesCollectionShown")
+        XCTAssertEqual(stubThirdyPartytAnalyticsReporter.sentActionList[0].data?.keys.count, 1)
+        XCTAssertEqual(stubThirdyPartytAnalyticsReporter.sentActionList[0].data?["test"] as? String, "something")
     }
 
 
@@ -99,10 +99,10 @@ extension AssetCollectionViewControllerTests {
         startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
         startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
 
-        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList.count, 2)
-        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[1].name, "MoviesCollectionShown")
-        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[1].data?.keys.count, 1)
-        XCTAssertEqual(stubAdobeAnalyticsReporter.sentActionList[1].data?["test"] as? String, "something")
+        XCTAssertEqual(stubThirdyPartytAnalyticsReporter.sentActionList.count, 2)
+        XCTAssertEqual(stubThirdyPartytAnalyticsReporter.sentActionList[1].name, "MoviesCollectionShown")
+        XCTAssertEqual(stubThirdyPartytAnalyticsReporter.sentActionList[1].data?.keys.count, 1)
+        XCTAssertEqual(stubThirdyPartytAnalyticsReporter.sentActionList[1].data?["test"] as? String, "something")
     }
 }
 

@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		window = UIWindow(frame: UIScreen.main.bounds)
 		guard let window = window else { return true }
 
-        let adobeAnalyticsReporter = AdobeAnalyticsReporter()
-        let analyticsFactory = AnalyticsReporterFactory(adobeAnalyticsReporter: adobeAnalyticsReporter)
+        let thirdPartyAnalyticsReporter = ThirdyPartyAnalyticsReporter()
+        let analyticsFactory = AnalyticsReporterFactory(thirdPartyAnalyticsReporter: thirdPartyAnalyticsReporter)
         let dataLoaderFactory = DataLoaderFactory()
         let iflixServiceFactory = GetDataServiceFactory(dataLoaderFactory: dataLoaderFactory)
 

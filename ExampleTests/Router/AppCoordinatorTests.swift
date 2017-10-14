@@ -18,8 +18,8 @@ class AppCoordinatorTests: XCTestCase {
         super.setUp()
         window = UIWindow()
         navigationController = UINavigationController()
-        let adobeAnalyticsReporter = StubAdobeAnalyticsReporter()
-        let analyticsReporterFactory = AnalyticsReporterFactory(adobeAnalyticsReporter: adobeAnalyticsReporter)
+        let stubAnalyticsReporter = StubThirdPartyAnalyticsReporter()
+        let analyticsReporterFactory = AnalyticsReporterFactory(thirdPartyAnalyticsReporter: stubAnalyticsReporter)
         let viewControllerFactory = ViewControllerFactory(iflixServiceFactory: StubGetDataServiceFactory(), analyticsFactory: analyticsReporterFactory)
         appCoordinator = AppCoordinator(window: window, navigationController: navigationController, viewControllerFactory: viewControllerFactory)
     }

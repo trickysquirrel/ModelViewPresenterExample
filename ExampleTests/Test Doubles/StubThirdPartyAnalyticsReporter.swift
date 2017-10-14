@@ -7,7 +7,7 @@ import XCTest
 @testable import Example
 
 
-class StubAdobeAnalyticsReporter: AdobeAnalyticsReporting {
+class StubThirdPartyAnalyticsReporter: ThirdPartyAnalyticsReporting {
 
     private(set) var sentActionList: [(name: String, data: [String:Any]?)] = []
 

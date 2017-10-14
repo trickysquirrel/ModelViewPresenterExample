@@ -19,7 +19,7 @@
 		303AFCE91F8996C00068018E /* GetDataServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AFCE81F8996C00068018E /* GetDataServiceFactory.swift */; };
 		303AFCFF1F8B22550068018E /* StubAssetDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AFCFE1F8B22550068018E /* StubAssetDataLoader.swift */; };
 		303AFD011F8B23FB0068018E /* DataLoaderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AFD001F8B23FB0068018E /* DataLoaderFactory.swift */; };
-		303AFD031F8B2BE50068018E /* AdobeAnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AFD021F8B2BE50068018E /* AdobeAnalyticsReporter.swift */; };
+		303AFD031F8B2BE50068018E /* ThirdyPartyAnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AFD021F8B2BE50068018E /* ThirdyPartyAnalyticsReporter.swift */; };
 		303E94201F90D86F00AB92C9 /* StubGetDataServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303E941F1F90D86F00AB92C9 /* StubGetDataServiceFactory.swift */; };
 		3066DD901F90AF1E002A70D7 /* AppCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3066DD8F1F90AF1E002A70D7 /* AppCoordinatorTests.swift */; };
 		3070C5371F8EBEF400F97C17 /* AppDispatching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3070C5361F8EBEF400F97C17 /* AppDispatching.swift */; };
@@ -51,7 +51,7 @@
 		30C954291F8635E4000ABE33 /* InformationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C954281F8635E4000ABE33 /* InformationAlert.swift */; };
 		30CD9EAF1F8DF97000C523A2 /* AssetCollectionPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CD9EAE1F8DF97000C523A2 /* AssetCollectionPresenterTests.swift */; };
 		30E762171F8C220000864D07 /* StubConfigureCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E762161F8C220000864D07 /* StubConfigureCollectionView.swift */; };
-		30E762191F8C222100864D07 /* StubAdobeAnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E762181F8C222100864D07 /* StubAdobeAnalyticsReporter.swift */; };
+		30E762191F8C222100864D07 /* StubThirdPartyAnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E762181F8C222100864D07 /* StubThirdPartyAnalyticsReporter.swift */; };
 		30E7621B1F8C223A00864D07 /* StubAssetCollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E7621A1F8C223A00864D07 /* StubAssetCollectionPresenter.swift */; };
 		30E7621D1F8C226000864D07 /* StubInformationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E7621C1F8C226000864D07 /* StubInformationAlert.swift */; };
 		30E7621F1F8C228A00864D07 /* StubLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E7621E1F8C228A00864D07 /* StubLoadingIndicator.swift */; };
@@ -94,7 +94,7 @@
 		303AFCE81F8996C00068018E /* GetDataServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataServiceFactory.swift; sourceTree = "<group>"; };
 		303AFCFE1F8B22550068018E /* StubAssetDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubAssetDataLoader.swift; sourceTree = "<group>"; };
 		303AFD001F8B23FB0068018E /* DataLoaderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderFactory.swift; sourceTree = "<group>"; };
-		303AFD021F8B2BE50068018E /* AdobeAnalyticsReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdobeAnalyticsReporter.swift; sourceTree = "<group>"; };
+		303AFD021F8B2BE50068018E /* ThirdyPartyAnalyticsReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdyPartyAnalyticsReporter.swift; sourceTree = "<group>"; };
 		303E941F1F90D86F00AB92C9 /* StubGetDataServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubGetDataServiceFactory.swift; sourceTree = "<group>"; };
 		3066DD8F1F90AF1E002A70D7 /* AppCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinatorTests.swift; sourceTree = "<group>"; };
 		3070C5361F8EBEF400F97C17 /* AppDispatching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDispatching.swift; sourceTree = "<group>"; };
@@ -127,7 +127,7 @@
 		30C954281F8635E4000ABE33 /* InformationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationAlert.swift; sourceTree = "<group>"; };
 		30CD9EAE1F8DF97000C523A2 /* AssetCollectionPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetCollectionPresenterTests.swift; sourceTree = "<group>"; };
 		30E762161F8C220000864D07 /* StubConfigureCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubConfigureCollectionView.swift; sourceTree = "<group>"; };
-		30E762181F8C222100864D07 /* StubAdobeAnalyticsReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubAdobeAnalyticsReporter.swift; sourceTree = "<group>"; };
+		30E762181F8C222100864D07 /* StubThirdPartyAnalyticsReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubThirdPartyAnalyticsReporter.swift; sourceTree = "<group>"; };
 		30E7621A1F8C223A00864D07 /* StubAssetCollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubAssetCollectionPresenter.swift; sourceTree = "<group>"; };
 		30E7621C1F8C226000864D07 /* StubInformationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubInformationAlert.swift; sourceTree = "<group>"; };
 		30E7621E1F8C228A00864D07 /* StubLoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubLoadingIndicator.swift; sourceTree = "<group>"; };
@@ -275,7 +275,7 @@
 			children = (
 				303AFCFE1F8B22550068018E /* StubAssetDataLoader.swift */,
 				30E762161F8C220000864D07 /* StubConfigureCollectionView.swift */,
-				30E762181F8C222100864D07 /* StubAdobeAnalyticsReporter.swift */,
+				30E762181F8C222100864D07 /* StubThirdPartyAnalyticsReporter.swift */,
 				30E7621A1F8C223A00864D07 /* StubAssetCollectionPresenter.swift */,
 				30E7621C1F8C226000864D07 /* StubInformationAlert.swift */,
 				30E7621E1F8C228A00864D07 /* StubLoadingIndicator.swift */,
@@ -370,7 +370,7 @@
 		30C9541E1F85DF81000ABE33 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
-				303AFD021F8B2BE50068018E /* AdobeAnalyticsReporter.swift */,
+				303AFD021F8B2BE50068018E /* ThirdyPartyAnalyticsReporter.swift */,
 				30C9541F1F85DF97000ABE33 /* AnalyticsReporterFactory.swift */,
 				30C954211F85DFDC000ABE33 /* MovieCollectionReporter.swift */,
 			);
@@ -707,7 +707,7 @@
 				3081792C1F850DF7001F44FD /* AppActions.swift in Sources */,
 				3081791D1F84F3DC001F44FD /* AssetDataModel.swift in Sources */,
 				30115B171F8438C20042D614 /* ViewControllerFactory.swift in Sources */,
-				303AFD031F8B2BE50068018E /* AdobeAnalyticsReporter.swift in Sources */,
+				303AFD031F8B2BE50068018E /* ThirdyPartyAnalyticsReporter.swift in Sources */,
 				30115AF21F8436310042D614 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -722,7 +722,7 @@
 				30E7621D1F8C226000864D07 /* StubInformationAlert.swift in Sources */,
 				3070C5391F8EBFCB00F97C17 /* FakeAppDispatcher.swift in Sources */,
 				30E762171F8C220000864D07 /* StubConfigureCollectionView.swift in Sources */,
-				30E762191F8C222100864D07 /* StubAdobeAnalyticsReporter.swift in Sources */,
+				30E762191F8C222100864D07 /* StubThirdPartyAnalyticsReporter.swift in Sources */,
 				303E94201F90D86F00AB92C9 /* StubGetDataServiceFactory.swift in Sources */,
 				30CD9EAF1F8DF97000C523A2 /* AssetCollectionPresenterTests.swift in Sources */,
 				30E7621F1F8C228A00864D07 /* StubLoadingIndicator.swift in Sources */,

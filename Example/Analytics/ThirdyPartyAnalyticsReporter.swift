@@ -5,13 +5,15 @@
 
 import Foundation
 
-protocol AdobeAnalyticsReporting {
+
+protocol ThirdPartyAnalyticsReporting {
     func sendAction(name: String, data: [String:Any]?)
 }
 
-struct AdobeAnalyticsReporter: AdobeAnalyticsReporting {
+struct ThirdyPartyAnalyticsReporter: ThirdPartyAnalyticsReporting {
 
     func sendAction(name: String, data: [String:Any]?) {
-        // call adobe library here and pass on the data
+        // call thirdy party library here and pass on the data
+        // this should contain no logic just simply wrap 3rd party functions
     }
 }

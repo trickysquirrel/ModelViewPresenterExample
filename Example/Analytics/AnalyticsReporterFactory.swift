@@ -8,9 +8,9 @@ import Foundation
 
 struct AnalyticsReporterFactory {
 
-    let adobeAnalyticsReporter: AdobeAnalyticsReporting
+    let thirdPartyAnalyticsReporter: ThirdPartyAnalyticsReporting
 
     func makeAssetCollectionReporter() -> MovieCollectionReporter {
-        return MovieCollectionReporter(adobeAnalyticsReporter: adobeAnalyticsReporter)
+        return MovieCollectionReporter(thirdPartyAnalyticsReporter: thirdPartyAnalyticsReporter)
     }
 }
