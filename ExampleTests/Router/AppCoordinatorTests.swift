@@ -20,7 +20,7 @@ class AppCoordinatorTests: XCTestCase {
         navigationController = UINavigationController()
         let adobeAnalyticsReporter = StubAdobeAnalyticsReporter()
         let analyticsReporterFactory = AnalyticsReporterFactory(adobeAnalyticsReporter: adobeAnalyticsReporter)
-        let viewControllerFactory = ViewControllerFactory(iflixServiceFactory: StubBackendServiceFactory(), analyticsFactory: analyticsReporterFactory)
+        let viewControllerFactory = ViewControllerFactory(iflixServiceFactory: StubGetDataServiceFactory(), analyticsFactory: analyticsReporterFactory)
         appCoordinator = AppCoordinator(window: window, navigationController: navigationController, viewControllerFactory: viewControllerFactory)
     }
 
