@@ -10,12 +10,12 @@ private let reuseIdentifier = "MovieCell"
 
 class AssetCollectionViewController: UICollectionViewController {
 
-    private let appActions: AppMovieCollectionActions   // exposed for router testing could add in appActions factory to solve this
 	private let presenter: AssetCollectionPresenting
 	private let dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>
     private let reporter: MovieCollectionReporter
     private let loadingIndicator: LoadingIndicatorProtocol
     private let configureCollectionView: CollectionViewConfigurable
+    private weak var appActions: AssetCollectionCoordinatorActions?
 
 
 	required init?(coder aDecoder: NSCoder) {
@@ -29,7 +29,7 @@ class AssetCollectionViewController: UICollectionViewController {
 	     dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>,
          reporter: MovieCollectionReporter,
          loadingIndicator: LoadingIndicatorProtocol,
-	     appActions: AppMovieCollectionActions) {
+	     appActions: AssetCollectionCoordinatorActions) {
 		self.presenter = presenter
         self.configureCollectionView = configureCollectionView
 		self.dataSource = dataSource
@@ -88,24 +88,23 @@ private extension AssetCollectionViewController {
             cell.configure(viewModel: viewModel)
         }
         dataSource.onEventItemSelected(selectCell: { [weak self] (viewModel, indexPath) in
-            self?.appActions.showDetails(id: viewModel.id)
+            self?.appActions?.showDetails(id: viewModel.id)
         })
         dataSource.resetRows(viewModels: viewModelList, cellIdentifier: reuseIdentifier)
     }
 
 
     func showUserAlert(title: String, msg: String) {
-        appActions.showAlertOK(title: title, msg: msg, presentingViewController: self)
+        appActions?.showAlertOK(title: title, msg: msg, presentingViewController: self)
     }
 }
 
-
 #if TEST_TARGET
-    extension AssetCollectionViewController {
-        var _appActions: AppMovieCollectionActions {
-            get {
-                return appActions
-            }
+extension AssetCollectionViewController {
+    var _appActions: AssetCollectionCoordinatorActions? {
+        get {
+            return appActions
         }
     }
+}
 #endif

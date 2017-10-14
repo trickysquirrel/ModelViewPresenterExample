@@ -11,9 +11,9 @@ class AppCoordinatorTests: XCTestCase {
 
     var window: UIWindow!
     var navigationController: UINavigationController!
-    var appCoordinator: AppCoordinator!
+    var appCoordinator: RootAppCoordinator!
 
-    
+
     override func setUp() {
         super.setUp()
         window = UIWindow()
@@ -21,7 +21,7 @@ class AppCoordinatorTests: XCTestCase {
         let stubAnalyticsReporter = StubThirdPartyAnalyticsReporter()
         let analyticsReporterFactory = AnalyticsReporterFactory(thirdPartyAnalyticsReporter: stubAnalyticsReporter)
         let viewControllerFactory = ViewControllerFactory(getDataServiceFactory: StubGetDataServiceFactory(), analyticsFactory: analyticsReporterFactory)
-        appCoordinator = AppCoordinator(window: window, navigationController: navigationController, viewControllerFactory: viewControllerFactory)
+        appCoordinator = RootAppCoordinator(window: window, navigationController: navigationController, viewControllerFactory: viewControllerFactory)
     }
 
 
@@ -37,12 +37,12 @@ class AppCoordinatorTests: XCTestCase {
 extension AppCoordinatorTests {
 
     func test_showRootViewController_addsNavigationControllerToWindowRoot() {
-        appCoordinator.showRootViewController()
+        appCoordinator.start()
         XCTAssertEqual(window.rootViewController, navigationController)
     }
 
     func test_showRootViewController_showsAssetCollectionViewToUser() {
-        appCoordinator.showRootViewController()
+        appCoordinator.start()
         XCTAssertEqual(navigationController.viewControllers.count, 1)
         XCTAssertTrue(navigationController.viewControllers[0] is AssetCollectionViewController)
     }
@@ -50,10 +50,11 @@ extension AppCoordinatorTests {
     // not ideal perhaps we should have a coordinator for each view controller, much easier to test
     func test_performShowDetailsAppAction_addCorrectViewControllerToNavigationController() {
         UIView.setAnimationsEnabled(false)
-        appCoordinator.showRootViewController()
+        appCoordinator.start()
         let viewController = navigationController.viewControllers[0] as! AssetCollectionViewController
-        viewController._appActions.showDetails(id: 0)
+        viewController._appActions?.showDetails(id: 0)
         XCTAssertEqual(navigationController.viewControllers.count, 2)
         XCTAssertTrue(navigationController.viewControllers[1] is AssetDetailsViewController)
     }
 }
+

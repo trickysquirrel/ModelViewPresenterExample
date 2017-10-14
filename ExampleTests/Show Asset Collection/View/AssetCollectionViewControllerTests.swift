@@ -7,30 +7,49 @@ import XCTest
 @testable import Example
 
 
+class StubAppActions: AssetCollectionCoordinatorActions {
+
+    private(set) var didCallShowAlertOK: Bool?
+    private(set) var didCallShowAlertWithTitle: String?
+    private(set) var didCallShowAlertWithMsg: String?
+    private(set) var didCallShowAlertWithVC: UIViewController?
+    private(set) var didCallShowDetailsWithId: Int?
+
+    func showAlertOK(title: String, msg: String, presentingViewController: UIViewController) {
+        didCallShowAlertOK = true
+        didCallShowAlertWithTitle = title
+        didCallShowAlertWithMsg = msg
+        didCallShowAlertWithVC = presentingViewController
+    }
+
+    func showDetails(id: Int) {
+        didCallShowDetailsWithId = id
+    }
+
+}
+
+
 class AssetCollectionViewControllerTests: XCTestCase {
 
     var viewController: AssetCollectionViewController!
     var stubConfigureCollectionView: StubConfigureCollectionView!
     var stubThirdyPartytAnalyticsReporter: StubThirdPartyAnalyticsReporter!
     var stubPresenter: StubAssetCollectionPresenter!
-    var stubInformationAlert: StubInformationAlert!
     var dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>!
     var stubLoadingIndicator: StubLoadingIndicator!
-    var dummyAppActions: AppMovieCollectionActions!
+    var stubAppActions: StubAppActions!
 
     override func setUp() {
         super.setUp()
-        stubInformationAlert = StubInformationAlert()
-        dummyAppActions = AppMovieCollectionActions(alert: stubInformationAlert, block: { _ in })
+        stubAppActions = StubAppActions()
         stubConfigureCollectionView = StubConfigureCollectionView()
-        viewController = makeViewController(appActions: dummyAppActions, configureCollectionView: stubConfigureCollectionView)
+        viewController = makeViewController(appActions: stubAppActions, configureCollectionView: stubConfigureCollectionView)
     }
     
     override func tearDown() {
-        dummyAppActions = nil
+        stubAppActions = nil
         stubLoadingIndicator = nil
         dataSource = nil
-        stubInformationAlert = nil
         stubPresenter = nil
         stubThirdyPartytAnalyticsReporter = nil
         stubConfigureCollectionView = nil
@@ -38,7 +57,7 @@ class AssetCollectionViewControllerTests: XCTestCase {
         super.tearDown()
     }
 
-    private func makeViewController(appActions: AppMovieCollectionActions, configureCollectionView: CollectionViewConfigurable) -> AssetCollectionViewController {
+    private func makeViewController(appActions: StubAppActions, configureCollectionView: CollectionViewConfigurable) -> AssetCollectionViewController {
         stubThirdyPartytAnalyticsReporter = StubThirdPartyAnalyticsReporter()
         let analyticsFactory = AnalyticsReporterFactory(thirdPartyAnalyticsReporter: stubThirdyPartytAnalyticsReporter)
         stubPresenter = StubAssetCollectionPresenter()
@@ -140,9 +159,9 @@ extension AssetCollectionViewControllerTests {
 
         stubPresenter.updateHandler!(.error(title:"test title", msg:"test msg"))
         
-        XCTAssertEqual(stubInformationAlert.title!, "test title")
-        XCTAssertEqual(stubInformationAlert.message!, "test msg")
-        XCTAssertEqual(stubInformationAlert.presentingViewController!, viewController)
+        XCTAssertEqual(stubAppActions.didCallShowAlertWithTitle!, "test title")
+        XCTAssertEqual(stubAppActions.didCallShowAlertWithMsg!, "test msg")
+        XCTAssertEqual(stubAppActions.didCallShowAlertWithVC!, viewController)
     }
 
 
@@ -152,9 +171,9 @@ extension AssetCollectionViewControllerTests {
 
         stubPresenter.updateHandler!(.noResults(title:"test results", msg:"a msg"))
 
-        XCTAssertEqual(stubInformationAlert.title!, "test results")
-        XCTAssertEqual(stubInformationAlert.message!, "a msg")
-        XCTAssertEqual(stubInformationAlert.presentingViewController!, viewController)
+        XCTAssertEqual(stubAppActions.didCallShowAlertWithTitle!, "test results")
+        XCTAssertEqual(stubAppActions.didCallShowAlertWithMsg!, "a msg")
+        XCTAssertEqual(stubAppActions.didCallShowAlertWithVC!, viewController)
     }
 
 
@@ -175,18 +194,11 @@ extension AssetCollectionViewControllerTests {
 
     func test_onDataSource_onCellSelected_callsAppAction() {
 
-        var didCallAppActionWithId: Int?
-        let newAppActions = AppMovieCollectionActions(alert: StubInformationAlert(), block: { id in
-            didCallAppActionWithId = id
-        })
-
-        let newViewController = makeViewController(appActions: newAppActions, configureCollectionView: StubConfigureCollectionView())
-
-        startViewControllerLifeCycle(newViewController, forceViewDidAppear: true)
+        startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
         stubPresenter.updateHandler!(.success(makeTwoAssetViewModelList()))
 
-        newViewController.collectionView!.delegate!.collectionView!(viewController.collectionView!, didSelectItemAt: IndexPath(row: 1, section: 0))
-        XCTAssertEqual(didCallAppActionWithId, 2)
+        viewController.collectionView!.delegate!.collectionView!(viewController.collectionView!, didSelectItemAt: IndexPath(row: 1, section: 0))
+        XCTAssertEqual(stubAppActions.didCallShowDetailsWithId, 2)
     }
 
 
@@ -196,7 +208,7 @@ extension AssetCollectionViewControllerTests {
         let indexPath = IndexPath(row: 1, section: 0)
 
         let configureCollectionView = ConfigureCollectionView()
-        let newViewController = makeViewController(appActions: dummyAppActions, configureCollectionView: configureCollectionView)
+        let newViewController = makeViewController(appActions: stubAppActions, configureCollectionView: configureCollectionView)
         startViewControllerLifeCycle(newViewController, forceViewDidAppear: true)
         stubPresenter.updateHandler!(.success(viewModelList))
 

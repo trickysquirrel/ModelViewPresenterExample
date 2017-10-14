@@ -12,7 +12,7 @@
 		30115AF91F8436310042D614 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30115AF81F8436310042D614 /* Assets.xcassets */; };
 		30115AFC1F8436310042D614 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30115AFA1F8436310042D614 /* LaunchScreen.storyboard */; };
 		30115B121F84364A0042D614 /* info in Resources */ = {isa = PBXBuildFile; fileRef = 30115B111F84364A0042D614 /* info */; };
-		30115B141F8438A50042D614 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30115B131F8438A50042D614 /* AppCoordinator.swift */; };
+		30115B141F8438A50042D614 /* RootAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30115B131F8438A50042D614 /* RootAppCoordinator.swift */; };
 		30115B171F8438C20042D614 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30115B161F8438C20042D614 /* ViewControllerFactory.swift */; };
 		303AFCE51F8990D90068018E /* AssetCollectionViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AFCE41F8990D90068018E /* AssetCollectionViewControllerTests.swift */; };
 		303AFCE71F8991770068018E /* CollectionViewConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AFCE61F8991770068018E /* CollectionViewConfigurable.swift */; };
@@ -42,7 +42,6 @@
 		308179251F84F9DF001F44FD /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308179241F84F9DF001F44FD /* Array+Safe.swift */; };
 		308179281F84FBCA001F44FD /* AssetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308179261F84FBCA001F44FD /* AssetCollectionViewCell.swift */; };
 		308179291F84FBCA001F44FD /* AssetCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 308179271F84FBCA001F44FD /* AssetCollectionViewCell.xib */; };
-		3081792C1F850DF7001F44FD /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081792B1F850DF7001F44FD /* AppActions.swift */; };
 		30910C6D1F9012E700440731 /* AssetDetailsScreenObjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30910C6C1F9012E700440731 /* AssetDetailsScreenObjectModel.swift */; };
 		30910C701F90159900440731 /* AssetDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30910C6F1F90159900440731 /* AssetDetailsViewController.swift */; };
 		30C954201F85DF97000ABE33 /* AnalyticsReporterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C9541F1F85DF97000ABE33 /* AnalyticsReporterFactory.swift */; };
@@ -87,7 +86,7 @@
 		30115B021F8436310042D614 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30115B081F8436310042D614 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30115B111F84364A0042D614 /* info */ = {isa = PBXFileReference; lastKnownFileType = text; path = info; sourceTree = "<group>"; };
-		30115B131F8438A50042D614 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		30115B131F8438A50042D614 /* RootAppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootAppCoordinator.swift; sourceTree = "<group>"; };
 		30115B161F8438C20042D614 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		303AFCE41F8990D90068018E /* AssetCollectionViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollectionViewControllerTests.swift; sourceTree = "<group>"; };
 		303AFCE61F8991770068018E /* CollectionViewConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewConfigurable.swift; sourceTree = "<group>"; };
@@ -118,7 +117,6 @@
 		308179241F84F9DF001F44FD /* Array+Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Safe.swift"; sourceTree = "<group>"; };
 		308179261F84FBCA001F44FD /* AssetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollectionViewCell.swift; sourceTree = "<group>"; };
 		308179271F84FBCA001F44FD /* AssetCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetCollectionViewCell.xib; sourceTree = "<group>"; };
-		3081792B1F850DF7001F44FD /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		30910C6C1F9012E700440731 /* AssetDetailsScreenObjectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDetailsScreenObjectModel.swift; sourceTree = "<group>"; };
 		30910C6F1F90159900440731 /* AssetDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDetailsViewController.swift; sourceTree = "<group>"; };
 		30C9541F1F85DF97000ABE33 /* AnalyticsReporterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsReporterFactory.swift; sourceTree = "<group>"; };
@@ -222,9 +220,8 @@
 		30115B151F8438AC0042D614 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				30115B131F8438A50042D614 /* AppCoordinator.swift */,
+				30115B131F8438A50042D614 /* RootAppCoordinator.swift */,
 				30115B161F8438C20042D614 /* ViewControllerFactory.swift */,
-				3081792B1F850DF7001F44FD /* AppActions.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -668,7 +665,7 @@
 				308179281F84FBCA001F44FD /* AssetCollectionViewCell.swift in Sources */,
 				30C954291F8635E4000ABE33 /* InformationAlert.swift in Sources */,
 				303AFCE91F8996C00068018E /* GetDataServiceFactory.swift in Sources */,
-				30115B141F8438A50042D614 /* AppCoordinator.swift in Sources */,
+				30115B141F8438A50042D614 /* RootAppCoordinator.swift in Sources */,
 				308179231F84F9AE001F44FD /* CollectionViewDataSource.swift in Sources */,
 				30C954271F863466000ABE33 /* LoadingIndicator.swift in Sources */,
 				30C954221F85DFDC000ABE33 /* MovieCollectionReporter.swift in Sources */,
@@ -680,7 +677,6 @@
 				3070C5531F8ECD9500F97C17 /* AccessibilityIdentifiers.swift in Sources */,
 				308179191F84EFDD001F44FD /* AssetCollectionPresenter.swift in Sources */,
 				308179131F84EE8F001F44FD /* DataLoader.swift in Sources */,
-				3081792C1F850DF7001F44FD /* AppActions.swift in Sources */,
 				3081791D1F84F3DC001F44FD /* AssetDataModel.swift in Sources */,
 				30115B171F8438C20042D614 /* ViewControllerFactory.swift in Sources */,
 				303AFD031F8B2BE50068018E /* ThirdyPartyAnalyticsReporter.swift in Sources */,

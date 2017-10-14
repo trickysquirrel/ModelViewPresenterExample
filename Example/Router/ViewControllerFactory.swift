@@ -12,7 +12,7 @@ struct ViewControllerFactory {
     let getDataServiceFactory: GetDataServiceFactoryProtocol
     let analyticsFactory: AnalyticsReporterFactory
 
-    func makeMoviesViewController(showMovieDetailAction: AppMovieCollectionActions) -> UIViewController {
+    func makeMoviesViewController(appActions: AssetCollectionCoordinatorActions) -> UIViewController {
         let moviesDataLoader = getDataServiceFactory.makeMoviesAssetCollectionDataLoader()
         let presenter = AssetCollectionPresenter(assetDataLoader: moviesDataLoader, appDispatcher: AppDispatcher())
         let dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()
@@ -24,7 +24,7 @@ struct ViewControllerFactory {
             dataSource: dataSource,
             reporter: analyticsFactory.makeAssetCollectionReporter(),
             loadingIndicator: LoadingIndicator(),
-            appActions: showMovieDetailAction)
+            appActions: appActions)
     }
 
     func makeDetailsViewController() -> UIViewController {
