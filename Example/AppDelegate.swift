@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-	var appCoordinator: RootAppCoordinator?
+	var appCoordinator: AppCoordinator?
 
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -31,7 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let navigationController = UINavigationController()
 
-        appCoordinator = RootAppCoordinator(window: window, navigationController: navigationController, viewControllerFactory: viewControllerFactory)
+        appCoordinator = AppCoordinator(window: window,
+                                            navigationController: navigationController,
+                                            viewControllerFactory: viewControllerFactory,
+                                            informationAlert: InformationAlert())
         
         appCoordinator?.start()
 

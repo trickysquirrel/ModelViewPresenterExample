@@ -16,17 +16,22 @@ protocol AssetCollectionCoordinatorActions: class {
 }
 
 
-class RootAppCoordinator {
+class AppCoordinator {
 
 	private let window: UIWindow
 	private let navigationController: UINavigationController
 	private let viewControllerFactory: ViewControllerFactory
+    private let informationAlert: InformationAlertProtocol
 
 
-	init(window: UIWindow, navigationController: UINavigationController, viewControllerFactory: ViewControllerFactory) {
+	init(window: UIWindow,
+         navigationController: UINavigationController,
+         viewControllerFactory: ViewControllerFactory,
+         informationAlert: InformationAlertProtocol) {
 		self.window = window
 		self.viewControllerFactory = viewControllerFactory
 		self.navigationController = navigationController
+        self.informationAlert = informationAlert
 		window.rootViewController = navigationController
 		window.makeKeyAndVisible()
 	}
@@ -46,7 +51,7 @@ class RootAppCoordinator {
 }
 
 
-extension RootAppCoordinator: AssetTypeSelectionCoordinatorActions {
+extension AppCoordinator: AssetTypeSelectionCoordinatorActions {
 
     func showMoviesCollection() {
         let viewController = viewControllerFactory.makeMoviesViewController(appActions: self)
@@ -55,10 +60,10 @@ extension RootAppCoordinator: AssetTypeSelectionCoordinatorActions {
 }
 
 
-extension RootAppCoordinator: AssetCollectionCoordinatorActions {
+extension AppCoordinator: AssetCollectionCoordinatorActions {
 
     func showAlertOK(title: String, msg: String, presentingViewController: UIViewController) {
-        InformationAlert().displayAlert(title: title, message: msg, presentingViewController: presentingViewController)
+        informationAlert.displayAlert(title: title, message: msg, presentingViewController: presentingViewController)
     }
 
     func showDetails(id: Int) {

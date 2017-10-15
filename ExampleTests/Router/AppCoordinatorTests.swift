@@ -11,24 +11,30 @@ class AppCoordinatorTests: XCTestCase {
 
     var window: UIWindow!
     var navigationController: UINavigationController!
-    var appCoordinator: RootAppCoordinator!
+    var appCoordinator: AppCoordinator!
+    var stubAlert: StubInformationAlert!
 
 
     override func setUp() {
         super.setUp()
         window = UIWindow()
         navigationController = UINavigationController()
+        stubAlert = StubInformationAlert()
         let stubAnalyticsReporter = StubThirdPartyAnalyticsReporter()
         let analyticsReporterFactory = AnalyticsReporterFactory(thirdPartyAnalyticsReporter: stubAnalyticsReporter)
         let viewControllerFactory = ViewControllerFactory(getDataServiceFactory: StubGetDataServiceFactory(), analyticsFactory: analyticsReporterFactory)
-        appCoordinator = RootAppCoordinator(window: window, navigationController: navigationController, viewControllerFactory: viewControllerFactory)
+        appCoordinator = AppCoordinator(window: window,
+                                            navigationController: navigationController,
+                                            viewControllerFactory: viewControllerFactory,
+                                            informationAlert: stubAlert)
     }
 
 
     override func tearDown() {
-        window = nil
-        navigationController = nil
+        stubAlert = nil
         appCoordinator = nil
+        navigationController = nil
+        window = nil
         super.tearDown()
     }
 }
@@ -61,7 +67,15 @@ extension AppCoordinatorTests {
         XCTAssertTrue(navigationController.viewControllers[1] is AssetDetailsViewController)
     }
 
-    // TODO: after refactor missing test for show alert
+    func test_showAlertOk_callsInformationAlertToDisplayInfo() {
+        appCoordinator.start()
+        let currentViewController = navigationController.viewControllers.last!
+        appCoordinator.showAlertOK(title: "title", msg: "message", presentingViewController: currentViewController)
+        XCTAssertEqual(stubAlert.title, "title")
+        XCTAssertEqual(stubAlert.message, "message")
+        XCTAssertEqual(stubAlert.presentingViewController, currentViewController)
+    }
+
 
 }
 
