@@ -1,37 +1,47 @@
 
-Stuff evolves at different rates
+The idea of this example is to explore the idea that different parts of an application evolve at different rates and by seperating these parts and isolating them it can help to aid in the refactoring the application over the many years of its life time.  Wether you like it or not stuff always changes, and what you thought you needed at the start will not be want you want in a years time, so we really need to focus on the basics, SOLID.  If we can first get that right it should make refacting easier, even if it from one type of architeture to another.  I guess this example takes things one step future and says, lets take our SOLID objects and arange them into groups, and select to right kind of testing for each group.
 
-views   | view logic (presentation) | business logic | app navigation
-View&VC | present stuff             | get stuff      | go somewhere
+The problem is, is that there are never any detailed instructions on how the app works, there are the stories we used to build the app, but they never contain all the information of the little things that we had to fix along the way.  How often do you see code and have no idea why its there "it looks wrong, but maybe it has a purpose", and your too scared to change it (enter code rot), or you think thats a bit too compicated we definately don't need that code (bug time).  The only place that can describe how the app works are the tests.  And if we have all the tests then people naturally refactor stuff and in my experience alot happier. I've found that TDD comes in handy here as so often writing the tests afterwards I tend to forget something.
+
+Another thing worth mentioning, is as a developer I only tend to do 3 distinct jobs, fix, refactor and the biggest, amending features (you could probably add in a fourth 'creating bugs', but lets leave that one for now).  For any of these 3 jobs I seem to spend the majority of my time just reading code, over and over again just wondering what the hells going on, lets take a guess at 80% reading code 20% writing code.  So also in this example I've tried to explore a way of writing standard OO code in a way that tries to express simply the steps required to make up a feature for each of the 'parts', so that who ever has to read this next is not cursing me.
 
 
-(you could argue about the order of bl and an but these are different for differnent apps and lifecycle of the app)
 
-Need to appreciate that there is no where in the business that actually describes how the app work, there are the stories we used to build the app, but they never contain all the information of the little things that we had to fix along the way.  How often do you see code and have no idea why its there "it looks wrong, but maybe it has a purpose", and your too scared to change it (enter code rot).  The only place that can describe how the app works are the tests.  And if we have all the tests then people naturally refactor stuff and in my experience alot happier.
+Anyway, I've tried to split up the app into 5 parts, 'Views' | 'Controllers' | 'Present stuff' | 'Get Data' | 'Show something else'
 
-Things to bear in mind...
+
+1) Views:
+There basic function is to show stuff to the user, they are dumb and contain no presentation or business logic.  They may contain standard libraries for layout, animation, loading images etc.
+Snap shot testing - these classes will contain mainly autolayout setting either in code or xib,storybaord etc.  Here we can use snap shot testing to check autolayout has not been broken (https://github.com/facebook/ios-snapshot-test-case).  Create mock data with very long strings to ensure wrapping etc has not been broken
+Unit testing logic - as they contain no logic there is not alot of return on effort put in, and these objects evolve fast so you will continually be updating tests that do not provide that much benifit.
+
+
+2) Controllers:
+Manage users input and are the trigger points for any feature
+Snap shot testing not required as all visual code is removed into the view, you will have a reference to the views but they are only used to pass information to other objects to do the work.
+Unit testing - These tend to take the form of mockiest tests.  Mock all objects the view controller requires. Make sure tests cover the trigger point of each action and that the appropriate classes are called to perform their specific actions, and that the result of each action is tested
+
+
+3) Presenting:
+A collection of objects used to request for raw data and transform it into view model data.  Their basic function is to turn raw data into view data.
+Unit testing, you get more of an advantage using classical testing methods here as these objects are not really re-used in other places, and we want to just test the inputs and output and our not too concerned with the classes that do the job, just the fact that the job is done.  Any object that is not directly related to presenting the raw data is mocked, e.g get data objects.
+
+
+4) Get Data:
+Its basic function is to provide raw data, either from the network or persistent storage.
+Unit testing, these will end up being used in lots of places and contain reusable parts for networking and DB access so best to go with a mockiest approach here.
+
+
+5. Show user something else
+Its basic function is to show the user something different to where you are already are, e.g. other view controllers, web pages, alerts etc
+Unit testing can take the form of classical testing, e.g make sure that calling that method results in add a view new view controller to the navigation stack, no need to test the objects involved.
+
+
+
+Things to bear in mind when writing tests...
 
 1. Write tests that do not care about how the result was produced, we want tests that just check the result.  That way when we need to refactor the inner workings of a class we don't need to change the tests.
-2. You can write all the unit tests you like, but if some of those classes you are testing include public variables, you have introduce time, and unit tests are just a snapshot of time, so the tests no longer tell you if something works through the life cycle of the app.  By removing time, your unit test tell you exactly how the object works over the entire lifecycle of the app.
-3. If your business logic include a view (fastest changing object type) your going to have to change the business tests more, by disconnecting fast evolving objects from the slower one, less maintance will be needed.  By keeping objects that deal with a similar theme isolated we'll be maintaining the tests less.
-4. Isolate multithreading to keep test easier to read.
+2. You can write all the unit tests you like, but if some of those classes you are testing include public variables, you have introduce time, and unit tests are just a snapshot of time, so the tests no longer tell you if something works through the life cycle of the app.  By removing time from the app code, your unit test tell you exactly how the object works over the entire lifecycle of the app.
+3. If your business logic includes a view (fastest changing object type) your going to have to change the business tests more, by disconnecting fast evolving objects from the slower one, less maintance will be needed.  By keeping objects that deal with a similar theme isolated we'll be maintaining the tests less.
+4. Provide the ability for the tests to remove multithreading to keep tests easier to read and as fast as possible
 
-
-
-
-
-Split the app into a few distint parts
-
-View&VC | present stuff | get stuff | go somewhere
-
-tests are aranged around each area and only care about inputs and outputs, e.g
-
-get stuff: if I ask for data give me data, don't care too much wether its from db or network, exception being images
-present stuff: ask for the initial view state and check the returning view model struct, we don't care how it done.  Maybe its just one object, maybe its Redux, maybe you have view configurations, it does not matter.  Your free to refractor from redux to something else and the tests never change so you know you've not broken anything.  Also this area has no concept of how this information is to be displayed, e.g. maybe its a table, collection or stack view - should not matter
-View: are just dumb and just set stuff.
-VC: contain trigger points for features, knows how to display the viewmodel struct
-go somewhere: an object that takes the users to a different place in the app
-
-
-
-When writing code we tend to just, fix bugs or refactor, but 80%-90% of what we do is add/remove/change features.  If we also spend 80% just reading code thats already there so we know how to change it, it makes sense to really show to the read how the feature works.
