@@ -12,6 +12,11 @@ struct ViewControllerFactory {
     let getDataServiceFactory: GetDataServiceFactoryProtocol
     let analyticsFactory: AnalyticsReporterFactory
 
+    func makeAssetTypeSelectionViewController(appActions: AssetTypeSelectionCoordinatorActions) -> UIViewController {
+        let viewController = AssetTypeSelectionViewController(appActions: appActions)
+        return viewController
+    }
+
     func makeMoviesViewController(appActions: AssetCollectionCoordinatorActions) -> UIViewController {
         let moviesDataLoader = getDataServiceFactory.makeMoviesAssetCollectionDataLoader()
         let presenter = AssetCollectionPresenter(assetDataLoader: moviesDataLoader, appDispatcher: AppDispatcher())

@@ -44,17 +44,24 @@ extension AppCoordinatorTests {
     func test_showRootViewController_showsAssetCollectionViewToUser() {
         appCoordinator.start()
         XCTAssertEqual(navigationController.viewControllers.count, 1)
-        XCTAssertTrue(navigationController.viewControllers[0] is AssetCollectionViewController)
+        XCTAssertTrue(navigationController.viewControllers[0] is AssetTypeSelectionViewController)
     }
 
-    // not ideal perhaps we should have a coordinator for each view controller, much easier to test
-    func test_performShowDetailsAppAction_addCorrectViewControllerToNavigationController() {
-        UIView.setAnimationsEnabled(false)
+    func test_showAssetCollection_showsAssetCollectionViewToUser() {
         appCoordinator.start()
-        let viewController = navigationController.viewControllers[0] as! AssetCollectionViewController
-        viewController._appActions?.showDetails(id: 0)
+        appCoordinator.showMoviesCollection()
+        XCTAssertEqual(navigationController.viewControllers.count, 2)
+        XCTAssertTrue(navigationController.viewControllers[1] is AssetCollectionViewController)
+    }
+
+    func test_showAssetDetails_showsAssetDetailsViewToUser() {
+        appCoordinator.start()
+        appCoordinator.showDetails(id: 1)
         XCTAssertEqual(navigationController.viewControllers.count, 2)
         XCTAssertTrue(navigationController.viewControllers[1] is AssetDetailsViewController)
     }
+
+    // TODO: after refactor missing test for show alert
+
 }
 

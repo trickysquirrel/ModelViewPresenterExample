@@ -6,7 +6,8 @@
 import Foundation
 
 enum Access: String {
-    
+
+    case selectionMoviesButton
     case assetCollectionView
     case assetDetailsView
 

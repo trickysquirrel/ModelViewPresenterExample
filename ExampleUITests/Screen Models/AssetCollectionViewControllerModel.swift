@@ -26,6 +26,7 @@ class AssetCollectionViewControllerModel: ViewControllerModel {
 
     // MARK: Verifications
 
+    
     // MARK: Actions
 
     @discardableResult

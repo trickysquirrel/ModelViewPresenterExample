@@ -21,11 +21,14 @@ class ExampleUITests: UITestCase {
     // Plain XCTAssert can also work well here instead of the above tools
 
 
-    func test_userCanNavigate_fromAssetCollectionToDetailsAndBack() {
+    func test_userCanNavigate_fromAssetTypeSelectionToAssetDetailsAndBack() {
 
         launchApp()
 
-        AssetCollectionViewControllerModel(context: context)
+        AssetTypeSelectionViewControllerModel(context: context)
+            .waitForScreenAppearanceToBeHitable()
+            .verify(navigationTitle: "Selection")
+            .navigateToMovieCollectionByTappingButton()
             .waitForScreenAppearanceToBeHitable()
             .verify(navigationTitle: "Movies")
             .navigateToAssetDetailsByTappingCell(atIndex: 0)
@@ -33,6 +36,10 @@ class ExampleUITests: UITestCase {
             .verify(navigationTitle: "Details")
             .tapBackButton()
             .waitForScreenAppearanceToBeHitable()
+            .verify(navigationTitle: "Movies")
+            .tapBackButton()
+            .waitForScreenAppearanceToBeHitable()
+            .verify(navigationTitle: "Selection")
     }
 
     

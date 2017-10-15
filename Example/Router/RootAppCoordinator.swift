@@ -5,6 +5,10 @@
 
 import UIKit
 
+protocol AssetTypeSelectionCoordinatorActions: class {
+    func showMoviesCollection()
+}
+
 
 protocol AssetCollectionCoordinatorActions: class {
     func showAlertOK(title: String, msg: String, presentingViewController: UIViewController)
@@ -29,7 +33,7 @@ class RootAppCoordinator {
 
 
 	func start() {
-        let viewController = viewControllerFactory.makeMoviesViewController(appActions: self)
+        let viewController = viewControllerFactory.makeAssetTypeSelectionViewController(appActions: self)
         navigationController(navigationController, pushOnViewController: viewController, animated: false)
 	}
 
@@ -39,10 +43,18 @@ class RootAppCoordinator {
         let shouldAnimate = isRunningTests ? false : animated
         navigationController.pushViewController(viewController, animated: shouldAnimate)
     }
-
 }
 
-    
+
+extension RootAppCoordinator: AssetTypeSelectionCoordinatorActions {
+
+    func showMoviesCollection() {
+        let viewController = viewControllerFactory.makeMoviesViewController(appActions: self)
+        navigationController(navigationController, pushOnViewController: viewController, animated: true)
+    }
+}
+
+
 extension RootAppCoordinator: AssetCollectionCoordinatorActions {
 
     func showAlertOK(title: String, msg: String, presentingViewController: UIViewController) {
@@ -53,5 +65,4 @@ extension RootAppCoordinator: AssetCollectionCoordinatorActions {
         let viewController = viewControllerFactory.makeDetailsViewController()
         navigationController(navigationController, pushOnViewController: viewController, animated: true)
     }
-
 }

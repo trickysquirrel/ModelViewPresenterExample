@@ -15,12 +15,16 @@ class AssetCollectionViewController: UICollectionViewController {
     private let reporter: MovieCollectionReporter
     private let loadingIndicator: LoadingIndicatorProtocol
     private let configureCollectionView: CollectionViewConfigurable
-    private weak var appActions: AssetCollectionCoordinatorActions?
+    private let appActions: AssetCollectionCoordinatorActions
 
 
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
+
+    deinit {
+        print("gone ")
+    }
 
 	
     init(title: String,
@@ -88,14 +92,14 @@ private extension AssetCollectionViewController {
             cell.configure(viewModel: viewModel)
         }
         dataSource.onEventItemSelected(selectCell: { [weak self] (viewModel, indexPath) in
-            self?.appActions?.showDetails(id: viewModel.id)
+            self?.appActions.showDetails(id: viewModel.id)
         })
         dataSource.resetRows(viewModels: viewModelList, cellIdentifier: reuseIdentifier)
     }
 
 
     func showUserAlert(title: String, msg: String) {
-        appActions?.showAlertOK(title: title, msg: msg, presentingViewController: self)
+        appActions.showAlertOK(title: title, msg: msg, presentingViewController: self)
     }
 }
 
