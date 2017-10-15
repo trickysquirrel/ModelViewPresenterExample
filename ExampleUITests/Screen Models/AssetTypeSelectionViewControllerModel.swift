@@ -32,6 +32,14 @@ class AssetTypeSelectionViewControllerModel: ViewControllerModel {
 
     // MARK: Verifications
 
+    @discardableResult
+    func verifyMoviesButtonExists(fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> Self {
+        XCTAssertTrue(moviesButton.exists, "movies button does not exist", file: fileStatic, line: line)
+        XCTAssertTrue(moviesButton.isHittable, "movies button is not selectable", file: fileStatic, line: line)
+        return self
+    }
+
+
     // MARK: Actions
 
     @discardableResult

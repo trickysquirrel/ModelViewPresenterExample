@@ -75,7 +75,5 @@ extension AppCoordinatorTests {
         XCTAssertEqual(stubAlert.message, "message")
         XCTAssertEqual(stubAlert.presentingViewController, currentViewController)
     }
-
-
 }
 

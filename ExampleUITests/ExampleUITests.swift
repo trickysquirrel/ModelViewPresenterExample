@@ -28,6 +28,7 @@ class ExampleUITests: UITestCase {
         AssetTypeSelectionViewControllerModel(context: context)
             .waitForScreenAppearanceToBeHitable()
             .verify(navigationTitle: "Selection")
+            .verifyMoviesButtonExists()
             .navigateToMovieCollectionByTappingButton()
             .waitForScreenAppearanceToBeHitable()
             .verify(navigationTitle: "Movies")
