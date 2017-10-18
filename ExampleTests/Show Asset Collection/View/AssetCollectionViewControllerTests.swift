@@ -1,32 +1,9 @@
 //
-//  Created by Richard Moult on 8/10/17.
 //  Copyright © 2017 Richard Moult. All rights reserved.
 //
 
 import XCTest
 @testable import Example
-
-
-class StubAppActions: AssetCollectionCoordinatorActions {
-
-    private(set) var didCallShowAlertOK: Bool?
-    private(set) var didCallShowAlertWithTitle: String?
-    private(set) var didCallShowAlertWithMsg: String?
-    private(set) var didCallShowAlertWithVC: UIViewController?
-    private(set) var didCallShowDetailsWithId: Int?
-
-    func showAlertOK(title: String, msg: String, presentingViewController: UIViewController) {
-        didCallShowAlertOK = true
-        didCallShowAlertWithTitle = title
-        didCallShowAlertWithMsg = msg
-        didCallShowAlertWithVC = presentingViewController
-    }
-
-    func showDetails(id: Int) {
-        didCallShowDetailsWithId = id
-    }
-
-}
 
 
 class AssetCollectionViewControllerTests: XCTestCase {
@@ -37,11 +14,11 @@ class AssetCollectionViewControllerTests: XCTestCase {
     var stubPresenter: StubAssetCollectionPresenter!
     var dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>!
     var stubLoadingIndicator: StubLoadingIndicator!
-    var stubAppActions: StubAppActions!
+    var stubAppActions: StubAssetCollectionCoordinatorActions!
 
     override func setUp() {
         super.setUp()
-        stubAppActions = StubAppActions()
+        stubAppActions = StubAssetCollectionCoordinatorActions()
         stubConfigureCollectionView = StubConfigureCollectionView()
         viewController = makeViewController(appActions: stubAppActions, configureCollectionView: stubConfigureCollectionView)
     }
@@ -57,7 +34,7 @@ class AssetCollectionViewControllerTests: XCTestCase {
         super.tearDown()
     }
 
-    private func makeViewController(appActions: StubAppActions, configureCollectionView: CollectionViewConfigurable) -> AssetCollectionViewController {
+    private func makeViewController(appActions: StubAssetCollectionCoordinatorActions, configureCollectionView: CollectionViewConfigurable) -> AssetCollectionViewController {
         stubThirdyPartytAnalyticsReporter = StubThirdPartyAnalyticsReporter()
         let analyticsFactory = AnalyticsReporterFactory(thirdPartyAnalyticsReporter: stubThirdyPartytAnalyticsReporter)
         stubPresenter = StubAssetCollectionPresenter()

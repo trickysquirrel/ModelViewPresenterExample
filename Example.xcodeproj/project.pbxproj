@@ -17,6 +17,7 @@
 		302867541F97305F00AC53B5 /* AssetSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302867521F97305F00AC53B5 /* AssetSearchViewController.swift */; };
 		302867551F97305F00AC53B5 /* AssetSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 302867531F97305F00AC53B5 /* AssetSearchViewController.xib */; };
 		302867571F97FE9D00AC53B5 /* AssetSearchPresentingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302867561F97FE9D00AC53B5 /* AssetSearchPresentingTests.swift */; };
+		302867591F9800B000AC53B5 /* StubAssetCollectionCoordinatorActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302867581F9800B000AC53B5 /* StubAssetCollectionCoordinatorActions.swift */; };
 		303AFCE51F8990D90068018E /* AssetCollectionViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AFCE41F8990D90068018E /* AssetCollectionViewControllerTests.swift */; };
 		303AFCE71F8991770068018E /* CollectionViewConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AFCE61F8991770068018E /* CollectionViewConfigurable.swift */; };
 		303AFCE91F8996C00068018E /* GetDataServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303AFCE81F8996C00068018E /* GetDataServiceFactory.swift */; };
@@ -99,6 +100,7 @@
 		302867521F97305F00AC53B5 /* AssetSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetSearchViewController.swift; sourceTree = "<group>"; };
 		302867531F97305F00AC53B5 /* AssetSearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetSearchViewController.xib; sourceTree = "<group>"; };
 		302867561F97FE9D00AC53B5 /* AssetSearchPresentingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetSearchPresentingTests.swift; sourceTree = "<group>"; };
+		302867581F9800B000AC53B5 /* StubAssetCollectionCoordinatorActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubAssetCollectionCoordinatorActions.swift; sourceTree = "<group>"; };
 		303AFCE41F8990D90068018E /* AssetCollectionViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollectionViewControllerTests.swift; sourceTree = "<group>"; };
 		303AFCE61F8991770068018E /* CollectionViewConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewConfigurable.swift; sourceTree = "<group>"; };
 		303AFCE81F8996C00068018E /* GetDataServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDataServiceFactory.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				30E7621E1F8C228A00864D07 /* StubLoadingIndicator.swift */,
 				3070C5381F8EBFCB00F97C17 /* FakeAppDispatcher.swift */,
 				303E941F1F90D86F00AB92C9 /* StubGetDataServiceFactory.swift */,
+				302867581F9800B000AC53B5 /* StubAssetCollectionCoordinatorActions.swift */,
 			);
 			path = "Test Doubles";
 			sourceTree = "<group>";
@@ -757,6 +760,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3066DD901F90AF1E002A70D7 /* AppCoordinatorTests.swift in Sources */,
+				302867591F9800B000AC53B5 /* StubAssetCollectionCoordinatorActions.swift in Sources */,
 				303AFCFF1F8B22550068018E /* StubAssetDataLoader.swift in Sources */,
 				30E7621B1F8C223A00864D07 /* StubAssetCollectionPresenter.swift in Sources */,
 				30E7621D1F8C226000864D07 /* StubInformationAlert.swift in Sources */,

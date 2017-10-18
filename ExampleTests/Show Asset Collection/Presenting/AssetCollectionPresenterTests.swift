@@ -1,5 +1,4 @@
 //
-//  Created by Richard Moult on 11/10/17.
 //  Copyright © 2017 Richard Moult. All rights reserved.
 //
 
