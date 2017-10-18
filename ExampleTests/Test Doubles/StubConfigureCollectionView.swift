@@ -11,7 +11,7 @@ class StubConfigureCollectionView: CollectionViewConfigurable {
 
     private(set) var didCallConfigure = false
 
-    func configure(collectionView: UICollectionView?, nibName: String, reuseIdentifier: String) {
+    func configure(collectionView: UICollectionView?, nibName: String, reuseIdentifier: String, accessId: String) {
         didCallConfigure = true
     }
 }

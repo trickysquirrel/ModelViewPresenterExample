@@ -7,6 +7,7 @@ import UIKit
 
 protocol AssetTypeSelectionCoordinatorActions: class {
     func showMoviesCollection()
+    func showSearch()
 }
 
 
@@ -55,6 +56,11 @@ extension AppCoordinator: AssetTypeSelectionCoordinatorActions {
 
     func showMoviesCollection() {
         let viewController = viewControllerFactory.makeMoviesViewController(appActions: self)
+        navigationController(navigationController, pushOnViewController: viewController, animated: true)
+    }
+
+    func showSearch() {
+        let viewController = viewControllerFactory.makeSearchViewController()
         navigationController(navigationController, pushOnViewController: viewController, animated: true)
     }
 }

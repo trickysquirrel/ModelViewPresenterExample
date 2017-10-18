@@ -8,6 +8,8 @@ import SDWebImage
 
 class AssetCollectionViewCell: UICollectionViewCell {
 
+    static let reuseIdentifier = "MovieCell"
+
 	@IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var labelTitle: UILabel!
 

@@ -28,19 +28,35 @@ class ExampleUITests: UITestCase {
         AssetTypeSelectionViewControllerModel(context: context)
             .waitForScreenAppearanceToBeHitable()
             .verify(navigationTitle: "Selection")
-            .verifyMoviesButtonExists()
             .navigateToMovieCollectionByTappingButton()
+
             .waitForScreenAppearanceToBeHitable()
             .verify(navigationTitle: "Movies")
             .navigateToAssetDetailsByTappingCell(atIndex: 0)
             .waitForScreenAppearance()
             .verify(navigationTitle: "Details")
             .tapBackButton()
+
             .waitForScreenAppearanceToBeHitable()
             .verify(navigationTitle: "Movies")
             .tapBackButton()
+            
             .waitForScreenAppearanceToBeHitable()
             .verify(navigationTitle: "Selection")
+    }
+
+
+    func test_canUserSearchForAssets() {
+
+        launchApp()
+
+        AssetTypeSelectionViewControllerModel(context: context)
+            .waitForScreenAppearanceToBeHitable()
+            .verify(navigationTitle: "Selection")
+            .navigateToSearchCollectionByTappingButton()
+
+            .waitForScreenAppearanceToBeHitable()
+            //.verify(navigationTitle: "Search")
     }
 
     

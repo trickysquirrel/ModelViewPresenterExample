@@ -5,8 +5,6 @@
 
 import UIKit
 
-private let reuseIdentifier = "MovieCell"
-
 
 class AssetCollectionViewController: UICollectionViewController {
 
@@ -22,11 +20,6 @@ class AssetCollectionViewController: UICollectionViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-    deinit {
-        print("gone ")
-    }
-
-	
     init(title: String,
          presenter: AssetCollectionPresenting,
          configureCollectionView: CollectionViewConfigurable,
@@ -47,7 +40,7 @@ class AssetCollectionViewController: UICollectionViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureCollectionView.configure(collectionView: collectionView, nibName: "AssetCollectionViewCell", reuseIdentifier: reuseIdentifier)
+        configureCollectionView.configure(collectionView: collectionView, nibName: "AssetCollectionViewCell", reuseIdentifier: AssetCollectionViewCell.reuseIdentifier, accessId: Access.assetCollectionView.id)
 		dataSource.configure(collectionView: collectionView)
 		refreshView()
     }
@@ -81,24 +74,24 @@ private extension AssetCollectionViewController {
     }
 
 
-    func showLoading(_ loading: Bool) {
+    private func showLoading(_ loading: Bool) {
         loadingIndicator.statusBar(loading)
         loadingIndicator.view(view: self.view, loading: loading)
     }
 
 
-    func reloadDataSource(viewModelList: [AssetViewModel]) {
+    private func reloadDataSource(viewModelList: [AssetViewModel]) {
         dataSource.onEventConfigureCell { cell, viewModel in
             cell.configure(viewModel: viewModel)
         }
         dataSource.onEventItemSelected(selectCell: { [weak self] (viewModel, indexPath) in
             self?.appActions.showDetails(id: viewModel.id)
         })
-        dataSource.resetRows(viewModels: viewModelList, cellIdentifier: reuseIdentifier)
+        dataSource.resetRows(viewModels: viewModelList, cellIdentifier: AssetCollectionViewCell.reuseIdentifier)
     }
 
 
-    func showUserAlert(title: String, msg: String) {
+    private func showUserAlert(title: String, msg: String) {
         appActions.showAlertOK(title: title, msg: msg, presentingViewController: self)
     }
 }

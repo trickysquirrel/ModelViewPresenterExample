@@ -37,4 +37,16 @@ struct ViewControllerFactory {
         return viewController
 	}
 
+    func makeSearchViewController() -> UIViewController {
+        let presenter = AssetSearchPresenter()
+        let searchController = UISearchController(searchResultsController: nil)
+        let configureCollectionView = ConfigureCollectionView()
+        let dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()
+        let viewController = AssetSearchViewController(searchController: searchController,
+                                                       presenter: presenter,
+                                                       loadingIndicator: LoadingIndicator(),
+                                                       configureCollectionView: configureCollectionView,
+                                                       dataSource: dataSource)
+        return viewController
+    }
 }

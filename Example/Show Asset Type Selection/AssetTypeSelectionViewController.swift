@@ -27,22 +27,27 @@ class AssetTypeSelectionViewController: UIViewController {
         super.viewDidLoad()
         title = "Selection"
         view.backgroundColor = .white
-        addMoviesSelectionButton()
+        addButtonToView(withTitle: "Movies", yPosition: 200, selector: #selector(moviesButtonSelected), accessID: Access.selectionMoviesButton.id)
+        addButtonToView(withTitle: "Search", yPosition: 300, selector: #selector(searchButtonSelected), accessID: Access.selectionSearchButton.id)
     }
 
-
-    private func addMoviesSelectionButton() {
-        let button = UIButton(frame: CGRect(x: 100, y: 200, width: 100, height: 50))
-        button.setTitle("Movies", for: .normal)
+    private func addButtonToView(withTitle title: String, yPosition: CGFloat, selector: Selector, accessID: String) {
+        let button = UIButton(frame: CGRect(x: 100, y: yPosition, width: 100, height: 50))
+        button.setTitle(title, for: .normal)
         button.setTitleColor(.blue, for: .normal)
-        button.accessibilityIdentifier = Access.selectionMoviesButton.id
-        button.addTarget(self, action: #selector(moviesButtonSelected), for: .primaryActionTriggered)
+        button.accessibilityIdentifier = accessID
+        button.addTarget(self, action: selector, for: .primaryActionTriggered)
         view.addSubview(button)
     }
 
     
     @objc private func moviesButtonSelected() {
         appActions?.showMoviesCollection()
+    }
+
+
+    @objc private func searchButtonSelected() {
+        appActions?.showSearch()
     }
 
 }

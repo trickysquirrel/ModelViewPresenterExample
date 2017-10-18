@@ -8,8 +8,10 @@ import Foundation
 enum Access: String {
 
     case selectionMoviesButton
+    case selectionSearchButton
     case assetCollectionView
     case assetDetailsView
+    case assetSearchCollectionView
 
     var id: String {
         return self.rawValue
