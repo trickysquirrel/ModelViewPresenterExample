@@ -53,6 +53,10 @@
 		30827CD51F96925B0090F021 /* AssetSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30827CD41F96925B0090F021 /* AssetSearchPresenter.swift */; };
 		30910C6D1F9012E700440731 /* AssetDetailsScreenObjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30910C6C1F9012E700440731 /* AssetDetailsScreenObjectModel.swift */; };
 		30910C701F90159900440731 /* AssetDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30910C6F1F90159900440731 /* AssetDetailsViewController.swift */; };
+		30AA7F3D1F9DCB710034BEED /* SearchDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA7F3C1F9DCB710034BEED /* SearchDataLoader.swift */; };
+		30AA7F3F1F9DCBAC0034BEED /* StubSearchDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA7F3E1F9DCBAC0034BEED /* StubSearchDataLoader.swift */; };
+		30AA7F411F9DCDAC0034BEED /* Throttle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA7F401F9DCDAC0034BEED /* Throttle.swift */; };
+		30AA7F431F9DCF920034BEED /* StubThrottle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA7F421F9DCF920034BEED /* StubThrottle.swift */; };
 		30C954201F85DF97000ABE33 /* AnalyticsReporterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C9541F1F85DF97000ABE33 /* AnalyticsReporterFactory.swift */; };
 		30C954221F85DFDC000ABE33 /* MovieCollectionReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C954211F85DFDC000ABE33 /* MovieCollectionReporter.swift */; };
 		30C954271F863466000ABE33 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C954261F863466000ABE33 /* LoadingIndicator.swift */; };
@@ -137,6 +141,10 @@
 		30827CD41F96925B0090F021 /* AssetSearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetSearchPresenter.swift; sourceTree = "<group>"; };
 		30910C6C1F9012E700440731 /* AssetDetailsScreenObjectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDetailsScreenObjectModel.swift; sourceTree = "<group>"; };
 		30910C6F1F90159900440731 /* AssetDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDetailsViewController.swift; sourceTree = "<group>"; };
+		30AA7F3C1F9DCB710034BEED /* SearchDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataLoader.swift; sourceTree = "<group>"; };
+		30AA7F3E1F9DCBAC0034BEED /* StubSearchDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubSearchDataLoader.swift; sourceTree = "<group>"; };
+		30AA7F401F9DCDAC0034BEED /* Throttle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttle.swift; sourceTree = "<group>"; };
+		30AA7F421F9DCF920034BEED /* StubThrottle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubThrottle.swift; sourceTree = "<group>"; };
 		30C9541F1F85DF97000ABE33 /* AnalyticsReporterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsReporterFactory.swift; sourceTree = "<group>"; };
 		30C954211F85DFDC000ABE33 /* MovieCollectionReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionReporter.swift; sourceTree = "<group>"; };
 		30C954261F863466000ABE33 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
@@ -276,6 +284,8 @@
 				3070C5381F8EBFCB00F97C17 /* FakeAppDispatcher.swift */,
 				303E941F1F90D86F00AB92C9 /* StubGetDataServiceFactory.swift */,
 				302867581F9800B000AC53B5 /* StubAssetCollectionCoordinatorActions.swift */,
+				30AA7F3E1F9DCBAC0034BEED /* StubSearchDataLoader.swift */,
+				30AA7F421F9DCF920034BEED /* StubThrottle.swift */,
 			);
 			path = "Test Doubles";
 			sourceTree = "<group>";
@@ -331,6 +341,7 @@
 		308179161F84EF73001F44FD /* Get Data */ = {
 			isa = PBXGroup;
 			children = (
+				30AA7F3B1F9DCB5F0034BEED /* Search Loader */,
 				3081791E1F84F6EC001F44FD /* Asset Loader */,
 				308179121F84EE8F001F44FD /* DataLoader.swift */,
 				303AFD001F8B23FB0068018E /* DataLoaderFactory.swift */,
@@ -360,6 +371,7 @@
 				303AFCE61F8991770068018E /* CollectionViewConfigurable.swift */,
 				3070C5361F8EBEF400F97C17 /* AppDispatching.swift */,
 				3070C5521F8ECD9500F97C17 /* AccessibilityIdentifiers.swift */,
+				30AA7F401F9DCDAC0034BEED /* Throttle.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -405,6 +417,14 @@
 				30910C6F1F90159900440731 /* AssetDetailsViewController.swift */,
 			);
 			path = "Show Asset Details";
+			sourceTree = "<group>";
+		};
+		30AA7F3B1F9DCB5F0034BEED /* Search Loader */ = {
+			isa = PBXGroup;
+			children = (
+				30AA7F3C1F9DCB710034BEED /* SearchDataLoader.swift */,
+			);
+			path = "Search Loader";
 			sourceTree = "<group>";
 		};
 		30C9541E1F85DF81000ABE33 /* Analytics */ = {
@@ -741,6 +761,7 @@
 				30C954221F85DFDC000ABE33 /* MovieCollectionReporter.swift in Sources */,
 				308179101F84EAA6001F44FD /* AssetCollectionViewController.swift in Sources */,
 				30910C701F90159900440731 /* AssetDetailsViewController.swift in Sources */,
+				30AA7F411F9DCDAC0034BEED /* Throttle.swift in Sources */,
 				308179211F84F979001F44FD /* CollectionRowSections.swift in Sources */,
 				308179151F84EF2B001F44FD /* AssetDataLoader.swift in Sources */,
 				3070C5371F8EBEF400F97C17 /* AppDispatching.swift in Sources */,
@@ -751,6 +772,7 @@
 				3081791D1F84F3DC001F44FD /* AssetDataModel.swift in Sources */,
 				30115B171F8438C20042D614 /* ViewControllerFactory.swift in Sources */,
 				303AFD031F8B2BE50068018E /* ThirdyPartyAnalyticsReporter.swift in Sources */,
+				30AA7F3D1F9DCB710034BEED /* SearchDataLoader.swift in Sources */,
 				30115AF21F8436310042D614 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -765,6 +787,7 @@
 				30E7621B1F8C223A00864D07 /* StubAssetCollectionPresenter.swift in Sources */,
 				30E7621D1F8C226000864D07 /* StubInformationAlert.swift in Sources */,
 				302867571F97FE9D00AC53B5 /* AssetSearchPresentingTests.swift in Sources */,
+				30AA7F3F1F9DCBAC0034BEED /* StubSearchDataLoader.swift in Sources */,
 				3070C5391F8EBFCB00F97C17 /* FakeAppDispatcher.swift in Sources */,
 				30E762171F8C220000864D07 /* StubConfigureCollectionView.swift in Sources */,
 				30E762191F8C222100864D07 /* StubThirdPartyAnalyticsReporter.swift in Sources */,
@@ -773,6 +796,7 @@
 				30E7621F1F8C228A00864D07 /* StubLoadingIndicator.swift in Sources */,
 				303AFCE51F8990D90068018E /* AssetCollectionViewControllerTests.swift in Sources */,
 				30827CD11F968CCF0090F021 /* AssetSearchViewControllerTests.swift in Sources */,
+				30AA7F431F9DCF920034BEED /* StubThrottle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
