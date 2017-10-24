@@ -45,23 +45,46 @@ class AssetSearchPresentingTests: XCTestCase {
     }
 
 
-    func test_updateSearchResults_entersOneChar_returnsTextToEnterMoreChars() {
+    func test_updateSearchResults_entersZeroChar_returnsEmptyInformationAndViewModels() {
         var responseInformation: String?
+        var responseViewModels: [AssetViewModel]?
+        presenter.updateSearchResults(searchString: "") { (response) in
+            switch response {
+            case .information(let msg):
+                responseInformation = msg
+            case .success(let viewModelList):
+                responseViewModels = viewModelList
+            default:
+                break
+            }
+        }
+        XCTAssertEqual(responseInformation, "")
+        XCTAssertEqual(responseViewModels?.count, 0)
+    }
+
+
+    func test_updateSearchResults_entersOneChar_returnsTextToEnterMoreCharsAndEmptyViewModels() {
+        var responseInformation: String?
+        var responseViewModels: [AssetViewModel]?
         presenter.updateSearchResults(searchString: "a") { (response) in
             switch response {
             case .information(let msg):
                 responseInformation = msg
+            case .success(let viewModelList):
+                responseViewModels = viewModelList
             default:
                 break
             }
         }
         XCTAssertEqual(responseInformation, "enter min 3 characters")
+        XCTAssertEqual(responseViewModels?.count, 0)
     }
 
 
     func test_updateSearchResults_entersThreeChar_returnsEmptyInformationStringAndLoadingTrue() {
         var responseInformation: String?
         var loading: Bool?
+        var responseViewModels: [AssetViewModel]?
         presenter.updateSearchResults(searchString: "abc") { (response) in
             switch response {
             case .information(let msg):

@@ -20,7 +20,7 @@ struct LoadingIndicator: LoadingIndicatorProtocol {
 
     func view(view: UIView, loading: Bool) {
         if loading {
-            MBProgressHUD.showAdded(to: view, animated: true)
+            MBProgressHUD.showAdded(to: view, animated: true).accessibilityIdentifier = Access.loadingView.id
         }
         else {
             MBProgressHUD.hide(for: view, animated: true)

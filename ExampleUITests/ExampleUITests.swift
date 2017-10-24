@@ -29,17 +29,22 @@ class ExampleUITests: UITestCase {
             .verify(navigationTitle: "Selection")
             .navigateToMovieCollectionByTappingButton()
 
+            // AssetCollectionViewControllerModel
             .waitForScreenAppearanceToBeHitable()
             .verify(navigationTitle: "Movies")
             .navigateToAssetDetailsByTappingCell(atIndex: 0)
+
+            // AssetDetailsScreenObjectModel
             .waitForScreenAppearance()
             .verify(navigationTitle: "Details")
             .tapBackButton()
 
+            // AssetCollectionViewControllerModel
             .waitForScreenAppearanceToBeHitable()
             .verify(navigationTitle: "Movies")
             .tapBackButton()
-            
+
+            // AssetTypeSelectionViewControllerModel
             .waitForScreenAppearanceToBeHitable()
             .verify(navigationTitle: "Selection")
     }
@@ -54,8 +59,23 @@ class ExampleUITests: UITestCase {
             .verify(navigationTitle: "Selection")
             .navigateToSearchCollectionByTappingButton()
 
+            // AssetSearchViewControllerModel
             .waitForScreenAppearanceToBeHitable()
-            //.verify(navigationTitle: "Search")
+            .verify(navigationTitle: "Search")
+            .enterSearchText("random text")
+            .waitForLoadingViewToAppear()
+            .waitForCollectionViewCellsToBecomeHittable()
+            .verifyLoadingViewHidden()
+            .verify(keyboardIsShown: true)
+            .deleteSearchText()
+            .verifyNoCellsShowing()
+            .verify(keyboardIsShown: false)
+            .tapBackButton()
+
+            // AssetTypeSelectionViewControllerModel
+            .waitForScreenAppearanceToBeHitable()
+            .verify(navigationTitle: "Selection")
+
     }
 
     

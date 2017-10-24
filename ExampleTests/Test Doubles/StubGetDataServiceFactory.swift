@@ -11,4 +11,8 @@ class StubGetDataServiceFactory: GetDataServiceFactoryProtocol {
     func makeMoviesAssetCollectionDataLoader() -> AssetDataLoading {
         return StubAssetDataLoader()
     }
+
+    func makeSearchDataLoader() -> SearchDataLoading {
+        return StubSearchDataLoader()
+    }
 }

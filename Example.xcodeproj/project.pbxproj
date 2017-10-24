@@ -57,6 +57,8 @@
 		30AA7F3F1F9DCBAC0034BEED /* StubSearchDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA7F3E1F9DCBAC0034BEED /* StubSearchDataLoader.swift */; };
 		30AA7F411F9DCDAC0034BEED /* Throttle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA7F401F9DCDAC0034BEED /* Throttle.swift */; };
 		30AA7F431F9DCF920034BEED /* StubThrottle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA7F421F9DCF920034BEED /* StubThrottle.swift */; };
+		30AA7F471F9F1AE50034BEED /* String+UrlEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA7F461F9F1AE50034BEED /* String+UrlEncoding.swift */; };
+		30AA7F491F9F1CE40034BEED /* search.json in Resources */ = {isa = PBXBuildFile; fileRef = 30AA7F481F9F1CE40034BEED /* search.json */; };
 		30C954201F85DF97000ABE33 /* AnalyticsReporterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C9541F1F85DF97000ABE33 /* AnalyticsReporterFactory.swift */; };
 		30C954221F85DFDC000ABE33 /* MovieCollectionReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C954211F85DFDC000ABE33 /* MovieCollectionReporter.swift */; };
 		30C954271F863466000ABE33 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C954261F863466000ABE33 /* LoadingIndicator.swift */; };
@@ -145,6 +147,8 @@
 		30AA7F3E1F9DCBAC0034BEED /* StubSearchDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubSearchDataLoader.swift; sourceTree = "<group>"; };
 		30AA7F401F9DCDAC0034BEED /* Throttle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttle.swift; sourceTree = "<group>"; };
 		30AA7F421F9DCF920034BEED /* StubThrottle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubThrottle.swift; sourceTree = "<group>"; };
+		30AA7F461F9F1AE50034BEED /* String+UrlEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UrlEncoding.swift"; sourceTree = "<group>"; };
+		30AA7F481F9F1CE40034BEED /* search.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = search.json; sourceTree = "<group>"; };
 		30C9541F1F85DF97000ABE33 /* AnalyticsReporterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsReporterFactory.swift; sourceTree = "<group>"; };
 		30C954211F85DFDC000ABE33 /* MovieCollectionReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionReporter.swift; sourceTree = "<group>"; };
 		30C954261F863466000ABE33 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
@@ -372,6 +376,7 @@
 				3070C5361F8EBEF400F97C17 /* AppDispatching.swift */,
 				3070C5521F8ECD9500F97C17 /* AccessibilityIdentifiers.swift */,
 				30AA7F401F9DCDAC0034BEED /* Throttle.swift */,
+				30AA7F461F9F1AE50034BEED /* String+UrlEncoding.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -423,6 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				30AA7F3C1F9DCB710034BEED /* SearchDataLoader.swift */,
+				30AA7F481F9F1CE40034BEED /* search.json */,
 			);
 			path = "Search Loader";
 			sourceTree = "<group>";
@@ -610,6 +616,7 @@
 				3081791B1F84F300001F44FD /* movies.json in Resources */,
 				30115B121F84364A0042D614 /* info in Resources */,
 				308179291F84FBCA001F44FD /* AssetCollectionViewCell.xib in Resources */,
+				30AA7F491F9F1CE40034BEED /* search.json in Resources */,
 				302867551F97305F00AC53B5 /* AssetSearchViewController.xib in Resources */,
 				308179111F84EAA6001F44FD /* AssetCollectionViewController.xib in Resources */,
 				30115AFC1F8436310042D614 /* LaunchScreen.storyboard in Resources */,
@@ -767,6 +774,7 @@
 				3070C5371F8EBEF400F97C17 /* AppDispatching.swift in Sources */,
 				3070C5531F8ECD9500F97C17 /* AccessibilityIdentifiers.swift in Sources */,
 				30827CD51F96925B0090F021 /* AssetSearchPresenter.swift in Sources */,
+				30AA7F471F9F1AE50034BEED /* String+UrlEncoding.swift in Sources */,
 				308179191F84EFDD001F44FD /* AssetCollectionPresenter.swift in Sources */,
 				308179131F84EE8F001F44FD /* DataLoader.swift in Sources */,
 				3081791D1F84F3DC001F44FD /* AssetDataModel.swift in Sources */,

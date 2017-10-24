@@ -39,6 +39,7 @@ class AssetSearchViewController: UIViewController {
         view.backgroundColor = .white
         configureCollectionView.configure(collectionView: collectionView, nibName: "AssetCollectionViewCell", reuseIdentifier: AssetCollectionViewCell.reuseIdentifier, accessId: Access.assetSearchCollectionView.id)
         dataSource.configure(collectionView: collectionView)
+        collectionView.accessibilityIdentifier = Access.searchCollectionView.id
         configureSearchController()
         navigationItem.searchController = searchController
     }
@@ -47,6 +48,7 @@ class AssetSearchViewController: UIViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = presenter.searchBarPlaceHolderText()
+        searchController.searchBar.accessibilityIdentifier = Access.searchBar.id
         definesPresentationContext = true
     }
 }

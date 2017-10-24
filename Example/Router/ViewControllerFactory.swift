@@ -38,7 +38,8 @@ struct ViewControllerFactory {
 
     func makeSearchViewController() -> UIViewController {
         let throttle = Throttle()
-        let presenter = AssetSearchPresenter(throttle: throttle, searchDataLoader: SearchDataLoader(), appDispatcher: AppDispatcher())
+        let searchDataLoader = getDataServiceFactory.makeSearchDataLoader()
+        let presenter = AssetSearchPresenter(throttle: throttle, searchDataLoader: searchDataLoader, appDispatcher: AppDispatcher())
         let searchController = UISearchController(searchResultsController: nil)
         let configureCollectionView = ConfigureCollectionView()
         let dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()

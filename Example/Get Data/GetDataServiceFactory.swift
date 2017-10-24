@@ -6,6 +6,7 @@ import Foundation
 
 protocol GetDataServiceFactoryProtocol {
     func makeMoviesAssetCollectionDataLoader() -> AssetDataLoading
+    func makeSearchDataLoader() -> SearchDataLoading
 }
 
 struct GetDataServiceFactory: GetDataServiceFactoryProtocol {
@@ -18,4 +19,9 @@ struct GetDataServiceFactory: GetDataServiceFactoryProtocol {
         return moviesDataLoader
     }
 
+    func makeSearchDataLoader() -> SearchDataLoading {
+        let dataLoader = dataLoaderFactory.makeSearchDataLoader()
+        let searchDataLoader = SearchDataLoader(dataLoader: dataLoader)
+        return searchDataLoader
+    }
 }

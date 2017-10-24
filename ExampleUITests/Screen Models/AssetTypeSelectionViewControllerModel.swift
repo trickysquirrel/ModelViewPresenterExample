@@ -36,6 +36,7 @@ class AssetTypeSelectionViewControllerModel: ViewControllerModel {
         return AssetCollectionViewControllerModel(context: context, parent: self)
     }
 
+    @discardableResult
     func navigateToSearchCollectionByTappingButton(fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> AssetSearchViewControllerModel {
         XCTAssertTrue(searchButton.exists, "movies button does not exist", file: fileStatic, line: line)
         XCTAssertTrue(searchButton.isHittable, "movies button is not selectable", file: fileStatic, line: line)

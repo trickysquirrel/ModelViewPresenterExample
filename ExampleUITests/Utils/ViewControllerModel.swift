@@ -44,7 +44,7 @@ class ViewControllerModel {
     // MARK: Verifications
 
     @discardableResult
-    func waitForScreenAppearance(fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> Self {
+    func waitForScreenAppearance(file: String = #file, line: UInt = #line) -> Self {
         for element in screenIdentifyingElements() {
             testCase.waitForElementToExist(element, waitSeconds: 10, file: file, line: line)
         }
@@ -52,7 +52,7 @@ class ViewControllerModel {
     }
 
     @discardableResult
-    func waitForScreenAppearanceToBeHitable(fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> Self {
+    func waitForScreenAppearanceToBeHitable(file: String = #file, line: UInt = #line) -> Self {
         for element in screenIdentifyingElements() {
             testCase.waitForElementToExistAndVisibleAndHittable(element, waitSeconds: 10, file: file, line: line)
         }
@@ -60,8 +60,14 @@ class ViewControllerModel {
     }
 
     @discardableResult
-    func waitForElement(element: XCUIElement, fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> Self {
+    func waitForElementToExist(element: XCUIElement, file: String = #file, line: UInt = #line) -> Self {
         testCase.waitForElementToExist(element, waitSeconds: 10, file: file, line: line)
+        return self
+    }
+
+    @discardableResult
+    func waitForElementToBeHittable(element: XCUIElement, fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> Self {
+        testCase.waitForElementToExistAndVisibleAndHittable(element, waitSeconds: 10, file: file, line: line)
         return self
     }
 
@@ -70,6 +76,18 @@ class ViewControllerModel {
         XCTAssertEqual(navigationTitle.identifier, title, file: file, line: line)
         return self
     }
+
+    @discardableResult
+    func verify(keyboardIsShown: Bool, file: StaticString = #file, line: UInt = #line) -> Self {
+        if keyboardIsShown {
+            XCTAssert(app.keyboards.count > 0, "The keyboard is not showing", file: file, line: line)
+        }
+        else {
+            XCTAssert(app.keyboards.count == 0, "The keyboard is showing", file: file, line: line)
+        }
+        return self
+    }
+
 
     // MARK: Actions
 
