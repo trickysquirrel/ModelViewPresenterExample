@@ -171,7 +171,9 @@ class AssetSearchPresentingTests: XCTestCase {
         XCTAssertFalse(responseLoading!)
     }
 
-    // TODO:
-    // if requesting another search then delete the old one and create a new one
-    
+
+    func test_updateSearchResults_requestToCancelPreviousRequest() {
+        presenter.updateSearchResults(searchString: "abc") { _ in }
+        XCTAssertTrue(stubSearchDataLoader.didRequestToCancelSearch!)
+    }
 }

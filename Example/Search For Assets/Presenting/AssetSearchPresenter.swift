@@ -39,9 +39,15 @@ class AssetSearchPresenter: AssetSearchPresenting {
     func searchBarPlaceHolderText() -> String {
         return "enter title"
     }
+}
 
+// MARK: Search
+
+extension AssetSearchPresenter {
 
     func updateSearchResults(searchString: String, updateHandler: @escaping updateHandlerType) {
+
+        searchDataLoader.cancel()
 
         guard (searchString.count >= 3) else {
             updateHandler(.information("enter min 3 characters"))

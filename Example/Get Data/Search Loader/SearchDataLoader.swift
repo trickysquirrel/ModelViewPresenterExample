@@ -19,11 +19,16 @@ enum SearchDataLoaderResponse {
 
 protocol SearchDataLoading {
     func load(searchString: String, completionQueue: DispatchQueue, completion:@escaping (SearchDataLoaderResponse)->())
+    func cancel()
 }
 
 
 struct SearchDataLoader: SearchDataLoading {
 
     func load(searchString: String, completionQueue: DispatchQueue, completion:@escaping (SearchDataLoaderResponse)->()) {
+    }
+
+    func cancel() {
+        
     }
 }
