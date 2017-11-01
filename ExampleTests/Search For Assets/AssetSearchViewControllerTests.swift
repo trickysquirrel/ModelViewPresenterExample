@@ -5,25 +5,6 @@
 import XCTest
 @testable import Example
 
-class StubAssetSearchPresenter: AssetSearchPresenting {
-
-    private(set) var didCallUpdateSearchResultsWithString: String?
-    var updateHandler: updateHandlerType?
-
-    func navigationTitle() -> String {
-        return "search test title"
-    }
-
-    func searchBarPlaceHolderText() -> String {
-        return "not tested yet as could not figure out how to get search bar to initialise"
-    }
-
-    func updateSearchResults(searchString: String, updateHandler: @escaping updateHandlerType) {
-        didCallUpdateSearchResultsWithString = searchString
-        self.updateHandler = updateHandler
-    }
-}
-
 
 class AssetSearchViewControllerTests: XCTestCase {
 
@@ -33,11 +14,12 @@ class AssetSearchViewControllerTests: XCTestCase {
     var stubLoadingIndicator: StubLoadingIndicator!
     var stubConfigureCollectionView: StubConfigureCollectionView!
     var dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>!
-
+    var stubThirdyPartytAnalyticsReporter: StubThirdPartyAnalyticsReporter!
 
 
     override func setUp() {
         super.setUp()
+        stubThirdyPartytAnalyticsReporter = StubThirdPartyAnalyticsReporter()
         dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()
         stubConfigureCollectionView = StubConfigureCollectionView()
         stubLoadingIndicator = StubLoadingIndicator()
@@ -47,6 +29,7 @@ class AssetSearchViewControllerTests: XCTestCase {
     }
 
     override func tearDown() {
+        stubThirdyPartytAnalyticsReporter = nil
         dataSource = nil
         stubConfigureCollectionView = nil
         stubPresenter = nil
@@ -56,12 +39,14 @@ class AssetSearchViewControllerTests: XCTestCase {
     }
 
     private func makeViewController(configureCollectionView: CollectionViewConfigurable) -> AssetSearchViewController {
+        let analyticsFactory = AnalyticsReporterFactory(thirdPartyAnalyticsReporter: stubThirdyPartytAnalyticsReporter)
         let viewController = AssetSearchViewController(searchController: searchController,
                                                        presenter: stubPresenter,
                                                        loadingIndicator: stubLoadingIndicator,
                                                        configureCollectionView: configureCollectionView,
-                                                       dataSource: dataSource)
-        viewController.beginAppearanceTransition(true, animated: false)
+                                                       dataSource: dataSource,
+                                                       reporter: analyticsFactory.makeSearchReporter())
+        startViewControllerLifeCycle(viewController, forceViewDidAppear: false)
         return viewController
     }
 
@@ -75,6 +60,12 @@ class AssetSearchViewControllerTests: XCTestCase {
         viewController._updateSearchText(searchString: string)
     }
 
+    private func startViewControllerLifeCycle(_ viewController: UIViewController, forceViewDidAppear: Bool = false) {
+        viewController.beginAppearanceTransition(true, animated: false)
+        if forceViewDidAppear {
+            viewController.viewDidAppear(false)
+        }
+    }
 }
 
 // MARK: view did load
@@ -88,12 +79,30 @@ extension AssetSearchViewControllerTests {
     func test_viewDidLoad_configuresSearchController() {
         XCTAssertTrue(searchController.searchResultsUpdater === viewController)
         XCTAssertFalse(searchController.obscuresBackgroundDuringPresentation)
-        //XCTAssertEqual(searchController.searchBar.placeholder, "enter title")// need to figure out why this s failing
+        //XCTAssertEqual(searchController.searchBar.placeholder, "enter title")// need to figure out why this s failing, object nil at this point
         XCTAssertTrue(viewController.definesPresentationContext)
     }
 
     func test_onViewLoad_configuresCollectionView() {
         XCTAssertTrue(stubConfigureCollectionView.didCallConfigure)
+    }
+
+    func test_onViewDidAppear_sendCorrectAnalyticsActionAndData() {
+        startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
+        XCTAssertEqual(stubThirdyPartytAnalyticsReporter.sentActionList.count, 1)
+        XCTAssertEqual(stubThirdyPartytAnalyticsReporter.sentActionList[0].name, "SearchShown")
+        XCTAssertNil(stubThirdyPartytAnalyticsReporter.sentActionList[0].data)
+    }
+
+
+    func test_onViewDidAppear_eachCall_sendCorrectAnalyticsActionAndData() {
+
+        startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
+        startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
+
+        XCTAssertEqual(stubThirdyPartytAnalyticsReporter.sentActionList.count, 2)
+        XCTAssertEqual(stubThirdyPartytAnalyticsReporter.sentActionList[1].name, "SearchShown")
+        XCTAssertNil(stubThirdyPartytAnalyticsReporter.sentActionList[1].data)
     }
 
 }
@@ -181,5 +190,3 @@ extension AssetSearchViewControllerTests {
     }
 
 }
-
-

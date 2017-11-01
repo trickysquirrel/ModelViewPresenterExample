@@ -14,7 +14,7 @@ class AssetCollectionViewController: UICollectionViewController {
     private let configureCollectionView: CollectionViewConfigurable
     private let appActions: AssetCollectionCoordinatorActions
 
-
+    @available(*, unavailable)
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}

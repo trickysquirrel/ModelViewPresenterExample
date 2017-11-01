@@ -43,11 +43,13 @@ struct ViewControllerFactory {
         let searchController = UISearchController(searchResultsController: nil)
         let configureCollectionView = ConfigureCollectionView()
         let dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()
-        let viewController = AssetSearchViewController(searchController: searchController,
-                                                       presenter: presenter,
-                                                       loadingIndicator: LoadingIndicator(),
-                                                       configureCollectionView: configureCollectionView,
-                                                       dataSource: dataSource)
+        let viewController = AssetSearchViewController(
+            searchController: searchController,
+            presenter: presenter,
+            loadingIndicator: LoadingIndicator(),
+            configureCollectionView: configureCollectionView,
+            dataSource: dataSource,
+            reporter: analyticsFactory.makeSearchReporter())
         return viewController
     }
 }

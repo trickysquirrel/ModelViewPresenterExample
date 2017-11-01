@@ -12,4 +12,8 @@ struct AnalyticsReporterFactory {
     func makeAssetCollectionReporter() -> MovieCollectionReporter {
         return MovieCollectionReporter(thirdPartyAnalyticsReporter: thirdPartyAnalyticsReporter)
     }
+
+    func makeSearchReporter() -> SearchReporter {
+        return SearchReporter(thirdPartyAnalyticsReporter: thirdPartyAnalyticsReporter)
+    }
 }

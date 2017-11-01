@@ -8,6 +8,7 @@ class AssetTypeSelectionViewController: UIViewController {
 
     private let appActions: AssetTypeSelectionCoordinatorActions?
 
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

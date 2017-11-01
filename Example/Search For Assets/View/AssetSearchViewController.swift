@@ -14,8 +14,9 @@ class AssetSearchViewController: UIViewController {
     private let loadingIndicator: LoadingIndicatorProtocol
     private let configureCollectionView: CollectionViewConfigurable
     private let dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>
+    private let reporter: SearchReporter
 
-
+    @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -24,35 +25,29 @@ class AssetSearchViewController: UIViewController {
          presenter: AssetSearchPresenting,
          loadingIndicator: LoadingIndicatorProtocol,
          configureCollectionView: CollectionViewConfigurable,
-         dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>) {
+         dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>,
+         reporter: SearchReporter) {
         self.searchController = searchController
         self.presenter = presenter
         self.loadingIndicator = loadingIndicator
         self.configureCollectionView = configureCollectionView
         self.dataSource = dataSource
+        self.reporter = reporter
         super.init(nibName: "AssetSearchViewController", bundle: nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = presenter.navigationTitle()
-        view.backgroundColor = .white
-        configureCollectionView.configure(collectionView: collectionView, nibName: "AssetCollectionViewCell", reuseIdentifier: AssetCollectionViewCell.reuseIdentifier, accessId: Access.assetSearchCollectionView.id)
-        dataSource.configure(collectionView: collectionView)
-        collectionView.accessibilityIdentifier = Access.searchCollectionView.id
-        configureSearchController()
-        navigationItem.searchController = searchController
+        configureView()
     }
 
-    private func configureSearchController() {
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = presenter.searchBarPlaceHolderText()
-        searchController.searchBar.accessibilityIdentifier = Access.searchBar.id
-        definesPresentationContext = true
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        reporter.viewShown()
     }
 }
 
+// MARK:- Search for assets feature
 
 extension AssetSearchViewController: UISearchResultsUpdating {
 
@@ -93,9 +88,33 @@ extension AssetSearchViewController: UISearchResultsUpdating {
     private func showUserInformation(msg: String) {
         informationLabel.text = msg
     }
-
 }
 
+// MARK:- View configuration
+
+extension AssetSearchViewController {
+
+    private func configureView() {
+        title = presenter.navigationTitle()
+        view.backgroundColor = .white
+        configureCollectionView.configure(collectionView: collectionView, nibName: "AssetCollectionViewCell", reuseIdentifier: AssetCollectionViewCell.reuseIdentifier, accessId: Access.assetSearchCollectionView.id)
+        dataSource.configure(collectionView: collectionView)
+        collectionView.accessibilityIdentifier = Access.searchCollectionView.id
+        configureSearchController()
+        navigationItem.searchController = searchController
+    }
+    
+
+    private func configureSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = presenter.searchBarPlaceHolderText()
+        searchController.searchBar.accessibilityIdentifier = Access.searchBar.id
+        definesPresentationContext = true
+    }
+}
+
+// MARK:- Test target exposure
 
 #if TEST_TARGET
     extension AssetSearchViewController {

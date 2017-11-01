@@ -8,7 +8,7 @@ class AssetDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // This is a dummy view controller so this would be extracted out, its here for now to help
+        // This is a dummy view controller so this would be cleaned up, its here for now to help
         // with UI testing
         title = "Details"
         view.backgroundColor = .white

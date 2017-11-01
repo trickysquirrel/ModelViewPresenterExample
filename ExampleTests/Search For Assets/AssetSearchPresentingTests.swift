@@ -84,7 +84,6 @@ class AssetSearchPresentingTests: XCTestCase {
     func test_updateSearchResults_entersThreeChar_returnsEmptyInformationStringAndLoadingTrue() {
         var responseInformation: String?
         var loading: Bool?
-        var responseViewModels: [AssetViewModel]?
         presenter.updateSearchResults(searchString: "abc") { (response) in
             switch response {
             case .information(let msg):

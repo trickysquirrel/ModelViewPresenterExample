@@ -25,12 +25,14 @@ class AssetSearchPresenter: AssetSearchPresenting {
     let throttle: Throttling
     let searchDataLoader: SearchDataLoading
     let appDispatcher: AppDispatching
+    let backgroundQueue: DispatchQueue
 
 
     init(throttle: Throttling, searchDataLoader: SearchDataLoading, appDispatcher: AppDispatching) {
         self.throttle = throttle
         self.searchDataLoader = searchDataLoader
         self.appDispatcher = appDispatcher
+        self.backgroundQueue = appDispatcher.makeBackgroundQueue()
     }
 
 
@@ -44,7 +46,7 @@ class AssetSearchPresenter: AssetSearchPresenting {
     }
 }
 
-// MARK: Search
+// MARK:- Search feature
 
 extension AssetSearchPresenter {
 
@@ -52,25 +54,21 @@ extension AssetSearchPresenter {
 
         searchDataLoader.cancel()
 
-        guard (searchString.count > 0) else {
-            notPerformingSearchUpdateHandler(information: "", updateHandler: updateHandler)
+        if let errorInfo = isSearchStringInvalid(string: searchString) {
+            notPerformingSearchUpdateHandler(information: errorInfo, updateHandler: updateHandler)
             return
         }
-        guard (searchString.count >= 3) else {
-            notPerformingSearchUpdateHandler(information: "enter min 3 characters", updateHandler: updateHandler)
-            return
-        }
-
-        let backgroundQueue = appDispatcher.makeBackgroundQueue()
         
         updateHandler(.information(""))
 
         throttle.value(withDelay: 0.3, object: searchString) { [weak self] throttledText in
 
+            guard let strongSelf = self else { return }
+
             updateHandler(.loading(show: true))
             updateHandler(.success([]))
 
-            self?.searchDataLoader.load(searchString: searchString, completionQueue: backgroundQueue) { [weak self] response in
+            strongSelf.searchDataLoader.load(searchString: searchString, completionQueue: strongSelf.backgroundQueue) { [weak self] response in
 
                 guard let strongSelf = self else { return }
 
@@ -82,6 +80,17 @@ extension AssetSearchPresenter {
                 }
             }
         }
+    }
+}
+
+// MARK:- Utils
+
+extension AssetSearchPresenter {
+
+    private func isSearchStringInvalid(string: String) -> String? {
+        guard (string.count > 0) else { return "" }
+        guard (string.count >= 3) else { return "enter min 3 characters" }
+        return nil
     }
 
 
