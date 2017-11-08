@@ -30,19 +30,19 @@ class AssetCollectionPresenter: AssetCollectionPresenting {
 
 	let assetDataLoader: AssetDataLoading
     let appDispatcher: AppDispatching
+    let backgroundQueue: DispatchQueue
 
     
     init(assetDataLoader: AssetDataLoading, appDispatcher: AppDispatching) {
         self.assetDataLoader = assetDataLoader
         self.appDispatcher = appDispatcher
+        backgroundQueue = appDispatcher.makeBackgroundQueue()
     }
 
 
     func updateView(updateHandler:@escaping CompletionAlias) {
 
         updateHandler(.loading(show: true))
-
-        let backgroundQueue = appDispatcher.makeBackgroundQueue()
 
         assetDataLoader.load(completionQueue: backgroundQueue) { [weak self] (response) in
 
@@ -51,13 +51,7 @@ class AssetCollectionPresenter: AssetCollectionPresenting {
 
             switch response {
             case .success(let assetDataModelList):
-                let viewModelList = strongSelf.makeViewModelsList(dataModelList: assetDataModelList)
-                if viewModelList.count == 0 {
-                    presenterResponse = .noResults(title:"title", msg:"no results try again later")
-                }
-                else {
-                    presenterResponse = .success(viewModelList)
-                }
+                presenterResponse = strongSelf.presenterResponseFromSuccessDataModelList(assetDataModelList: assetDataModelList)
 
             case .error:
                 // do something better with the error here
@@ -75,6 +69,14 @@ class AssetCollectionPresenter: AssetCollectionPresenting {
 // MARK: Utils
 
 extension AssetCollectionPresenter {
+
+    private func presenterResponseFromSuccessDataModelList(assetDataModelList: [AssetDataModel]) -> AssetCollectionPresenterResponse {
+        let viewModelList = makeViewModelsList(dataModelList: assetDataModelList)
+        if viewModelList.count == 0 {
+            return .noResults(title:"title", msg:"no results try again later")
+        }
+        return .success(viewModelList)
+    }
 
     private func makeViewModelsList(dataModelList: [AssetDataModel]) -> [AssetViewModel] {
         return dataModelList.map { AssetViewModel(id: $0.id, title: $0.title, imageUrl: $0.imageUrl) }
