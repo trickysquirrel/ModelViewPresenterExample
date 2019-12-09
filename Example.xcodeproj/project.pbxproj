@@ -36,7 +36,7 @@
 		3070C5511F8ECB7B00F97C17 /* AssetCollectionViewControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3070C5501F8ECB7B00F97C17 /* AssetCollectionViewControllerModel.swift */; };
 		3070C5531F8ECD9500F97C17 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3070C5521F8ECD9500F97C17 /* AccessibilityIdentifiers.swift */; };
 		3070C5541F8ECDBC00F97C17 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3070C5521F8ECD9500F97C17 /* AccessibilityIdentifiers.swift */; };
-		3080D2261F92CF980051AB7D /* AssetTypeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3080D2251F92CF980051AB7D /* AssetTypeSelectionViewController.swift */; };
+		3080D2261F92CF980051AB7D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3080D2251F92CF980051AB7D /* HomeViewController.swift */; };
 		3080D2281F9300900051AB7D /* AssetTypeSelectionViewControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3080D2271F9300900051AB7D /* AssetTypeSelectionViewControllerModel.swift */; };
 		308179101F84EAA6001F44FD /* AssetCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081790E1F84EAA6001F44FD /* AssetCollectionViewController.swift */; };
 		308179111F84EAA6001F44FD /* AssetCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3081790F1F84EAA6001F44FD /* AssetCollectionViewController.xib */; };
@@ -66,6 +66,8 @@
 		30C954271F863466000ABE33 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C954261F863466000ABE33 /* LoadingIndicator.swift */; };
 		30C954291F8635E4000ABE33 /* InformationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C954281F8635E4000ABE33 /* InformationAlert.swift */; };
 		30CD9EAF1F8DF97000C523A2 /* AssetCollectionPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CD9EAE1F8DF97000C523A2 /* AssetCollectionPresenterTests.swift */; };
+		30E44100239E41BE00B0E3E9 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E440FF239E41BE00B0E3E9 /* Runner.swift */; };
+		30E44102239E420200B0E3E9 /* DispatchQueue+AsyncSafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E44101239E420200B0E3E9 /* DispatchQueue+AsyncSafe.swift */; };
 		30E762171F8C220000864D07 /* StubConfigureCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E762161F8C220000864D07 /* StubConfigureCollectionView.swift */; };
 		30E762191F8C222100864D07 /* StubThirdPartyAnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E762181F8C222100864D07 /* StubThirdPartyAnalyticsReporter.swift */; };
 		30E7621B1F8C223A00864D07 /* StubAssetCollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E7621A1F8C223A00864D07 /* StubAssetCollectionPresenter.swift */; };
@@ -128,7 +130,7 @@
 		3070C54D1F8ECA7500F97C17 /* ViewControllerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerModel.swift; sourceTree = "<group>"; };
 		3070C5501F8ECB7B00F97C17 /* AssetCollectionViewControllerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollectionViewControllerModel.swift; sourceTree = "<group>"; };
 		3070C5521F8ECD9500F97C17 /* AccessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifiers.swift; sourceTree = "<group>"; };
-		3080D2251F92CF980051AB7D /* AssetTypeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetTypeSelectionViewController.swift; sourceTree = "<group>"; };
+		3080D2251F92CF980051AB7D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3080D2271F9300900051AB7D /* AssetTypeSelectionViewControllerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetTypeSelectionViewControllerModel.swift; sourceTree = "<group>"; };
 		3081790E1F84EAA6001F44FD /* AssetCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollectionViewController.swift; sourceTree = "<group>"; };
 		3081790F1F84EAA6001F44FD /* AssetCollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetCollectionViewController.xib; sourceTree = "<group>"; };
@@ -158,6 +160,8 @@
 		30C954261F863466000ABE33 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		30C954281F8635E4000ABE33 /* InformationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationAlert.swift; sourceTree = "<group>"; };
 		30CD9EAE1F8DF97000C523A2 /* AssetCollectionPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetCollectionPresenterTests.swift; sourceTree = "<group>"; };
+		30E440FF239E41BE00B0E3E9 /* Runner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
+		30E44101239E420200B0E3E9 /* DispatchQueue+AsyncSafe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+AsyncSafe.swift"; sourceTree = "<group>"; };
 		30E762161F8C220000864D07 /* StubConfigureCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubConfigureCollectionView.swift; sourceTree = "<group>"; };
 		30E762181F8C222100864D07 /* StubThirdPartyAnalyticsReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubThirdPartyAnalyticsReporter.swift; sourceTree = "<group>"; };
 		30E7621A1F8C223A00864D07 /* StubAssetCollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubAssetCollectionPresenter.swift; sourceTree = "<group>"; };
@@ -202,10 +206,9 @@
 		30115AE51F8436310042D614 = {
 			isa = PBXGroup;
 			children = (
+				301844BB1FD5F72F000A9B59 /* Common */,
+				301844CC1FD5F87B000A9B59 /* iOS */,
 				30115B111F84364A0042D614 /* info */,
-				30115AF01F8436310042D614 /* Example */,
-				30115B051F8436310042D614 /* ExampleTests */,
-				3070C53F1F8EC92E00F97C17 /* ExampleUITests */,
 				30115AEF1F8436310042D614 /* Products */,
 				B9519B461B1EE0BBC7B9A19D /* Pods */,
 				D4520D5B1B498EF61AB160E0 /* Frameworks */,
@@ -229,9 +232,9 @@
 				30C9541E1F85DF81000ABE33 /* Analytics */,
 				30115B151F8438AC0042D614 /* Router */,
 				308179161F84EF73001F44FD /* Get Data */,
-				3080D2241F92CF700051AB7D /* Show Asset Type Selection */,
-				3081790B1F84EA28001F44FD /* Show Asset Collection */,
-				30910C6E1F90157700440731 /* Show Asset Details */,
+				3080D2241F92CF700051AB7D /* Home View Controller */,
+				3081790B1F84EA28001F44FD /* Asset Collection View Controller */,
+				30910C6E1F90157700440731 /* Asset Details View Controller */,
 				30827CCA1F9688EE0090F021 /* Search For Assets */,
 				30115AF11F8436310042D614 /* AppDelegate.swift */,
 				30115AF51F8436310042D614 /* Main.storyboard */,
@@ -261,6 +264,111 @@
 				30115B161F8438C20042D614 /* ViewControllerFactory.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		301844BB1FD5F72F000A9B59 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				301844CE1FD5FADA000A9B59 /* App */,
+				301844CF1FD5FAE6000A9B59 /* AppTests */,
+				301844D01FD5FAEB000A9B59 /* AppUITests */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		301844BC1FD5F745000A9B59 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		301844BD1FD5F74B000A9B59 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
+		301844BE1FD5F756000A9B59 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		301844BF1FD5F764000A9B59 /* Get Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Get Data";
+			sourceTree = "<group>";
+		};
+		301844C01FD5F76A000A9B59 /* Show Asset Type Selection */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Show Asset Type Selection";
+			sourceTree = "<group>";
+		};
+		301844C11FD5F777000A9B59 /* Show Asset Collection */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Show Asset Collection";
+			sourceTree = "<group>";
+		};
+		301844C21FD5F789000A9B59 /* Show Asset Details */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Show Asset Details";
+			sourceTree = "<group>";
+		};
+		301844C31FD5F795000A9B59 /* Search For Assets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Search For Assets";
+			sourceTree = "<group>";
+		};
+		301844CC1FD5F87B000A9B59 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				30115AF01F8436310042D614 /* Example */,
+				30115B051F8436310042D614 /* ExampleTests */,
+				3070C53F1F8EC92E00F97C17 /* ExampleUITests */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		301844CE1FD5FADA000A9B59 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				301844BC1FD5F745000A9B59 /* Utils */,
+				301844BD1FD5F74B000A9B59 /* Analytics */,
+				301844BE1FD5F756000A9B59 /* Router */,
+				301844BF1FD5F764000A9B59 /* Get Data */,
+				301844C01FD5F76A000A9B59 /* Show Asset Type Selection */,
+				301844C11FD5F777000A9B59 /* Show Asset Collection */,
+				301844C21FD5F789000A9B59 /* Show Asset Details */,
+				301844C31FD5F795000A9B59 /* Search For Assets */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		301844CF1FD5FAE6000A9B59 /* AppTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AppTests;
+			sourceTree = "<group>";
+		};
+		301844D01FD5FAEB000A9B59 /* AppUITests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AppUITests;
 			sourceTree = "<group>";
 		};
 		303AFCE11F8990880068018E /* Router */ = {
@@ -330,21 +438,21 @@
 			path = "Screen Models";
 			sourceTree = "<group>";
 		};
-		3080D2241F92CF700051AB7D /* Show Asset Type Selection */ = {
+		3080D2241F92CF700051AB7D /* Home View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				3080D2251F92CF980051AB7D /* AssetTypeSelectionViewController.swift */,
+				3080D2251F92CF980051AB7D /* HomeViewController.swift */,
 			);
-			path = "Show Asset Type Selection";
+			path = "Home View Controller";
 			sourceTree = "<group>";
 		};
-		3081790B1F84EA28001F44FD /* Show Asset Collection */ = {
+		3081790B1F84EA28001F44FD /* Asset Collection View Controller */ = {
 			isa = PBXGroup;
 			children = (
 				30E762111F8C215400864D07 /* View */,
-				30E762121F8C216500864D07 /* Presenting */,
+				30E762121F8C216500864D07 /* Presenter */,
 			);
-			path = "Show Asset Collection";
+			path = "Asset Collection View Controller";
 			sourceTree = "<group>";
 		};
 		308179161F84EF73001F44FD /* Get Data */ = {
@@ -382,6 +490,8 @@
 				3070C5521F8ECD9500F97C17 /* AccessibilityIdentifiers.swift */,
 				30AA7F401F9DCDAC0034BEED /* Throttle.swift */,
 				30AA7F461F9F1AE50034BEED /* String+UrlEncoding.swift */,
+				30E440FF239E41BE00B0E3E9 /* Runner.swift */,
+				30E44101239E420200B0E3E9 /* DispatchQueue+AsyncSafe.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -390,7 +500,7 @@
 			isa = PBXGroup;
 			children = (
 				30827CD31F9692440090F021 /* View */,
-				30827CD21F96923D0090F021 /* Presenting */,
+				30827CD21F96923D0090F021 /* Presenter */,
 			);
 			path = "Search For Assets";
 			sourceTree = "<group>";
@@ -404,12 +514,12 @@
 			path = "Search For Assets";
 			sourceTree = "<group>";
 		};
-		30827CD21F96923D0090F021 /* Presenting */ = {
+		30827CD21F96923D0090F021 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
 				30827CD41F96925B0090F021 /* AssetSearchPresenter.swift */,
 			);
-			path = Presenting;
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		30827CD31F9692440090F021 /* View */ = {
@@ -421,12 +531,12 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		30910C6E1F90157700440731 /* Show Asset Details */ = {
+		30910C6E1F90157700440731 /* Asset Details View Controller */ = {
 			isa = PBXGroup;
 			children = (
 				30910C6F1F90159900440731 /* AssetDetailsViewController.swift */,
 			);
-			path = "Show Asset Details";
+			path = "Asset Details View Controller";
 			sourceTree = "<group>";
 		};
 		30AA7F3B1F9DCB5F0034BEED /* Search Loader */ = {
@@ -452,20 +562,20 @@
 		30E762111F8C215400864D07 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3081790F1F84EAA6001F44FD /* AssetCollectionViewController.xib */,
-				308179271F84FBCA001F44FD /* AssetCollectionViewCell.xib */,
 				3081790E1F84EAA6001F44FD /* AssetCollectionViewController.swift */,
+				3081790F1F84EAA6001F44FD /* AssetCollectionViewController.xib */,
 				308179261F84FBCA001F44FD /* AssetCollectionViewCell.swift */,
+				308179271F84FBCA001F44FD /* AssetCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		30E762121F8C216500864D07 /* Presenting */ = {
+		30E762121F8C216500864D07 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
 				308179181F84EFDD001F44FD /* AssetCollectionPresenter.swift */,
 			);
-			path = Presenting;
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		B9519B461B1EE0BBC7B9A19D /* Pods */ = {
@@ -558,7 +668,7 @@
 		30115AE61F8436310042D614 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 0910;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Richard Moult";
 				TargetAttributes = {
@@ -752,17 +862,19 @@
 				30C954291F8635E4000ABE33 /* InformationAlert.swift in Sources */,
 				303AFCE91F8996C00068018E /* GetDataServiceFactory.swift in Sources */,
 				30115B141F8438A50042D614 /* AppCoordinator.swift in Sources */,
-				3080D2261F92CF980051AB7D /* AssetTypeSelectionViewController.swift in Sources */,
+				3080D2261F92CF980051AB7D /* HomeViewController.swift in Sources */,
 				308179231F84F9AE001F44FD /* CollectionViewDataSource.swift in Sources */,
 				30C954271F863466000ABE33 /* LoadingIndicator.swift in Sources */,
 				30C954221F85DFDC000ABE33 /* MovieCollectionReporter.swift in Sources */,
 				308179101F84EAA6001F44FD /* AssetCollectionViewController.swift in Sources */,
+				30E44100239E41BE00B0E3E9 /* Runner.swift in Sources */,
 				30910C701F90159900440731 /* AssetDetailsViewController.swift in Sources */,
 				30AA7F411F9DCDAC0034BEED /* Throttle.swift in Sources */,
 				308179211F84F979001F44FD /* CollectionRowSections.swift in Sources */,
 				308179151F84EF2B001F44FD /* AssetDataLoader.swift in Sources */,
 				3070C5371F8EBEF400F97C17 /* AppDispatching.swift in Sources */,
 				3070C5531F8ECD9500F97C17 /* AccessibilityIdentifiers.swift in Sources */,
+				30E44102239E420200B0E3E9 /* DispatchQueue+AsyncSafe.swift in Sources */,
 				301D71451FAA6FAA007D29DE /* SearchReporter.swift in Sources */,
 				30827CD51F96925B0090F021 /* AssetSearchPresenter.swift in Sources */,
 				30AA7F471F9F1AE50034BEED /* String+UrlEncoding.swift in Sources */,
@@ -963,7 +1075,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Example/Info.plist;
+				INFOPLIST_FILE = iOS/Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trickysquirrel.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -978,7 +1090,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Example/Info.plist;
+				INFOPLIST_FILE = iOS/Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trickysquirrel.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -994,7 +1106,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ExampleTests/Info.plist;
+				INFOPLIST_FILE = iOS/ExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trickysquirrel.ExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1011,7 +1123,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ExampleTests/Info.plist;
+				INFOPLIST_FILE = iOS/ExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trickysquirrel.ExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1084,7 +1196,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = Example/Info.plist;
+				INFOPLIST_FILE = iOS/Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DTEST_TARGET";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trickysquirrel.Example;
@@ -1101,7 +1213,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ExampleTests/Info.plist;
+				INFOPLIST_FILE = iOS/ExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trickysquirrel.ExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1115,7 +1227,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ExampleUITests/Info.plist;
+				INFOPLIST_FILE = iOS/ExampleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trickysquirrel.ExampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1129,7 +1241,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ExampleUITests/Info.plist;
+				INFOPLIST_FILE = iOS/ExampleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trickysquirrel.ExampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1143,7 +1255,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ExampleUITests/Info.plist;
+				INFOPLIST_FILE = iOS/ExampleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trickysquirrel.ExampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
