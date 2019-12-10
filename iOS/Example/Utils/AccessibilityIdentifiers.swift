@@ -11,8 +11,6 @@ enum Accessibility: String {
     case assetCollectionView
     case assetDetailsView
     case assetSearchCollectionView
-    case searchBar
-    case searchCollectionView
     case loadingView
 
     var id: String {

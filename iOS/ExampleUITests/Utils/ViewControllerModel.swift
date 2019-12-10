@@ -97,5 +97,14 @@ class ViewControllerModel {
         XCTAssertNotNil(parent, "screen object does not have parent to back up to", file: file, line: line)
         return parent!
     }
+
+    @discardableResult
+    func tapBackButtonToSearch(file: StaticString = #file, line: UInt = #line) -> AssetSearchViewControllerModel {
+        navigationBackButton.tap()
+        XCTAssertNotNil(parent, "screen object does not have parent to back up to", file: file, line: line)
+        let searchParent = parent as? AssetSearchViewControllerModel
+        XCTAssertNotNil(searchParent, "screen object does not have parent to back up to", file: file, line: line)
+        return searchParent!
+    }
 }
 

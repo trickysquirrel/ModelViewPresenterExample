@@ -10,19 +10,15 @@ class AssetSearchViewControllerModel: ViewControllerModel {
     // MARK: - UI Elements
 
     private var searchBar: XCUIElement {
-        return app.otherElements[Accessibility.searchBar.id]
+        return app.searchFields.element(boundBy: 0)
     }
 
     private var searchBarClearButton: XCUIElement {
         return searchBar.buttons.element(boundBy: 0)
     }
 
-    private var loadingView: XCUIElement {
-        return app.otherElements[Accessibility.loadingView.id]
-    }
-
     private var collectionView: XCUIElement {
-        return app.collectionViews[Accessibility.searchCollectionView.id]
+        return app.collectionViews[Accessibility.assetCollectionView.id]
     }
 
     private func cellAtIndex(_ index: Int) -> XCUIElement {
@@ -39,21 +35,9 @@ class AssetSearchViewControllerModel: ViewControllerModel {
     // MARK: Verifications
 
     @discardableResult
-    func waitForLoadingViewToAppear(fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> Self {
-        waitForElementToExist(element: loadingView)
-        return self
-    }
-
-    @discardableResult
     func waitForCollectionViewCellsToBecomeHittable(fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> Self {
-        waitForElementToBeHittable(element: collectionView)
-        waitForElementToBeHittable(element: cellAtIndex(0))
-        return self
-    }
-
-    @discardableResult
-    func verifyLoadingViewHidden(fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> Self {
-        XCTAssertFalse(loadingView.exists, file: fileStatic, line: line)
+        waitForElementToBeHittable(element: collectionView, file: file, line: line)
+        waitForElementToBeHittable(element: cellAtIndex(0), file: file, line: line)
         return self
     }
 
@@ -64,6 +48,14 @@ class AssetSearchViewControllerModel: ViewControllerModel {
     }
 
     // MARK: Actions
+
+    @discardableResult
+    func navigateToAssetDetailsByTappingCell(atIndex index: Int, fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> AssetDetailsViewControllerModel {
+        let cell = cellAtIndex(index)
+        XCTAssertTrue(cell.exists, "asset collection cell not found", file: fileStatic, line: line)
+        cell.tap()
+        return AssetDetailsViewControllerModel(context: context, parent: self)
+    }
 
     @discardableResult
     func enterSearchText(_ searchText: String, fileStatic: StaticString = #file, line: UInt = #line) -> Self {

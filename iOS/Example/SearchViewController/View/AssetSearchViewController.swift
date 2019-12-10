@@ -84,7 +84,6 @@ extension AssetSearchViewController {
     private func configureView() {
         title = "Search"
         view.backgroundColor = .white
-        //collectionView.accessibilityIdentifier = Accessibility.searchCollectionView.id
         configureSearchController()
         navigationItem.searchController = searchController
     }
@@ -94,7 +93,7 @@ extension AssetSearchViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "enter title"
-        searchController.searchBar.accessibilityIdentifier = Accessibility.searchBar.id
+        searchController.searchBar.accessibilityTraits = UIAccessibilityTraits.searchField
         definesPresentationContext = true
     }
 }

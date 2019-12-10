@@ -194,7 +194,6 @@
 		30115AE51F8436310042D614 = {
 			isa = PBXGroup;
 			children = (
-				301844BB1FD5F72F000A9B59 /* Common */,
 				301844CC1FD5F87B000A9B59 /* iOS */,
 				30115B111F84364A0042D614 /* info */,
 				30115AEF1F8436310042D614 /* Products */,
@@ -254,72 +253,6 @@
 			path = AppRouter;
 			sourceTree = "<group>";
 		};
-		301844BB1FD5F72F000A9B59 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				301844CE1FD5FADA000A9B59 /* App */,
-				301844CF1FD5FAE6000A9B59 /* AppTests */,
-				301844D01FD5FAEB000A9B59 /* AppUITests */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		301844BC1FD5F745000A9B59 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
-		301844BD1FD5F74B000A9B59 /* Analytics */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Analytics;
-			sourceTree = "<group>";
-		};
-		301844BE1FD5F756000A9B59 /* Router */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Router;
-			sourceTree = "<group>";
-		};
-		301844BF1FD5F764000A9B59 /* Get Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Get Data";
-			sourceTree = "<group>";
-		};
-		301844C01FD5F76A000A9B59 /* Show Asset Type Selection */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Show Asset Type Selection";
-			sourceTree = "<group>";
-		};
-		301844C11FD5F777000A9B59 /* Show Asset Collection */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Show Asset Collection";
-			sourceTree = "<group>";
-		};
-		301844C21FD5F789000A9B59 /* Show Asset Details */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Show Asset Details";
-			sourceTree = "<group>";
-		};
-		301844C31FD5F795000A9B59 /* Search For Assets */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Search For Assets";
-			sourceTree = "<group>";
-		};
 		301844CC1FD5F87B000A9B59 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -328,35 +261,6 @@
 				3070C53F1F8EC92E00F97C17 /* ExampleUITests */,
 			);
 			path = iOS;
-			sourceTree = "<group>";
-		};
-		301844CE1FD5FADA000A9B59 /* App */ = {
-			isa = PBXGroup;
-			children = (
-				301844BC1FD5F745000A9B59 /* Utils */,
-				301844BD1FD5F74B000A9B59 /* Analytics */,
-				301844BE1FD5F756000A9B59 /* Router */,
-				301844BF1FD5F764000A9B59 /* Get Data */,
-				301844C01FD5F76A000A9B59 /* Show Asset Type Selection */,
-				301844C11FD5F777000A9B59 /* Show Asset Collection */,
-				301844C21FD5F789000A9B59 /* Show Asset Details */,
-				301844C31FD5F795000A9B59 /* Search For Assets */,
-			);
-			path = App;
-			sourceTree = "<group>";
-		};
-		301844CF1FD5FAE6000A9B59 /* AppTests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AppTests;
-			sourceTree = "<group>";
-		};
-		301844D01FD5FAEB000A9B59 /* AppUITests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AppUITests;
 			sourceTree = "<group>";
 		};
 		303AFCE11F8990880068018E /* Router */ = {
