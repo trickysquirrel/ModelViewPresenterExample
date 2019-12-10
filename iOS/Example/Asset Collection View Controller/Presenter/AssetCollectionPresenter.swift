@@ -6,7 +6,7 @@ import Foundation
 
 
 struct AssetViewModel {
-    let id: Int
+    let id: String
     let title: String
 	let imageUrl: URL
 }
@@ -27,14 +27,12 @@ protocol AssetCollectionPresenting {
 
 class AssetCollectionPresenter: AssetCollectionPresenting {
 
-	let assetDataLoader: AssetDataLoading
-    let appDispatcher: AppDispatching
+	let interactor: AssetCollectionInteracting
     let backgroundQueue: DispatchQueue
 
     
-    init(assetDataLoader: AssetDataLoading, appDispatcher: AppDispatching) {
-        self.assetDataLoader = assetDataLoader
-        self.appDispatcher = appDispatcher
+    init(interactor: AssetCollectionInteracting, appDispatcher: AppDispatching) {
+        self.interactor = interactor
         backgroundQueue = appDispatcher.makeBackgroundQueue()
     }
 
@@ -42,16 +40,16 @@ class AssetCollectionPresenter: AssetCollectionPresenting {
 
         runner.run(.loading(show: true))
 
-        assetDataLoader.load(running: .on(backgroundQueue) { [weak self] (response) in
+        interactor.load(running: .on(backgroundQueue) { [weak self] (response) in
 
             guard let self = self else { return }
             var presenterResponse: AssetCollectionPresenterResponse
 
             switch response {
-            case .success(let assetDataModelList):
-                presenterResponse = self.presenterResponseFromSuccessDataModelList(assetDataModelList: assetDataModelList)
+            case .success(let items):
+                presenterResponse = self.presenterResponseFromSuccessDataModelList(assetItems: items)
 
-            case .error:
+            case .failure:
                 // do something better with the error here
                 presenterResponse = .error(title: "error", msg: "this is an error message")
             }
@@ -66,15 +64,15 @@ class AssetCollectionPresenter: AssetCollectionPresenting {
 
 extension AssetCollectionPresenter {
 
-    private func presenterResponseFromSuccessDataModelList(assetDataModelList: [AssetDataModel]) -> AssetCollectionPresenterResponse {
-        let viewModelList = makeViewModelsList(dataModelList: assetDataModelList)
+    private func presenterResponseFromSuccessDataModelList(assetItems: [AssetItem]) -> AssetCollectionPresenterResponse {
+        let viewModelList = makeViewModelsList(assetItems: assetItems)
         if viewModelList.count == 0 {
             return .noResults(title:"title", msg:"no results try again later")
         }
         return .success(viewModelList)
     }
 
-    private func makeViewModelsList(dataModelList: [AssetDataModel]) -> [AssetViewModel] {
-        return dataModelList.map { AssetViewModel(id: $0.id, title: $0.title, imageUrl: $0.imageUrl) }
+    private func makeViewModelsList(assetItems: [AssetItem]) -> [AssetViewModel] {
+        return assetItems.map { AssetViewModel(id: $0.id, title: $0.title, imageUrl: $0.image.url) }
     }
 }

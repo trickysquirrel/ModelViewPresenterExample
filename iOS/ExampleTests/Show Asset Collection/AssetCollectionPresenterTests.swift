@@ -6,23 +6,34 @@ import XCTest
 @testable import Example
 
 
+class StubAssetInteractor: AssetCollectionInteracting {
+
+    var stubResponse: AssetCollectionInteractorResponse?
+
+    func load(running runner: AsyncRunner<AssetCollectionInteractorResponse>) {
+        if let response = stubResponse {
+            runner.run(response)
+        }
+    }
+}
+
 class AssetCollectionPresenterTests: XCTestCase {
 
     typealias responseHandlerType = (AssetCollectionPresenterResponse)->()
-    var stubAssetDataLoader: StubAssetDataLoader!
+    var stubInteractor: StubAssetInteractor!
     var presenter: AssetCollectionPresenter!
-    var fakeDataModel1 = AssetDataModel(id: 1, title: "1", imageUrl: URL(string:"dummy1")!)
-    var fakeDataModel2 = AssetDataModel(id: 2, title: "2", imageUrl: URL(string:"dummy2")!)
+    var fakeDataModel1 = AssetItem(id: "1", title: "1", image: AssetItem.Image(url: URL(string:"dummy1")!))
+    var fakeDataModel2 = AssetItem(id: "2", title: "2", image: AssetItem.Image(url: URL(string:"dummy2")!))
 
 
     override func setUp() {
-        stubAssetDataLoader = StubAssetDataLoader()
-        presenter = AssetCollectionPresenter(assetDataLoader: stubAssetDataLoader, appDispatcher: FakeAppDispatcher())
+        stubInteractor = StubAssetInteractor()
+        presenter = AssetCollectionPresenter(interactor: stubInteractor, appDispatcher: FakeAppDispatcher())
         super.setUp()
     }
 
     override func tearDown() {
-        stubAssetDataLoader = nil
+        stubInteractor = nil
         presenter = nil
         super.tearDown()
     }
@@ -43,7 +54,7 @@ extension AssetCollectionPresenterTests {
     
 
     func test_updateView_onAssetDataLoadingCompletion_respondsWithShowLoadingFalse() {
-        stubAssetDataLoader.stubResponse = AssetDataLoaderResponse.error(NSError())
+        stubInteractor.stubResponse = AssetCollectionInteractorResponse.failure(NSError())
         var isLoading = true
         updateViewExpectLoading(presenter: presenter) { loading in
             isLoading = loading
@@ -57,7 +68,7 @@ extension AssetCollectionPresenterTests {
 extension AssetCollectionPresenterTests {
 
     func test_updateView_onDataLoadingError_respondsWithError() {
-        stubAssetDataLoader.stubResponse = AssetDataLoaderResponse.error(NSError())
+        stubInteractor.stubResponse = AssetCollectionInteractorResponse.failure(NSError())
         var errorTitle = "", errorMsg = ""
         updateViewExpectError(presenter: presenter) { title, msg in
             errorTitle = title
@@ -73,7 +84,7 @@ extension AssetCollectionPresenterTests {
 extension AssetCollectionPresenterTests {
 
     func test_updateView_onDataLoadingNoResults_respondsWithError() {
-        stubAssetDataLoader.stubResponse = AssetDataLoaderResponse.success([])
+        stubInteractor.stubResponse = AssetCollectionInteractorResponse.success([])
         var errorTitle = "", errorMsg = ""
         updateViewExpectNoResults(presenter: presenter) { title, msg in
             errorTitle = title
@@ -89,7 +100,7 @@ extension AssetCollectionPresenterTests {
 extension AssetCollectionPresenterTests {
 
     func test_updateView_onDataLoadingSuccess_respondsWithCorrectNumberOfViewModels() {
-        stubAssetDataLoader.stubResponse = AssetDataLoaderResponse.success([fakeDataModel1, fakeDataModel2])
+        stubInteractor.stubResponse = AssetCollectionInteractorResponse.success([fakeDataModel1, fakeDataModel2])
         var viewModelList: [AssetViewModel]?
         updateViewExpectSuccess(presenter: presenter) { viewModels in
             viewModelList = viewModels
@@ -99,7 +110,7 @@ extension AssetCollectionPresenterTests {
 
 
     func test_updateView_onDataLoadingSuccess_respondsWithViewModelProperties() {
-        stubAssetDataLoader.stubResponse = AssetDataLoaderResponse.success([fakeDataModel1, fakeDataModel2])
+        stubInteractor.stubResponse = AssetCollectionInteractorResponse.success([fakeDataModel1, fakeDataModel2])
         var viewModelList: [AssetViewModel]?
         updateViewExpectSuccess(presenter: presenter) { viewModels in
             viewModelList = viewModels
@@ -107,11 +118,11 @@ extension AssetCollectionPresenterTests {
 
         XCTAssertEqual(viewModelList?.first?.id, fakeDataModel1.id)
         XCTAssertEqual(viewModelList?.first?.title, fakeDataModel1.title)
-        XCTAssertEqual(viewModelList?.first?.imageUrl, fakeDataModel1.imageUrl)
+        XCTAssertEqual(viewModelList?.first?.imageUrl, fakeDataModel1.image.url)
 
         XCTAssertEqual(viewModelList?.last?.id, fakeDataModel2.id)
         XCTAssertEqual(viewModelList?.last?.title, fakeDataModel2.title)
-        XCTAssertEqual(viewModelList?.last?.imageUrl, fakeDataModel2.imageUrl)
+        XCTAssertEqual(viewModelList?.last?.imageUrl, fakeDataModel2.image.url)
     }
 }
 

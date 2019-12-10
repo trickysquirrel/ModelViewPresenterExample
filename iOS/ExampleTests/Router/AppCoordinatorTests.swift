@@ -61,7 +61,7 @@ extension AppCoordinatorTests {
 
     func test_showAssetDetails_showsAssetDetailsViewToUser() {
         appCoordinator.start()
-        appCoordinator.showDetails(id: 1)
+        appCoordinator.showDetails(id: "1", title: "title")
         XCTAssertEqual(navigationController.viewControllers.count, 2)
         XCTAssertTrue(navigationController.viewControllers[1] is AssetDetailsViewController)
     }

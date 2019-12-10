@@ -145,7 +145,8 @@ extension AssetCollectionViewControllerTests {
         stubPresenter.runner?.run(.success(makeTwoAssetViewModelList()))
 
         viewController.collectionView!.delegate!.collectionView!(viewController.collectionView!, didSelectItemAt: IndexPath(row: 1, section: 0))
-        XCTAssertEqual(stubAppActions.didCallShowDetailsWithId, 2)
+        XCTAssertEqual(stubAppActions.didCallShowDetailsWithId, "2")
+        XCTAssertEqual(stubAppActions.didCallShowDetailsWithTitle, "b")
     }
 
 
@@ -194,8 +195,8 @@ extension AssetCollectionViewControllerTests {
     }
 
     private func makeTwoAssetViewModelList() -> [AssetViewModel] {
-        let assetViewModel1 = AssetViewModel(id: 1, title: "a", imageUrl: URL(string:"dummyA")!)
-        let assetViewModel2 = AssetViewModel(id: 2, title: "b", imageUrl: URL(string:"dummyB")!)
+        let assetViewModel1 = AssetViewModel(id: "1", title: "a", imageUrl: URL(string:"dummyA")!)
+        let assetViewModel2 = AssetViewModel(id: "2", title: "b", imageUrl: URL(string:"dummyB")!)
         return [assetViewModel1, assetViewModel2]
     }
 }

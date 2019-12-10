@@ -67,6 +67,7 @@
 		30E44100239E41BE00B0E3E9 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E440FF239E41BE00B0E3E9 /* Runner.swift */; };
 		30E44102239E420200B0E3E9 /* DispatchQueue+AsyncSafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E44101239E420200B0E3E9 /* DispatchQueue+AsyncSafe.swift */; };
 		30E44108239F03B300B0E3E9 /* UIImageView+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E44107239F03B300B0E3E9 /* UIImageView+URL.swift */; };
+		30E44110239F4AA800B0E3E9 /* AssetCollectionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E4410F239F4AA800B0E3E9 /* AssetCollectionInteractor.swift */; };
 		30E762171F8C220000864D07 /* StubConfigureCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E762161F8C220000864D07 /* StubConfigureCollectionView.swift */; };
 		30E762191F8C222100864D07 /* StubThirdPartyAnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E762181F8C222100864D07 /* StubThirdPartyAnalyticsReporter.swift */; };
 		30E7621B1F8C223A00864D07 /* StubAssetCollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E7621A1F8C223A00864D07 /* StubAssetCollectionPresenter.swift */; };
@@ -160,6 +161,7 @@
 		30E440FF239E41BE00B0E3E9 /* Runner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
 		30E44101239E420200B0E3E9 /* DispatchQueue+AsyncSafe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+AsyncSafe.swift"; sourceTree = "<group>"; };
 		30E44107239F03B300B0E3E9 /* UIImageView+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+URL.swift"; sourceTree = "<group>"; };
+		30E4410F239F4AA800B0E3E9 /* AssetCollectionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollectionInteractor.swift; sourceTree = "<group>"; };
 		30E762161F8C220000864D07 /* StubConfigureCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubConfigureCollectionView.swift; sourceTree = "<group>"; };
 		30E762181F8C222100864D07 /* StubThirdPartyAnalyticsReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubThirdPartyAnalyticsReporter.swift; sourceTree = "<group>"; };
 		30E7621A1F8C223A00864D07 /* StubAssetCollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubAssetCollectionPresenter.swift; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 			children = (
 				30E762111F8C215400864D07 /* View */,
 				30E762121F8C216500864D07 /* Presenter */,
+				30E44111239F4AAD00B0E3E9 /* Interactor */,
 			);
 			path = "Asset Collection View Controller";
 			sourceTree = "<group>";
@@ -554,6 +557,14 @@
 				301D71441FAA6FAA007D29DE /* LifecycleReporter.swift */,
 			);
 			path = Analytics;
+			sourceTree = "<group>";
+		};
+		30E44111239F4AAD00B0E3E9 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				30E4410F239F4AA800B0E3E9 /* AssetCollectionInteractor.swift */,
+			);
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 		30E762111F8C215400864D07 /* View */ = {
@@ -856,6 +867,7 @@
 				30C954201F85DF97000ABE33 /* AnalyticsReporterFactory.swift in Sources */,
 				308179281F84FBCA001F44FD /* AssetCollectionViewCell.swift in Sources */,
 				302867541F97305F00AC53B5 /* AssetSearchViewController.swift in Sources */,
+				30E44110239F4AA800B0E3E9 /* AssetCollectionInteractor.swift in Sources */,
 				30C954291F8635E4000ABE33 /* InformationAlert.swift in Sources */,
 				303AFCE91F8996C00068018E /* GetDataServiceFactory.swift in Sources */,
 				30115B141F8438A50042D614 /* AppRouter.swift in Sources */,

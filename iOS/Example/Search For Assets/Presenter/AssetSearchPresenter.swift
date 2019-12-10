@@ -21,14 +21,12 @@ class AssetSearchPresenter: AssetSearchPresenting {
 
     let throttle: Throttling
     let searchDataLoader: SearchDataLoading
-    let appDispatcher: AppDispatching
     let backgroundQueue: DispatchQueue
 
 
     init(throttle: Throttling, searchDataLoader: SearchDataLoading, appDispatcher: AppDispatching) {
         self.throttle = throttle
         self.searchDataLoader = searchDataLoader
-        self.appDispatcher = appDispatcher
         self.backgroundQueue = appDispatcher.makeBackgroundQueue()
     }
 }
@@ -99,7 +97,7 @@ extension AssetSearchPresenter {
             response = .information("no results please try again")
         }
         else {
-            let viewModelList = searchDataList.map { AssetViewModel(id: $0.id, title: $0.title, imageUrl: $0.imageUrl) }
+            let viewModelList = searchDataList.map { AssetViewModel(id: "\($0.id)", title: $0.title, imageUrl: $0.imageUrl) }
             response = .success(viewModelList)
         }
         runner.run(.loading(show: false))

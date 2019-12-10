@@ -172,8 +172,8 @@ extension AssetSearchViewControllerTests {
     }
 
     private func makeTwoAssetViewModelList() -> [AssetViewModel] {
-        let assetViewModel1 = AssetViewModel(id: 1, title: "a", imageUrl: URL(string:"dummyA")!)
-        let assetViewModel2 = AssetViewModel(id: 2, title: "b", imageUrl: URL(string:"dummyB")!)
+        let assetViewModel1 = AssetViewModel(id: "1", title: "a", imageUrl: URL(string:"dummyA")!)
+        let assetViewModel2 = AssetViewModel(id: "2", title: "b", imageUrl: URL(string:"dummyB")!)
         return [assetViewModel1, assetViewModel2]
     }
 

@@ -4,15 +4,16 @@
 
 import UIKit
 
+/// For RouterActions perfer to use Values rather than Classes to keep a stricter control dependancy and side effects
+
 protocol HomeRouterActions: class {
     func showMoviesCollection()
     func showSearch()
 }
 
-
 protocol AssetCollectionRouterActions: class {
     func showAlertOK(title: String, msg: String, presentingViewController: UIViewController)
-    func showDetails(id: Int)
+    func showDetails(id: String, title: String)
 }
 
 /// Simple AppRouter that controls navigation throughout the app
@@ -78,7 +79,7 @@ extension AppRouter: AssetCollectionRouterActions {
         informationAlert.displayAlert(title: title, message: msg, presentingViewController: presentingViewController)
     }
 
-    func showDetails(id: Int) {
+    func showDetails(id: String, title: String) {
         let viewController = viewControllerFactory.makeDetailsViewController()
         navigationController(navigationController, pushOnViewController: viewController, animated: true)
     }

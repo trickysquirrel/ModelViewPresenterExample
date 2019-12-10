@@ -12,7 +12,8 @@ class StubAssetCollectionCoordinatorActions: AssetCollectionRouterActions {
     private(set) var didCallShowAlertWithTitle: String?
     private(set) var didCallShowAlertWithMsg: String?
     private(set) var didCallShowAlertWithVC: UIViewController?
-    private(set) var didCallShowDetailsWithId: Int?
+    private(set) var didCallShowDetailsWithId: String?
+    private(set) var didCallShowDetailsWithTitle: String?
 
     func showAlertOK(title: String, msg: String, presentingViewController: UIViewController) {
         didCallShowAlertOK = true
@@ -21,8 +22,9 @@ class StubAssetCollectionCoordinatorActions: AssetCollectionRouterActions {
         didCallShowAlertWithVC = presentingViewController
     }
 
-    func showDetails(id: Int) {
+    func showDetails(id: String, title: String) {
         didCallShowDetailsWithId = id
+        didCallShowDetailsWithTitle = title // new addition need to test
     }
 
 }

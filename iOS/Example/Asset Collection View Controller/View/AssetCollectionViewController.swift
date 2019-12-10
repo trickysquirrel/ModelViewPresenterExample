@@ -81,7 +81,6 @@ private extension AssetCollectionViewController {
 
     private func reloadDataSource(viewModelList: [AssetViewModel]) {
         let sections = CollectionSection<AssetViewModel>(rows: viewModelList)
-        
         dataSource.reload(
             sections: [sections],
             cellIdentifier: { viewModel in
@@ -91,7 +90,7 @@ private extension AssetCollectionViewController {
                 cell.configure(viewModel: viewModel)
             },
             selectCell: { [weak self] (viewModel, indexPath) in
-                self?.appActions.showDetails(id: viewModel.id)
+                self?.appActions.showDetails(id: viewModel.id, title: viewModel.title)
             }
         )
     }

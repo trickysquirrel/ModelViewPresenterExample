@@ -20,8 +20,10 @@ struct ViewControllerFactory {
     }
 
     func makeMoviesViewController(appActions: AssetCollectionRouterActions) -> UIViewController {
-        let moviesDataLoader = getDataServiceFactory.makeMoviesAssetCollectionDataLoader()
-        let presenter = AssetCollectionPresenter(assetDataLoader: moviesDataLoader, appDispatcher: AppDispatcher())
+        let appDispatcher = AppDispatcher()
+        let moviesDataLoader = AssetDataLoader2<AssetDataModel2>(resource: "movies")
+        let interactor = AssetCollectionInterator(assetDataLoader: moviesDataLoader, appDispatcher: appDispatcher)
+        let presenter = AssetCollectionPresenter(interactor: interactor, appDispatcher: appDispatcher)
         let dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()
         let configureCollectionView = ConfigureCollectionView()
         return AssetCollectionViewController(
