@@ -18,11 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let thirdPartyAnalyticsReporter = AnalyticsReporterFacade()
         let analyticsFactory = AnalyticsReporterFactory(reporter: thirdPartyAnalyticsReporter)
-        let dataLoaderFactory = DataLoaderFactory()
-        let getDataServiceFactory = GetDataServiceFactory(dataLoaderFactory: dataLoaderFactory)
-
-        let viewControllerFactory = ViewControllerFactory(getDataServiceFactory: getDataServiceFactory,
-                                                          analyticsFactory: analyticsFactory)
+        let viewControllerFactory = ViewControllerFactory(analyticsFactory: analyticsFactory)
 
         let navigationController = UINavigationController()
 

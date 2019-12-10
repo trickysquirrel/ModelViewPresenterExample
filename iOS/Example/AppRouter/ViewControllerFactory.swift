@@ -11,7 +11,6 @@ import UIKit
 
 struct ViewControllerFactory {
 
-    let getDataServiceFactory: GetDataServiceFactoryProtocol
     let analyticsFactory: AnalyticsReporterFactory
 
     func makeHomeViewController(appActions: HomeRouterActions) -> UIViewController {
@@ -21,7 +20,7 @@ struct ViewControllerFactory {
 
     func makeMoviesViewController(appActions: AssetCollectionRouterActions) -> UIViewController {
         let appDispatcher = AppDispatcher()
-        let moviesDataLoader = AssetDataLoader2<AssetDataModel2>(resource: "movies")
+        let moviesDataLoader = AssetDataLoader<AssetDataModel2>(resource: "movies")
         let interactor = AssetCollectionInterator(assetDataLoader: moviesDataLoader, appDispatcher: appDispatcher)
         let presenter = AssetCollectionPresenter(interactor: interactor, appDispatcher: appDispatcher)
         let dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()
@@ -36,25 +35,38 @@ struct ViewControllerFactory {
             appActions: appActions)
     }
 
-    func makeDetailsViewController() -> UIViewController {
-		let viewController = AssetDetailsViewController()
+    func makeSearchResultsViewController(appActions: AssetCollectionRouterActions, searchText: String) -> UIViewController {
+        let search = "search" // should use searchText but for this example hardcoded
+        let appDispatcher = AppDispatcher()
+        let moviesDataLoader = AssetDataLoader<AssetDataModel2>(resource: search)
+        let interactor = AssetCollectionInterator(assetDataLoader: moviesDataLoader, appDispatcher: appDispatcher)
+        let presenter = AssetCollectionPresenter(interactor: interactor, appDispatcher: appDispatcher)
+        let dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()
+        let configureCollectionView = ConfigureCollectionView()
+        return AssetCollectionViewController(
+            title: "Movies",
+            presenter: presenter,
+            configureCollectionView: configureCollectionView,
+            dataSource: dataSource,
+            reporter: analyticsFactory.makeAssetCollectionReporter(),
+            loadingIndicator: LoadingIndicator(),
+            appActions: appActions)
+    }
+
+    func makeDetailsViewController(title: String) -> UIViewController {
+        let viewController = AssetDetailsViewController(title: title)
         return viewController
 	}
 
-    func makeSearchViewController() -> UIViewController {
+    func makeSearchViewController(appActions: SearchRouterActions) -> UIViewController {
         let throttle = Throttle()
-        let searchDataLoader = getDataServiceFactory.makeSearchDataLoader()
-        let presenter = AssetSearchPresenter(throttle: throttle, searchDataLoader: searchDataLoader, appDispatcher: AppDispatcher())
+        let presenter = AssetSearchPresenter(throttle: throttle)
         let searchController = UISearchController(searchResultsController: nil)
-        let configureCollectionView = ConfigureCollectionView()
-        let dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()
         let viewController = AssetSearchViewController(
             searchController: searchController,
             presenter: presenter,
-            loadingIndicator: LoadingIndicator(),
-            configureCollectionView: configureCollectionView,
-            dataSource: dataSource,
-            reporter: analyticsFactory.makeSearchReporter())
+            reporter: analyticsFactory.makeSearchReporter(),
+            appActions: appActions)
         return viewController
     }
 }

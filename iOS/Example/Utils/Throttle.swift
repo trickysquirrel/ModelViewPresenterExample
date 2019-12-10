@@ -6,7 +6,7 @@ import Foundation
 
 
 protocol Throttling {
-    func value(withDelay delay: TimeInterval, object: String,  response: @escaping (String)->())
+    func value(withDelay delay: TimeInterval, object: String, running runner: AsyncRunner<String>)
 }
 
 
@@ -14,15 +14,15 @@ class Throttle: Throttling {
 
     private var throttleTimer: Timer?
 
-    func value(withDelay delay: TimeInterval, object: String,  response: @escaping (String)->()) {
+    func value(
+        withDelay delay: TimeInterval,
+        object: String,
+        running runner: AsyncRunner<String>) {
+
         throttleTimer?.invalidate()
         throttleTimer = nil
-        if #available(iOS 10.0, *) {
-            throttleTimer = Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { (timer) in
-                response(object)
-            }
-        } else {
-            // Fallback on earlier versions
+        throttleTimer = Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { (timer) in
+            runner.run(object)
         }
     }
 

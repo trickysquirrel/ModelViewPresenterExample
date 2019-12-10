@@ -7,14 +7,11 @@ import UIKit
 class AssetSearchViewController: UIViewController {
 
     @IBOutlet weak var informationLabel: UILabel!
-    @IBOutlet weak var collectionView: UICollectionView!
 
     private let searchController: UISearchController
     private let presenter: AssetSearchPresenting
-    private let loadingIndicator: LoadingIndicatorProtocol
-    private let configureCollectionView: CollectionViewConfigurable
-    private let dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>
     private let reporter: LifecycleReporting
+    private let appActions: SearchRouterActions
 
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
@@ -23,16 +20,12 @@ class AssetSearchViewController: UIViewController {
 
     init(searchController: UISearchController,
          presenter: AssetSearchPresenting,
-         loadingIndicator: LoadingIndicatorProtocol,
-         configureCollectionView: CollectionViewConfigurable,
-         dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>,
-         reporter: LifecycleReporting) {
+         reporter: LifecycleReporting,
+         appActions: SearchRouterActions) {
         self.searchController = searchController
         self.presenter = presenter
-        self.loadingIndicator = loadingIndicator
-        self.configureCollectionView = configureCollectionView
-        self.dataSource = dataSource
         self.reporter = reporter
+        self.appActions = appActions
         super.init(nibName: "AssetSearchViewController", bundle: nil)
     }
 
@@ -60,41 +53,24 @@ extension AssetSearchViewController: UISearchResultsUpdating {
     private func searchTextDidUpdate(searchString: String) {
         presenter.updateSearchResults(searchString: searchString, running: .on(.main) { [weak self] response in
             switch response {
-            case .loading(let showLoading):
-                self?.showLoading(showLoading)
             case .information(let infoString):
                 self?.showUserInformation(msg: infoString)
-            case .success(let viewModelList):
-                self?.reloadDataSource(viewModelList: viewModelList)
+            case .success(let searchText):
+                self?.showSearchResult(for: searchText)
+            case .clearSearchResults:
+                self?.removeSearchResult()
             }
         })
     }
 
-    
-    private func showLoading(_ loading: Bool) {
-        loadingIndicator.statusBar(loading)
-        loadingIndicator.view(view: self.view, loading: loading)
+    private func showSearchResult(for text: String) {
+        let searchViewController = appActions.makeSearchResultsViewController(searchTerm: text)
+        addChildViewController(searchViewController)
     }
 
-
-    private func reloadDataSource(viewModelList: [AssetViewModel]) {
-        let sections = CollectionSection<AssetViewModel>(rows: viewModelList)
-
-        dataSource.reload(
-            sections: [sections],
-            cellIdentifier: { viewModel in
-                return AssetCollectionViewCell.reuseIdentifier
-            },
-            configureCell: { (cell, viewModel) in
-                cell.configure(viewModel: viewModel)
-            },
-            selectCell: { (_, _) in
-                // add details app action
-                // or remove this code and add collection view as child view controller
-            }
-        )
+    private func removeSearchResult() {
+        removeFirstChildViewController()
     }
-
 
     private func showUserInformation(msg: String) {
         informationLabel.text = msg
@@ -108,9 +84,7 @@ extension AssetSearchViewController {
     private func configureView() {
         title = "Search"
         view.backgroundColor = .white
-        configureCollectionView.configure(collectionView: collectionView, nibName: "AssetCollectionViewCell", reuseIdentifier: AssetCollectionViewCell.reuseIdentifier, accessId: Accessibility.assetSearchCollectionView.id)
-        dataSource.configure(collectionView: collectionView)
-        collectionView.accessibilityIdentifier = Accessibility.searchCollectionView.id
+        //collectionView.accessibilityIdentifier = Accessibility.searchCollectionView.id
         configureSearchController()
         navigationItem.searchController = searchController
     }

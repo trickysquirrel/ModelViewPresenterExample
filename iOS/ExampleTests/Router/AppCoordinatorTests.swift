@@ -13,7 +13,6 @@ class AppCoordinatorTests: XCTestCase {
     var appCoordinator: AppRouter!
     var stubAlert: StubInformationAlert!
 
-
     override func setUp() {
         super.setUp()
         window = UIWindow()
@@ -21,7 +20,7 @@ class AppCoordinatorTests: XCTestCase {
         stubAlert = StubInformationAlert()
         let stubAnalyticsReporter = StubThirdPartyAnalyticsReporter()
         let analyticsReporterFactory = AnalyticsReporterFactory(reporter: stubAnalyticsReporter)
-        let viewControllerFactory = ViewControllerFactory(getDataServiceFactory: StubGetDataServiceFactory(), analyticsFactory: analyticsReporterFactory)
+        let viewControllerFactory = ViewControllerFactory(analyticsFactory: analyticsReporterFactory)
         appCoordinator = AppRouter(window: window,
                                             navigationController: navigationController,
                                             viewControllerFactory: viewControllerFactory,

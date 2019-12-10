@@ -11,6 +11,10 @@ protocol HomeRouterActions: class {
     func showSearch()
 }
 
+protocol SearchRouterActions: class {
+    func makeSearchResultsViewController(searchTerm: String) -> UIViewController
+}
+
 protocol AssetCollectionRouterActions: class {
     func showAlertOK(title: String, msg: String, presentingViewController: UIViewController)
     func showDetails(id: String, title: String)
@@ -67,7 +71,7 @@ extension AppRouter: HomeRouterActions {
     }
 
     func showSearch() {
-        let viewController = viewControllerFactory.makeSearchViewController()
+        let viewController = viewControllerFactory.makeSearchViewController(appActions: self)
         navigationController(navigationController, pushOnViewController: viewController, animated: true)
     }
 }
@@ -80,7 +84,13 @@ extension AppRouter: AssetCollectionRouterActions {
     }
 
     func showDetails(id: String, title: String) {
-        let viewController = viewControllerFactory.makeDetailsViewController()
+        let viewController = viewControllerFactory.makeDetailsViewController(title: title)
         navigationController(navigationController, pushOnViewController: viewController, animated: true)
+    }
+}
+
+extension AppRouter: SearchRouterActions {
+    func makeSearchResultsViewController(searchTerm: String) -> UIViewController {
+        return viewControllerFactory.makeSearchResultsViewController(appActions: self, searchText: searchTerm)
     }
 }

@@ -11,11 +11,11 @@ class StubThrottle: Throttling {
     private(set) var didCallWithDelay: TimeInterval?
     private(set) var didCallWithObject: String?
 
-    func value(withDelay delay: TimeInterval, object: String,  response: @escaping (String)->()) {
+    func value(withDelay delay: TimeInterval, object: String,  running runner: AsyncRunner<String>) {
         didCallWithDelay = delay
         didCallWithObject = object
         if shouldReturnValue == true {
-            response(object)
+            runner.run(object)
         }
     }
 }

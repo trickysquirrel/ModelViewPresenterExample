@@ -19,6 +19,7 @@ class AssetCollectionViewController: UICollectionViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
 
+    
     init(title: String,
          presenter: AssetCollectionPresenting,
          configureCollectionView: CollectionViewConfigurable,
