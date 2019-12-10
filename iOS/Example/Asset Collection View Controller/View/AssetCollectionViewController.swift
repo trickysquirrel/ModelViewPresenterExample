@@ -80,13 +80,20 @@ private extension AssetCollectionViewController {
 
 
     private func reloadDataSource(viewModelList: [AssetViewModel]) {
-        dataSource.onEventConfigureCell { cell, viewModel in
-            cell.configure(viewModel: viewModel)
-        }
-        dataSource.onEventItemSelected(selectCell: { [weak self] (viewModel, indexPath) in
-            self?.appActions.showDetails(id: viewModel.id)
-        })
-        dataSource.resetRows(viewModels: viewModelList, cellIdentifier: AssetCollectionViewCell.reuseIdentifier)
+        let sections = CollectionSection<AssetViewModel>(title: nil, rows: viewModelList.map { CollectionRow<AssetViewModel>(data: $0, cellIdentifier: AssetCollectionViewCell.reuseIdentifier) })
+        
+        dataSource.reload(
+            sections: [sections],
+            cellIdentifier: { viewModel in
+                return AssetCollectionViewCell.reuseIdentifier
+            },
+            configureCell: { (cell, viewModel) in
+                cell.configure(viewModel: viewModel)
+            },
+            selectCell: { [weak self] (viewModel, indexPath) in
+                self?.appActions.showDetails(id: viewModel.id)
+            }
+        )
     }
 
 

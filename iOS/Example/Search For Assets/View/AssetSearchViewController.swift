@@ -78,10 +78,21 @@ extension AssetSearchViewController: UISearchResultsUpdating {
 
 
     private func reloadDataSource(viewModelList: [AssetViewModel]) {
-        dataSource.onEventConfigureCell { cell, viewModel in
-            cell.configure(viewModel: viewModel)
-        }
-        dataSource.resetRows(viewModels: viewModelList, cellIdentifier: AssetCollectionViewCell.reuseIdentifier)
+        let sections = CollectionSection<AssetViewModel>(title: nil, rows: viewModelList.map { CollectionRow<AssetViewModel>(data: $0, cellIdentifier: AssetCollectionViewCell.reuseIdentifier) })
+
+        dataSource.reload(
+            sections: [sections],
+            cellIdentifier: { viewModel in
+                return AssetCollectionViewCell.reuseIdentifier
+            },
+            configureCell: { (cell, viewModel) in
+                cell.configure(viewModel: viewModel)
+            },
+            selectCell: { (_, _) in
+                // add details app action
+                // or remove this code and add collection view as child view controller
+            }
+        )
     }
 
 
