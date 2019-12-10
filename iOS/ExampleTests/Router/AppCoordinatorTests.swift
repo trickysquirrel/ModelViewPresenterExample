@@ -10,7 +10,7 @@ class AppCoordinatorTests: XCTestCase {
 
     var window: UIWindow!
     var navigationController: UINavigationController!
-    var appCoordinator: AppCoordinator!
+    var appCoordinator: AppRouter!
     var stubAlert: StubInformationAlert!
 
 
@@ -20,9 +20,9 @@ class AppCoordinatorTests: XCTestCase {
         navigationController = UINavigationController()
         stubAlert = StubInformationAlert()
         let stubAnalyticsReporter = StubThirdPartyAnalyticsReporter()
-        let analyticsReporterFactory = AnalyticsReporterFactory(thirdPartyAnalyticsReporter: stubAnalyticsReporter)
+        let analyticsReporterFactory = AnalyticsReporterFactory(reporter: stubAnalyticsReporter)
         let viewControllerFactory = ViewControllerFactory(getDataServiceFactory: StubGetDataServiceFactory(), analyticsFactory: analyticsReporterFactory)
-        appCoordinator = AppCoordinator(window: window,
+        appCoordinator = AppRouter(window: window,
                                             navigationController: navigationController,
                                             viewControllerFactory: viewControllerFactory,
                                             informationAlert: stubAlert)

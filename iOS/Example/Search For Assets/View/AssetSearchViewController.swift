@@ -14,7 +14,7 @@ class AssetSearchViewController: UIViewController {
     private let loadingIndicator: LoadingIndicatorProtocol
     private let configureCollectionView: CollectionViewConfigurable
     private let dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>
-    private let reporter: SearchReporter
+    private let reporter: LifecycleReporting
 
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
@@ -26,7 +26,7 @@ class AssetSearchViewController: UIViewController {
          loadingIndicator: LoadingIndicatorProtocol,
          configureCollectionView: CollectionViewConfigurable,
          dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>,
-         reporter: SearchReporter) {
+         reporter: LifecycleReporting) {
         self.searchController = searchController
         self.presenter = presenter
         self.loadingIndicator = loadingIndicator
@@ -43,7 +43,7 @@ class AssetSearchViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        reporter.viewShown()
+        reporter.viewDidAppear()
     }
 }
 
@@ -58,7 +58,7 @@ extension AssetSearchViewController: UISearchResultsUpdating {
 
 
     private func searchTextDidUpdate(searchString: String) {
-        presenter.updateSearchResults(searchString: searchString, updateHandler: { [weak self] response in
+        presenter.updateSearchResults(searchString: searchString, running: .on(.main) { [weak self] response in
             switch response {
             case .loading(let showLoading):
                 self?.showLoading(showLoading)
@@ -95,7 +95,7 @@ extension AssetSearchViewController: UISearchResultsUpdating {
 extension AssetSearchViewController {
 
     private func configureView() {
-        title = presenter.navigationTitle()
+        title = "Search"
         view.backgroundColor = .white
         configureCollectionView.configure(collectionView: collectionView, nibName: "AssetCollectionViewCell", reuseIdentifier: AssetCollectionViewCell.reuseIdentifier, accessId: Accessibility.assetSearchCollectionView.id)
         dataSource.configure(collectionView: collectionView)
@@ -108,7 +108,7 @@ extension AssetSearchViewController {
     private func configureSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = presenter.searchBarPlaceHolderText()
+        searchController.searchBar.placeholder = "enter title"
         searchController.searchBar.accessibilityIdentifier = Accessibility.searchBar.id
         definesPresentationContext = true
     }

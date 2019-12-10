@@ -6,7 +6,7 @@ import XCTest
 @testable import Example
 
 
-class StubAssetCollectionCoordinatorActions: AssetCollectionCoordinatorActions {
+class StubAssetCollectionCoordinatorActions: AssetCollectionRouterActions {
 
     private(set) var didCallShowAlertOK: Bool?
     private(set) var didCallShowAlertWithTitle: String?

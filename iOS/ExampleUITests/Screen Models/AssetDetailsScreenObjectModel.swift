@@ -10,7 +10,7 @@ class AssetDetailsViewControllerModel: ViewControllerModel {
     // MARK: - UI Elements
 
     private var assetTitle: XCUIElement {
-        return app.staticTexts[Access.assetDetailsView.id]
+        return app.staticTexts[Accessibility.assetDetailsView.id]
     }
 
     // MARK: - UI Elements to identiy screen when navigating and waiting for screen to appear

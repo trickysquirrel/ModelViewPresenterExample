@@ -14,11 +14,11 @@ class AssetSearchViewControllerTests: XCTestCase {
     var stubLoadingIndicator: StubLoadingIndicator!
     var stubConfigureCollectionView: StubConfigureCollectionView!
     var dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>!
-    var stubThirdyPartytAnalyticsReporter: StubThirdPartyAnalyticsReporter!
+    var stubReporter: StubThirdPartyAnalyticsReporter!
 
     override func setUp() {
         super.setUp()
-        stubThirdyPartytAnalyticsReporter = StubThirdPartyAnalyticsReporter()
+        stubReporter = StubThirdPartyAnalyticsReporter()
         dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()
         stubConfigureCollectionView = StubConfigureCollectionView()
         stubLoadingIndicator = StubLoadingIndicator()
@@ -28,7 +28,7 @@ class AssetSearchViewControllerTests: XCTestCase {
     }
 
     override func tearDown() {
-        stubThirdyPartytAnalyticsReporter = nil
+        stubReporter = nil
         dataSource = nil
         stubConfigureCollectionView = nil
         stubPresenter = nil
@@ -42,14 +42,10 @@ class AssetSearchViewControllerTests: XCTestCase {
 
 extension AssetSearchViewControllerTests {
 
-    func test_viewDidLoad_navigationTitleCorrect() {
-        XCTAssertEqual(viewController.title, stubPresenter.navigationTitle())
-    }
-
     func test_viewDidLoad_configuresSearchController() {
         XCTAssertTrue(searchController.searchResultsUpdater === viewController)
         XCTAssertFalse(searchController.obscuresBackgroundDuringPresentation)
-        //XCTAssertEqual(searchController.searchBar.placeholder, "enter title")// need to figure out why this s failing, object nil at this point
+        XCTAssertEqual(searchController.searchBar.placeholder, "enter title")
         XCTAssertTrue(viewController.definesPresentationContext)
     }
 
@@ -59,9 +55,9 @@ extension AssetSearchViewControllerTests {
 
     func test_onViewDidAppear_sendCorrectAnalyticsActionAndData() {
         startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
-        XCTAssertEqual(stubThirdyPartytAnalyticsReporter.sentActionList.count, 1)
-        XCTAssertEqual(stubThirdyPartytAnalyticsReporter.sentActionList[0].name, "SearchShown")
-        XCTAssertNil(stubThirdyPartytAnalyticsReporter.sentActionList[0].data)
+        XCTAssertEqual(stubReporter.sentActionList.count, 1)
+        XCTAssertEqual(stubReporter.sentActionList[0].name, "Search")
+        XCTAssertEqual(stubReporter.sentActionList[0].data?["lifecycle"] as? String, "show")
     }
 
 
@@ -70,9 +66,9 @@ extension AssetSearchViewControllerTests {
         startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
         startViewControllerLifeCycle(viewController, forceViewDidAppear: true)
 
-        XCTAssertEqual(stubThirdyPartytAnalyticsReporter.sentActionList.count, 2)
-        XCTAssertEqual(stubThirdyPartytAnalyticsReporter.sentActionList[1].name, "SearchShown")
-        XCTAssertNil(stubThirdyPartytAnalyticsReporter.sentActionList[1].data)
+        XCTAssertEqual(stubReporter.sentActionList.count, 2)
+        XCTAssertEqual(stubReporter.sentActionList[1].name, "Search")
+        XCTAssertEqual(stubReporter.sentActionList[0].data?["lifecycle"] as? String, "show")
     }
 
 }
@@ -95,7 +91,7 @@ extension AssetSearchViewControllerTests {
 
         updateViewController(viewController, withSearchText: "t")
 
-        stubPresenter.updateHandler!(.loading(show: true))
+        stubPresenter.runner?.run(.loading(show: true))
 
         XCTAssertTrue(stubLoadingIndicator.didCallStatusBarWithLoading!)
         XCTAssertTrue(stubLoadingIndicator.didCallViewWithLoading!)
@@ -107,7 +103,7 @@ extension AssetSearchViewControllerTests {
 
         updateViewController(viewController, withSearchText: "t")
 
-        stubPresenter.updateHandler!(.loading(show: false))
+        stubPresenter.runner?.run(.loading(show: false))
 
         XCTAssertFalse(stubLoadingIndicator.didCallStatusBarWithLoading!)
         XCTAssertFalse(stubLoadingIndicator.didCallViewWithLoading!)
@@ -119,7 +115,7 @@ extension AssetSearchViewControllerTests {
 
         updateViewController(viewController, withSearchText: "t")
 
-        stubPresenter.updateHandler!(.information("in a test"))
+        stubPresenter.runner?.run(.information("in a test"))
 
         XCTAssertEqual(viewController.informationLabel.text, "in a test")
     }
@@ -130,7 +126,7 @@ extension AssetSearchViewControllerTests {
         let viewModels = makeTwoAssetViewModelList()
         updateViewController(viewController, withSearchText: "t")
 
-        stubPresenter.updateHandler!(.success(viewModels))
+        stubPresenter.runner?.run(.success(viewModels))
 
         XCTAssertEqual(dataSource.numberOfSections(in: self.viewController.collectionView!), 1)
         XCTAssertEqual(dataSource.collectionView(self.viewController.collectionView!, numberOfItemsInSection: 0), 2)
@@ -151,7 +147,7 @@ extension AssetSearchViewControllerTests {
 
         updateViewController(newViewController, withSearchText: "t")
 
-        stubPresenter.updateHandler!(.success(viewModelList))
+        stubPresenter.runner?.run(.success(viewModelList))
 
         let collectionView = newViewController.collectionView!
         let cell = collectionView.dataSource?.collectionView(collectionView, cellForItemAt: indexPath) as! AssetCollectionViewCell
@@ -164,7 +160,7 @@ extension AssetSearchViewControllerTests {
 extension AssetSearchViewControllerTests {
 
     private func makeViewController(configureCollectionView: CollectionViewConfigurable) -> AssetSearchViewController {
-        let analyticsFactory = AnalyticsReporterFactory(thirdPartyAnalyticsReporter: stubThirdyPartytAnalyticsReporter)
+        let analyticsFactory = AnalyticsReporterFactory(reporter: stubReporter)
         let viewController = AssetSearchViewController(searchController: searchController,
                                                        presenter: stubPresenter,
                                                        loadingIndicator: stubLoadingIndicator,

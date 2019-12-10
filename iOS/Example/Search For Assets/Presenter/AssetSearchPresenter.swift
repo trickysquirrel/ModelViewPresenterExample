@@ -6,10 +6,7 @@ import Foundation
 
 
 protocol AssetSearchPresenting {
-    typealias updateHandlerType = (AssetSearchPresenterResponse)->()
-    func navigationTitle() -> String
-    func searchBarPlaceHolderText() -> String
-    func updateSearchResults(searchString: String, updateHandler: @escaping updateHandlerType)
+    func updateSearchResults(searchString: String, running runner: AsyncRunner<AssetSearchPresenterResponse>)
 }
 
 
@@ -34,51 +31,41 @@ class AssetSearchPresenter: AssetSearchPresenting {
         self.appDispatcher = appDispatcher
         self.backgroundQueue = appDispatcher.makeBackgroundQueue()
     }
-
-
-    func navigationTitle() -> String {
-        return "Search"
-    }
-
-
-    func searchBarPlaceHolderText() -> String {
-        return "enter title"
-    }
 }
 
 // MARK:- Search feature
 
 extension AssetSearchPresenter {
 
-    func updateSearchResults(searchString: String, updateHandler: @escaping updateHandlerType) {
-
-        searchDataLoader.cancel()
+    func updateSearchResults(searchString: String, running runner: AsyncRunner<AssetSearchPresenterResponse>) {
 
         if let errorInfo = isSearchStringInvalid(string: searchString) {
-            notPerformingSearchUpdateHandler(information: errorInfo, updateHandler: updateHandler)
+            handleInvalidSearchTerm(information: errorInfo, running: runner)
             return
         }
-        
-        updateHandler(.information(""))
+
+        runner.run(.information(""))
 
         throttle.value(withDelay: 0.3, object: searchString) { [weak self] throttledText in
 
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
 
-            updateHandler(.loading(show: true))
-            updateHandler(.success([]))
+            runner.run(.loading(show: true))
+            runner.run(.success([]))
 
-            strongSelf.searchDataLoader.load(searchString: searchString, completionQueue: strongSelf.backgroundQueue) { [weak self] response in
+            self.searchDataLoader.load(
+                searchString: searchString,
+                running: .on(self.backgroundQueue) { [weak self] response in
 
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
 
                 switch response {
                 case .error:
-                    strongSelf.onMainThreadupdateHandlerResponseWithError(updateHandler: updateHandler)
+                    self.handleError(running: runner)
                 case .success(let searchDataList):
-                    strongSelf.onMainThreadUpdateHandlerResponse(searchDataList: searchDataList, updateHandler: updateHandler)
+                    self.handleResponse(searchDataList: searchDataList, running: runner)
                 }
-            }
+            })
         }
     }
 }
@@ -94,21 +81,19 @@ extension AssetSearchPresenter {
     }
 
 
-    private func notPerformingSearchUpdateHandler(information: String, updateHandler: @escaping updateHandlerType) {
-        updateHandler(.information(information))
-        updateHandler(.success([]))
+    private func handleInvalidSearchTerm(information: String, running runner: AsyncRunner<AssetSearchPresenterResponse>) {
+        runner.run(.information(information))
+        runner.run(.success([]))
     }
 
 
-    private func onMainThreadupdateHandlerResponseWithError(updateHandler: @escaping updateHandlerType) {
-        appDispatcher.runMainAsync {
-            updateHandler(.loading(show: false))
-            updateHandler(.information("there was an error please try again"))
-        }
+    private func handleError(running runner: AsyncRunner<AssetSearchPresenterResponse>) {
+        runner.run(.loading(show: false))
+        runner.run(.information("there was an error please try again"))
     }
 
 
-    private func onMainThreadUpdateHandlerResponse(searchDataList: [SearchDataModel], updateHandler: @escaping updateHandlerType) {
+    private func handleResponse(searchDataList: [SearchDataModel], running runner: AsyncRunner<AssetSearchPresenterResponse>) {
         var response: AssetSearchPresenterResponse
         if searchDataList.count == 0 {
             response = .information("no results please try again")
@@ -117,10 +102,7 @@ extension AssetSearchPresenter {
             let viewModelList = searchDataList.map { AssetViewModel(id: $0.id, title: $0.title, imageUrl: $0.imageUrl) }
             response = .success(viewModelList)
         }
-
-        appDispatcher.runMainAsync {
-            updateHandler(.loading(show: false))
-            updateHandler(response)
-        }
+        runner.run(.loading(show: false))
+        runner.run(response)
     }
 }

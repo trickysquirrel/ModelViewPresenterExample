@@ -35,20 +35,10 @@ class AssetSearchPresentingTests: XCTestCase {
     }
 
 
-    func test_navigationTitle_returnsCorrectString() {
-        XCTAssertEqual(presenter.navigationTitle(), "Search")
-    }
-
-
-    func test_searchBarPlaceHolderText_returnsCorrectString() {
-        XCTAssertEqual(presenter.searchBarPlaceHolderText(), "enter title")
-    }
-
-
     func test_updateSearchResults_entersZeroChar_returnsEmptyInformationAndViewModels() {
         var responseInformation: String?
         var responseViewModels: [AssetViewModel]?
-        presenter.updateSearchResults(searchString: "") { (response) in
+        presenter.updateSearchResults(searchString: "", running: .on(.main) { (response) in
             switch response {
             case .information(let msg):
                 responseInformation = msg
@@ -57,7 +47,7 @@ class AssetSearchPresentingTests: XCTestCase {
             default:
                 break
             }
-        }
+        })
         XCTAssertEqual(responseInformation, "")
         XCTAssertEqual(responseViewModels?.count, 0)
     }
@@ -66,7 +56,7 @@ class AssetSearchPresentingTests: XCTestCase {
     func test_updateSearchResults_entersOneChar_returnsTextToEnterMoreCharsAndEmptyViewModels() {
         var responseInformation: String?
         var responseViewModels: [AssetViewModel]?
-        presenter.updateSearchResults(searchString: "a") { (response) in
+        presenter.updateSearchResults(searchString: "a", running: .on(.main) { (response) in
             switch response {
             case .information(let msg):
                 responseInformation = msg
@@ -75,7 +65,7 @@ class AssetSearchPresentingTests: XCTestCase {
             default:
                 break
             }
-        }
+        })
         XCTAssertEqual(responseInformation, "enter min 3 characters")
         XCTAssertEqual(responseViewModels?.count, 0)
     }
@@ -84,7 +74,7 @@ class AssetSearchPresentingTests: XCTestCase {
     func test_updateSearchResults_entersThreeChar_returnsEmptyInformationStringAndLoadingTrue() {
         var responseInformation: String?
         var loading: Bool?
-        presenter.updateSearchResults(searchString: "abc") { (response) in
+        presenter.updateSearchResults(searchString: "abc", running: .on(.main) { (response) in
             switch response {
             case .information(let msg):
                 responseInformation = msg
@@ -93,21 +83,21 @@ class AssetSearchPresentingTests: XCTestCase {
             default:
                 break
             }
-        }
+        })
         XCTAssertEqual(responseInformation, "")
         XCTAssertTrue(loading!)
     }
 
 
     func test_updateSearchResults_entersThreeChar_makesRequestForSearchResults() {
-        presenter.updateSearchResults(searchString: "abc") { (response) in }
+        presenter.updateSearchResults(searchString: "abc", running: .on(.main) { (response) in })
         XCTAssertEqual(stubSearchDataLoader.didRequestSearchString.count, 1)
         XCTAssertEqual(stubSearchDataLoader.didRequestSearchString[0], "abc")
     }
 
 
     func test_updateSearchResults_entersThreeChar_callsThrottleWithCorrectInfo() {
-        presenter.updateSearchResults(searchString: "abc") { (response) in }
+        presenter.updateSearchResults(searchString: "abc", running: .on(.main) { (response) in })
         XCTAssertEqual(stubThrottle.didCallWithDelay, 0.3)
         XCTAssertEqual(stubThrottle.didCallWithObject, "abc")
     }
@@ -115,7 +105,7 @@ class AssetSearchPresentingTests: XCTestCase {
 
     func test_updateSearchResult_throttleDoesNotReturn_searchDataNotLoaded() {
         stubThrottle.shouldReturnValue = false
-        presenter.updateSearchResults(searchString: "abc") { (response) in }
+        presenter.updateSearchResults(searchString: "abc", running: .on(.main) { (response) in })
         XCTAssertEqual(stubSearchDataLoader.didRequestSearchString.count, 0)
     }
 
@@ -123,14 +113,14 @@ class AssetSearchPresentingTests: XCTestCase {
     func test_updateSearchResult_throttleDoesNotReturn_doesNotRecevieLoadingResponse() {
         stubThrottle.shouldReturnValue = false
         var loading: Bool?
-        presenter.updateSearchResults(searchString: "abc") { (response) in
+        presenter.updateSearchResults(searchString: "abc", running: .on(.main) { (response) in
             switch response {
             case .loading(let showLoading):
                 loading = showLoading
             default:
                 break
             }
-        }
+        })
         XCTAssertNil(loading)
     }
 
@@ -139,7 +129,7 @@ class AssetSearchPresentingTests: XCTestCase {
         var responseInformation: String?
         var loading: Bool?
         stubSearchDataLoader.response = .error( NSError(domain: "", code: 0, userInfo: nil) )
-        presenter.updateSearchResults(searchString: "abc") { (response) in
+        presenter.updateSearchResults(searchString: "abc", running: .on(.main) { (response) in
             switch response {
             case .information(let msg):
                 responseInformation = msg
@@ -148,7 +138,7 @@ class AssetSearchPresentingTests: XCTestCase {
             default:
                 break
             }
-        }
+        })
         XCTAssertEqual(responseInformation, "there was an error please try again")
         XCTAssertFalse(loading!)
     }
@@ -158,7 +148,7 @@ class AssetSearchPresentingTests: XCTestCase {
         var responseInformation: String?
         var loading: Bool?
         stubSearchDataLoader.response = .success([])
-        presenter.updateSearchResults(searchString: "abc") { (response) in
+        presenter.updateSearchResults(searchString: "abc", running: .on(.main) { (response) in
             switch response {
             case .information(let msg):
                 responseInformation = msg
@@ -167,7 +157,7 @@ class AssetSearchPresentingTests: XCTestCase {
             default:
                 break
             }
-        }
+        })
         XCTAssertEqual(responseInformation, "no results please try again")
         XCTAssertFalse(loading!)
     }
@@ -178,7 +168,7 @@ class AssetSearchPresentingTests: XCTestCase {
         var responseLoading: Bool?
         var responseViewModelList: [AssetViewModel]?
         stubSearchDataLoader.response = .success(makeTwoSearchDataModelList())
-        presenter.updateSearchResults(searchString: "abc") { (response) in
+        presenter.updateSearchResults(searchString: "abc", running: .on(.main) { (response) in
             switch response {
             case .information(let msg):
                 responseInformation = msg
@@ -187,15 +177,9 @@ class AssetSearchPresentingTests: XCTestCase {
             case .success(let viewModelList):
                 responseViewModelList = viewModelList
             }
-        }
+        })
         XCTAssertEqual(responseViewModelList!.count, 2)
         XCTAssertEqual(responseInformation, "")
         XCTAssertFalse(responseLoading!)
-    }
-
-
-    func test_updateSearchResults_requestToCancelPreviousRequest() {
-        presenter.updateSearchResults(searchString: "abc") { _ in }
-        XCTAssertTrue(stubSearchDataLoader.didRequestToCancelSearch!)
     }
 }

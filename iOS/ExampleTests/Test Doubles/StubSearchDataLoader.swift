@@ -10,17 +10,11 @@ class StubSearchDataLoader: SearchDataLoading {
 
     var response: SearchDataLoaderResponse?
     private(set) var didRequestSearchString: [String] = []
-    private(set) var didRequestToCancelSearch: Bool?
 
-    func load(searchString: String, completionQueue: DispatchQueue, completion:@escaping (SearchDataLoaderResponse)->()) {
+    func load(searchString: String, running runner: AsyncRunner<SearchDataLoaderResponse>) {
         didRequestSearchString.append(searchString)
         if let response = self.response {
-            completion(response)
+            runner.run(response)
         }
     }
-
-    func cancel() {
-        didRequestToCancelSearch = true
-    }
-
 }

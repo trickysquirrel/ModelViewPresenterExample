@@ -5,18 +5,21 @@
 import Foundation
 import UIKit
 
+/// A common place to make all ViewController
+/// By having all VCs generated in one place we can bring together all the common components required to build the VCs
+/// A lot of those components can then be hidden from the AppRouter and only those properties that specialise need be injected
 
 struct ViewControllerFactory {
 
     let getDataServiceFactory: GetDataServiceFactoryProtocol
     let analyticsFactory: AnalyticsReporterFactory
 
-    func makeHomeViewController(appActions: HomeCoordinatorActions) -> UIViewController {
+    func makeHomeViewController(appActions: HomeRouterActions) -> UIViewController {
         let viewController = HomeViewController(appActions: appActions)
         return viewController
     }
 
-    func makeMoviesViewController(appActions: AssetCollectionCoordinatorActions) -> UIViewController {
+    func makeMoviesViewController(appActions: AssetCollectionRouterActions) -> UIViewController {
         let moviesDataLoader = getDataServiceFactory.makeMoviesAssetCollectionDataLoader()
         let presenter = AssetCollectionPresenter(assetDataLoader: moviesDataLoader, appDispatcher: AppDispatcher())
         let dataSource = CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>()

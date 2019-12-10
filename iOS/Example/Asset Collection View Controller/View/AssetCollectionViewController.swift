@@ -9,10 +9,10 @@ class AssetCollectionViewController: UICollectionViewController {
 
 	private let presenter: AssetCollectionPresenting
 	private let dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>
-    private let reporter: MovieCollectionReporter
+    private let reporter: LifecycleReporting
     private let loadingIndicator: LoadingIndicatorProtocol
     private let configureCollectionView: CollectionViewConfigurable
-    private let appActions: AssetCollectionCoordinatorActions
+    private let appActions: AssetCollectionRouterActions
 
     @available(*, unavailable)
 	required init?(coder aDecoder: NSCoder) {
@@ -23,9 +23,9 @@ class AssetCollectionViewController: UICollectionViewController {
          presenter: AssetCollectionPresenting,
          configureCollectionView: CollectionViewConfigurable,
 	     dataSource: CollectionViewDataSource<AssetCollectionViewCell, AssetViewModel>,
-         reporter: MovieCollectionReporter,
+         reporter: LifecycleReporting,
          loadingIndicator: LoadingIndicatorProtocol,
-	     appActions: AssetCollectionCoordinatorActions) {
+	     appActions: AssetCollectionRouterActions) {
 		self.presenter = presenter
         self.configureCollectionView = configureCollectionView
 		self.dataSource = dataSource
@@ -47,12 +47,12 @@ class AssetCollectionViewController: UICollectionViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        reporter.viewShown()
+        reporter.viewDidAppear()
     }
 }
 
 
-// MARK:- Feature refresh view
+// MARK:- Refresh view
 
 private extension AssetCollectionViewController {
 
@@ -97,7 +97,7 @@ private extension AssetCollectionViewController {
 
 #if TEST_TARGET
 extension AssetCollectionViewController {
-    var _appActions: AssetCollectionCoordinatorActions? {
+    var _appActions: AssetCollectionRouterActions? {
         get {
             return appActions
         }

@@ -4,9 +4,11 @@
 
 import UIKit
 
+/// Dummy Home View Controller with two buttons and accessibility for UI testing
+
 class HomeViewController: UIViewController {
 
-    private let appActions: HomeCoordinatorActions?
+    private let appActions: HomeRouterActions?
 
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
@@ -14,7 +16,7 @@ class HomeViewController: UIViewController {
     }
 
 
-    init(appActions: HomeCoordinatorActions) {
+    init(appActions: HomeRouterActions) {
         self.appActions = appActions
         super.init(nibName: nil, bundle: nil)
     }
@@ -54,6 +56,7 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController {
 
+    /// typically we would use contraints here, just doing the basics for now
     private func addButtonToView(withTitle title: String, yPosition: CGFloat, selector: Selector, accessID: String) {
         let button = UIButton(frame: CGRect(x: 100, y: yPosition, width: 100, height: 50))
         button.setTitle(title, for: .normal)

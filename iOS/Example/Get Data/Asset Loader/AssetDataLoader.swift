@@ -11,31 +11,26 @@ enum AssetDataLoaderResponse {
 }
 
 protocol AssetDataLoading {
-    func load(completionQueue: DispatchQueue, completion:@escaping (AssetDataLoaderResponse)->())
+    func load(running runner: AsyncRunner<AssetDataLoaderResponse>)
 }
 
 struct AssetDataLoader: AssetDataLoading {
 
 	let dataLoader: DataLoading
 
-    func load(completionQueue: DispatchQueue, completion:@escaping (AssetDataLoaderResponse)->()) {
+    func load(running runner: AsyncRunner<AssetDataLoaderResponse>) {
 		guard let assetJson = dataLoader.load() else {
-            completionQueue.async {
-                let tempError = NSError(domain: "", code: 0, userInfo: nil)
-                completion(.error(tempError))
-            }
+            let tempError = NSError(domain: "Could not load data from resource file", code: 0, userInfo: nil)
+            runner.run(.error(tempError))
             return
 		}
-        let assetDataModelList = assetJson.flatMap { makeAssetData(json: $0) }
+        let assetDataModelList = assetJson.compactMap { makeAssetData(json: $0) }
 
-        // adding in a delay before responding
+        // adding in a delay before responding to simulate network delays
         let when = DispatchTime.now() + 1
         DispatchQueue.main.asyncAfter(deadline: when) {
-            completionQueue.async {
-                completion(.success(assetDataModelList))
-            }
+            runner.run(.success(assetDataModelList))
         }
-
 	}
 }
 

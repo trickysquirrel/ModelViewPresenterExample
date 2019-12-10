@@ -4,19 +4,23 @@
 
 import UIKit
 
-protocol HomeCoordinatorActions: class {
+protocol HomeRouterActions: class {
     func showMoviesCollection()
     func showSearch()
 }
 
 
-protocol AssetCollectionCoordinatorActions: class {
+protocol AssetCollectionRouterActions: class {
     func showAlertOK(title: String, msg: String, presentingViewController: UIViewController)
     func showDetails(id: Int)
 }
 
+/// Simple AppRouter that controls navigation throughout the app
+/// Encourages a greater seperation of concerns between ViewController (VC) and navigation.
+/// This way we can focus ViewController on just the logic they need to perform their job
+/// Also having this seperation allows us to easily manipulated the flow of the app for A/B testing with VCs needing to know
 
-class AppCoordinator {
+class AppRouter {
 
 	private let window: UIWindow
 	private let navigationController: UINavigationController
@@ -44,6 +48,9 @@ class AppCoordinator {
 
     
     private func navigationController(_ navigationController: UINavigationController, pushOnViewController viewController:UIViewController, animated: Bool) {
+        // Large scale application that push and pop whilst animating can suffer random failures when used alot in unit tests as the system can get confused,
+        // by removing the animation we make the test simpler by not needing an expectation and more robust as timing is not involded which
+        // causes the majority of flaky tests of these kind
         let isRunningTests = NSClassFromString("XCTestCase") != nil
         let shouldAnimate = isRunningTests ? false : animated
         navigationController.pushViewController(viewController, animated: shouldAnimate)
@@ -51,7 +58,7 @@ class AppCoordinator {
 }
 
 
-extension AppCoordinator: HomeCoordinatorActions {
+extension AppRouter: HomeRouterActions {
 
     func showMoviesCollection() {
         let viewController = viewControllerFactory.makeMoviesViewController(appActions: self)
@@ -65,7 +72,7 @@ extension AppCoordinator: HomeCoordinatorActions {
 }
 
 
-extension AppCoordinator: AssetCollectionCoordinatorActions {
+extension AppRouter: AssetCollectionRouterActions {
 
     func showAlertOK(title: String, msg: String, presentingViewController: UIViewController) {
         informationAlert.displayAlert(title: title, message: msg, presentingViewController: presentingViewController)

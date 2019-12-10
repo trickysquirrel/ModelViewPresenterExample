@@ -10,9 +10,9 @@ class StubAssetDataLoader: AssetDataLoading {
 
     var stubResponse: AssetDataLoaderResponse?
 
-    func load(completionQueue: DispatchQueue, completion:@escaping (AssetDataLoaderResponse)->()) {
+    func load(running runner: AsyncRunner<AssetDataLoaderResponse>) {
         if let response = stubResponse {
-            completion(response)
+            runner.run(response)
         }
     }
 }

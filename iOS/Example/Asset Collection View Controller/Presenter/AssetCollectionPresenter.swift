@@ -42,14 +42,14 @@ class AssetCollectionPresenter: AssetCollectionPresenting {
 
         runner.run(.loading(show: true))
 
-        assetDataLoader.load(completionQueue: backgroundQueue) { [weak self] (response) in
+        assetDataLoader.load(running: .on(backgroundQueue) { [weak self] (response) in
 
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             var presenterResponse: AssetCollectionPresenterResponse
 
             switch response {
             case .success(let assetDataModelList):
-                presenterResponse = strongSelf.presenterResponseFromSuccessDataModelList(assetDataModelList: assetDataModelList)
+                presenterResponse = self.presenterResponseFromSuccessDataModelList(assetDataModelList: assetDataModelList)
 
             case .error:
                 // do something better with the error here
@@ -58,7 +58,7 @@ class AssetCollectionPresenter: AssetCollectionPresenting {
 
             runner.run(.loading(show: false))
             runner.run(presenterResponse)
-        }
+        })
 	}
 }
 

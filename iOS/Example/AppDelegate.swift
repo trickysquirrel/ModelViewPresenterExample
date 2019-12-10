@@ -8,7 +8,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-	var appCoordinator: AppCoordinator?
+	var appCoordinator: AppRouter?
 
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         guard let window = window else { return true }
 
-        let thirdPartyAnalyticsReporter = ThirdyPartyAnalyticsReporter()
-        let analyticsFactory = AnalyticsReporterFactory(thirdPartyAnalyticsReporter: thirdPartyAnalyticsReporter)
+        let thirdPartyAnalyticsReporter = AnalyticsReporterFacade()
+        let analyticsFactory = AnalyticsReporterFactory(reporter: thirdPartyAnalyticsReporter)
         let dataLoaderFactory = DataLoaderFactory()
         let getDataServiceFactory = GetDataServiceFactory(dataLoaderFactory: dataLoaderFactory)
 
@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let navigationController = UINavigationController()
 
-        appCoordinator = AppCoordinator(window: window,
+        appCoordinator = AppRouter(window: window,
                                             navigationController: navigationController,
                                             viewControllerFactory: viewControllerFactory,
                                             informationAlert: InformationAlert())

@@ -10,7 +10,7 @@ class AssetSearchViewControllerModel: ViewControllerModel {
     // MARK: - UI Elements
 
     private var searchBar: XCUIElement {
-        return app.otherElements[Access.searchBar.id]
+        return app.otherElements[Accessibility.searchBar.id]
     }
 
     private var searchBarClearButton: XCUIElement {
@@ -18,11 +18,11 @@ class AssetSearchViewControllerModel: ViewControllerModel {
     }
 
     private var loadingView: XCUIElement {
-        return app.otherElements[Access.loadingView.id]
+        return app.otherElements[Accessibility.loadingView.id]
     }
 
     private var collectionView: XCUIElement {
-        return app.collectionViews[Access.searchCollectionView.id]
+        return app.collectionViews[Accessibility.searchCollectionView.id]
     }
 
     private func cellAtIndex(_ index: Int) -> XCUIElement {

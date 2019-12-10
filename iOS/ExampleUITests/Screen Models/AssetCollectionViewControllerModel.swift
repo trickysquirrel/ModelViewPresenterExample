@@ -10,7 +10,7 @@ class AssetCollectionViewControllerModel: ViewControllerModel {
     // MARK: - UI Elements
 
     private var collectionView: XCUIElement {
-        return app.collectionViews[Access.assetCollectionView.id]
+        return app.collectionViews[Accessibility.assetCollectionView.id]
     }
 
     private func cellAtIndex(_ index: Int) -> XCUIElement {

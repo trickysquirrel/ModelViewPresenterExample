@@ -10,11 +10,11 @@ class AssetTypeSelectionViewControllerModel: ViewControllerModel {
     // MARK: - UI Elements
 
     private var moviesButton: XCUIElement {
-        return app.buttons[Access.selectionMoviesButton.id]
+        return app.buttons[Accessibility.selectionMoviesButton.id]
     }
 
     private var searchButton: XCUIElement {
-        return app.buttons[Access.selectionSearchButton.id]
+        return app.buttons[Accessibility.selectionSearchButton.id]
     }
 
     // MARK: - UI Elements to identiy screen when navigating and waiting for screen to appear

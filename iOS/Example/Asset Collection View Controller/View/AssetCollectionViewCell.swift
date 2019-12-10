@@ -3,7 +3,6 @@
 //
 
 import UIKit
-import SDWebImage
 
 class AssetCollectionViewCell: UICollectionViewCell {
 
@@ -13,7 +12,7 @@ class AssetCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var labelTitle: UILabel!
 
 	func configure(viewModel: AssetViewModel) {
-		imageView.sd_setImage(with: viewModel.imageUrl, completed: nil)
+        imageView.setImage(from: viewModel.imageUrl)
         labelTitle.text = viewModel.title
 	}
 
