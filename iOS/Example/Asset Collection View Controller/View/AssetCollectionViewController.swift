@@ -80,7 +80,7 @@ private extension AssetCollectionViewController {
 
 
     private func reloadDataSource(viewModelList: [AssetViewModel]) {
-        let sections = CollectionSection<AssetViewModel>(title: nil, rows: viewModelList.map { CollectionRow<AssetViewModel>(data: $0, cellIdentifier: AssetCollectionViewCell.reuseIdentifier) })
+        let sections = CollectionSection<AssetViewModel>(rows: viewModelList)
         
         dataSource.reload(
             sections: [sections],

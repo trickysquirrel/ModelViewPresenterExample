@@ -5,16 +5,19 @@
 import Foundation
 import UIKit
 
+struct CollectionSection<T> {
+    let rows:[T]
+}
 
 class CollectionViewDataSource<CellType, DataType>: NSObject, UICollectionViewDelegate, UICollectionViewDataSource where CellType: UICollectionViewCell {
 
 	typealias CellObjectClosure = (_ cell: CellType, _ object: DataType) -> ()
 	typealias ObjectIndexPathClosure = (_ object: DataType, _ indexPath: IndexPath) -> ()
-    typealias ObjectClosure = (_ object: DataType) -> (String)
+    typealias ObjectToStringClosure = (_ object: DataType) -> (String)
 
 	private var sections: [CollectionSection<DataType>] = []
     private var configureCellClosure: CellObjectClosure = { _, _ in }
-    private var cellIdentifierClosure: ObjectClosure = { _ in return "closure not set" }
+    private var cellIdentifierClosure: ObjectToStringClosure = { _ in return "closure not set" }
     private var selectCellClosure: ObjectIndexPathClosure = { _, _ in }
 	private weak var collectionView: UICollectionView?
 
@@ -26,7 +29,7 @@ class CollectionViewDataSource<CellType, DataType>: NSObject, UICollectionViewDe
 
     func reload(
         sections: [CollectionSection<DataType>],
-        cellIdentifier: @escaping ObjectClosure,
+        cellIdentifier: @escaping ObjectToStringClosure,
         configureCell: @escaping CellObjectClosure,
         selectCell: @escaping ObjectIndexPathClosure
     ) {
@@ -57,13 +60,13 @@ class CollectionViewDataSource<CellType, DataType>: NSObject, UICollectionViewDe
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		guard let row = sections[safe:indexPath.section]?.rows[safe:indexPath.row] else { return UICollectionViewCell() }
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifierClosure(row.data), for: indexPath) as? CellType else { return UICollectionViewCell() }
-		configureCellClosure(cell, row.data)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifierClosure(row), for: indexPath) as? CellType else { return UICollectionViewCell() }
+		configureCellClosure(cell, row)
 		return cell
 	}
 
 	private func objectAtIndexPath(_ indexPath: IndexPath) -> DataType? {
-		return sections[safe:indexPath.section]?.rows[safe:indexPath.row]?.data
+		return sections[safe:indexPath.section]?.rows[safe:indexPath.row]
 	}
 
 	// MARK: CollectionView delegate
