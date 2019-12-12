@@ -56,7 +56,7 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController {
 
-    /// typically we would use contraints here, just doing the basics for now
+    /// typically we would use contraints here, just doing the basics for now for a dummy VC
     private func addButtonToView(withTitle title: String, yPosition: CGFloat, selector: Selector, accessID: String) {
         let button = UIButton(frame: CGRect(x: 100, y: yPosition, width: 100, height: 50))
         button.setTitle(title, for: .normal)

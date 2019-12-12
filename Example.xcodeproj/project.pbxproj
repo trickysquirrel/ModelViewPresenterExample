@@ -49,7 +49,6 @@
 		30910C701F90159900440731 /* AssetDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30910C6F1F90159900440731 /* AssetDetailsViewController.swift */; };
 		30AA7F411F9DCDAC0034BEED /* Throttle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA7F401F9DCDAC0034BEED /* Throttle.swift */; };
 		30AA7F431F9DCF920034BEED /* StubThrottle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA7F421F9DCF920034BEED /* StubThrottle.swift */; };
-		30AA7F471F9F1AE50034BEED /* String+UrlEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA7F461F9F1AE50034BEED /* String+UrlEncoding.swift */; };
 		30C954201F85DF97000ABE33 /* AnalyticsReporterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C9541F1F85DF97000ABE33 /* AnalyticsReporterFactory.swift */; };
 		30C954271F863466000ABE33 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C954261F863466000ABE33 /* LoadingIndicator.swift */; };
 		30C954291F8635E4000ABE33 /* InformationAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C954281F8635E4000ABE33 /* InformationAlert.swift */; };
@@ -137,7 +136,6 @@
 		30910C6F1F90159900440731 /* AssetDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDetailsViewController.swift; sourceTree = "<group>"; };
 		30AA7F401F9DCDAC0034BEED /* Throttle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttle.swift; sourceTree = "<group>"; };
 		30AA7F421F9DCF920034BEED /* StubThrottle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubThrottle.swift; sourceTree = "<group>"; };
-		30AA7F461F9F1AE50034BEED /* String+UrlEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UrlEncoding.swift"; sourceTree = "<group>"; };
 		30C9541F1F85DF97000ABE33 /* AnalyticsReporterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsReporterFactory.swift; sourceTree = "<group>"; };
 		30C954261F863466000ABE33 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		30C954281F8635E4000ABE33 /* InformationAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationAlert.swift; sourceTree = "<group>"; };
@@ -366,7 +364,6 @@
 				3070C5361F8EBEF400F97C17 /* AppDispatching.swift */,
 				3070C5521F8ECD9500F97C17 /* AccessibilityIdentifiers.swift */,
 				30AA7F401F9DCDAC0034BEED /* Throttle.swift */,
-				30AA7F461F9F1AE50034BEED /* String+UrlEncoding.swift */,
 				30E440FF239E41BE00B0E3E9 /* Runner.swift */,
 				30E44101239E420200B0E3E9 /* DispatchQueue+AsyncSafe.swift */,
 				30E44107239F03B300B0E3E9 /* UIImageView+URL.swift */,
@@ -705,7 +702,6 @@
 				30E44102239E420200B0E3E9 /* DispatchQueue+AsyncSafe.swift in Sources */,
 				301D71451FAA6FAA007D29DE /* LifecycleReporter.swift in Sources */,
 				30827CD51F96925B0090F021 /* AssetSearchPresenter.swift in Sources */,
-				30AA7F471F9F1AE50034BEED /* String+UrlEncoding.swift in Sources */,
 				308179191F84EFDD001F44FD /* AssetCollectionPresenter.swift in Sources */,
 				30E44113239F679300B0E3E9 /* AssetDataLoader.swift in Sources */,
 				30115B171F8438C20042D614 /* ViewControllerFactory.swift in Sources */,
