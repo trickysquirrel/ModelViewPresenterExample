@@ -14,7 +14,7 @@ class ExampleUITests: UITestCase {
     // by ScreenModels that contain only the actions they have available for each ViewController
 
     // We should aim to not pimarily rely on UI tests, the bulk of our tests should primarly be lower down in
-    // the stack, focused and fast, supported by a smaller number of higher level / broad tests such as UI tests.
+    // the stack, focused and fast, like unit and ViewController integrated tests then supported by a smaller number of higher level/broad tests such as UI tests.
 
     // There are other kinds of UI tests, check out snap shot testing https://github.com/uber/ios-snapshot-test-case/
     // this is great for checking visual elements, e.g aligments, visibility etc
@@ -29,7 +29,7 @@ class ExampleUITests: UITestCase {
 
         launchApp()
 
-        AssetTypeSelectionViewControllerModel(context: context)
+        AssetTypeSelectionScreenModel(context: context)
             .waitForScreenAppearanceToBeHitable()
             .verify(navigationTitle: "Selection")
             .navigateToMovieCollectionByTappingButton()
@@ -59,7 +59,7 @@ class ExampleUITests: UITestCase {
 
         launchApp()
 
-        AssetTypeSelectionViewControllerModel(context: context)
+        AssetTypeSelectionScreenModel(context: context)
 
             // wait for home view and then select search button
             .waitForScreenAppearanceToBeHitable()

@@ -5,7 +5,7 @@
 import XCTest
 @testable import Example
 
-class AssetCollectionViewControllerModel: ViewControllerModel {
+class AssetCollectionScreenModel: ViewControllerScreenModel {
 
     // MARK: - UI Elements
 
@@ -29,11 +29,11 @@ class AssetCollectionViewControllerModel: ViewControllerModel {
     // MARK: Actions
 
     @discardableResult
-    func navigateToAssetDetailsByTappingCell(atIndex index: Int, fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> AssetDetailsViewControllerModel {
+    func navigateToAssetDetailsByTappingCell(atIndex index: Int, fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> AssetDetailsScreenModel {
         let cell = cellAtIndex(index)
         XCTAssertTrue(cell.exists, "asset collection cell not found", file: fileStatic, line: line)
         cell.tap()
-        return AssetDetailsViewControllerModel(context: context, parent: self)
+        return AssetDetailsScreenModel(context: context, parent: self)
     }
 
 }

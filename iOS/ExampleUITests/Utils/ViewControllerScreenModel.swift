@@ -5,9 +5,9 @@
 import XCTest
 
 
-class ViewControllerModel {
+class ViewControllerScreenModel {
 
-    var parent: ViewControllerModel?
+    var parent: ViewControllerScreenModel?
 
     let context: UITestContext
 
@@ -20,7 +20,7 @@ class ViewControllerModel {
     }
 
     @discardableResult
-    init(context: UITestContext, parent: ViewControllerModel? = nil) {
+    init(context: UITestContext, parent: ViewControllerScreenModel? = nil) {
         self.context = context
         self.parent = parent
     }
@@ -92,17 +92,17 @@ class ViewControllerModel {
     // MARK: Actions
 
     @discardableResult
-    func tapBackButton(file: StaticString = #file, line: UInt = #line) -> ViewControllerModel {
+    func tapBackButton(file: StaticString = #file, line: UInt = #line) -> ViewControllerScreenModel {
         navigationBackButton.tap()
         XCTAssertNotNil(parent, "screen object does not have parent to back up to", file: file, line: line)
         return parent!
     }
 
     @discardableResult
-    func tapBackButtonToSearch(file: StaticString = #file, line: UInt = #line) -> AssetSearchViewControllerModel {
+    func tapBackButtonToSearch(file: StaticString = #file, line: UInt = #line) -> AssetSearchScreenModel {
         navigationBackButton.tap()
         XCTAssertNotNil(parent, "screen object does not have parent to back up to", file: file, line: line)
-        let searchParent = parent as? AssetSearchViewControllerModel
+        let searchParent = parent as? AssetSearchScreenModel
         XCTAssertNotNil(searchParent, "screen object does not have parent to back up to", file: file, line: line)
         return searchParent!
     }

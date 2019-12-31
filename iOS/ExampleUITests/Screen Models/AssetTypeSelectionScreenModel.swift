@@ -5,7 +5,7 @@
 import XCTest
 @testable import Example
 
-class AssetTypeSelectionViewControllerModel: ViewControllerModel {
+class AssetTypeSelectionScreenModel: ViewControllerScreenModel {
 
     // MARK: - UI Elements
 
@@ -29,19 +29,19 @@ class AssetTypeSelectionViewControllerModel: ViewControllerModel {
     // MARK: Actions
 
     @discardableResult
-    func navigateToMovieCollectionByTappingButton(fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> AssetCollectionViewControllerModel {
+    func navigateToMovieCollectionByTappingButton(fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> AssetCollectionScreenModel {
         XCTAssertTrue(moviesButton.exists, "movies button does not exist", file: fileStatic, line: line)
         XCTAssertTrue(moviesButton.isHittable, "movies button is not selectable", file: fileStatic, line: line)
         moviesButton.tap()
-        return AssetCollectionViewControllerModel(context: context, parent: self)
+        return AssetCollectionScreenModel(context: context, parent: self)
     }
 
     @discardableResult
-    func navigateToSearchCollectionByTappingButton(fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> AssetSearchViewControllerModel {
+    func navigateToSearchCollectionByTappingButton(fileStatic: StaticString = #file, file: String = #file, line: UInt = #line) -> AssetSearchScreenModel {
         XCTAssertTrue(searchButton.exists, "movies button does not exist", file: fileStatic, line: line)
         XCTAssertTrue(searchButton.isHittable, "movies button is not selectable", file: fileStatic, line: line)
         searchButton.tap()
-        return AssetSearchViewControllerModel(context: context, parent: self)
+        return AssetSearchScreenModel(context: context, parent: self)
     }
 
 }

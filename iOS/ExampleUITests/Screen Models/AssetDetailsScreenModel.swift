@@ -5,7 +5,7 @@
 import XCTest
 @testable import Example
 
-class AssetDetailsViewControllerModel: ViewControllerModel {
+class AssetDetailsScreenModel: ViewControllerScreenModel {
 
     // MARK: - UI Elements
 
