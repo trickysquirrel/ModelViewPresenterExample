@@ -2,7 +2,8 @@
 
 ### An iOS app to demonstrate one possible way to construct larger complex apps, handling 3rd party dependancies, Unit Testing and UI Automation.
 
-(Please note that this app is not too concerned with UI and focuses on those things mentioned above)
+(Please note that this app is not too concerned with UI and focuses on those things mentioned above, you can download the code and run, no need to update pods they are checked in this example to make it easier to get up and running)
+
 
 ## Architecture
 
@@ -65,7 +66,11 @@ Check out the `AssetCollectionViewController` along with `AssetCollectionPresent
 ### Further Work
 
 Error handling for failed API calls.
+
 Creating modules for specific areas of the app, speeds up build time and enforces good dependancies (but only required as the projects get much bigger)
+
 Acceptance tests to cover the entire ViewController and their Presenter and Models.
+
 Localisations
+
 UI
