@@ -8,10 +8,10 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-	var appCoordinator: AppRouter?
+	var appRouter: AppRouter?
 
 
-	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         window = UIWindow(frame: UIScreen.main.bounds)
         guard let window = window else { return true }
@@ -22,16 +22,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let navigationController = UINavigationController()
 
-        appCoordinator = AppRouter(window: window,
-                                            navigationController: navigationController,
-                                            viewControllerFactory: viewControllerFactory,
-                                            informationAlert: InformationAlert(),
-                                            animateTransitions: true)
+        appRouter = AppRouter(window: window,
+                                   navigationController: navigationController,
+                                   viewControllerFactory: viewControllerFactory,
+                                   informationAlert: InformationAlert(),
+                                   animateTransitions: true)
         
-        appCoordinator?.start()
+        appRouter?.start()
 
         return true
-	}
+    }
 }
 
 
@@ -40,19 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // MARK:- App life cycle
 
 extension AppDelegate {
-	func applicationWillResignActive(_ application: UIApplication) {
-	}
-
-	func applicationDidEnterBackground(_ application: UIApplication) {
-	}
-
-	func applicationWillEnterForeground(_ application: UIApplication) {
-	}
-
-	func applicationDidBecomeActive(_ application: UIApplication) {
-	}
-
-	func applicationWillTerminate(_ application: UIApplication) {
-	}
+	func applicationWillResignActive(_ application: UIApplication) {}
+	func applicationDidEnterBackground(_ application: UIApplication) {}
+	func applicationWillEnterForeground(_ application: UIApplication) {}
+	func applicationDidBecomeActive(_ application: UIApplication) {}
+	func applicationWillTerminate(_ application: UIApplication) {}
 }
 

@@ -63,6 +63,7 @@ As a developer several of the projects I've worked on have a reasonalble percent
 
 Check out the `AssetCollectionViewController` along with `AssetCollectionPresenter` and `AssetCollectionInteractor`, notice all properties are `let`s, the only variable source of truth for this area of the code is contained within `CollectionViewDataSource`.
 
+
 ### Further Work
 
 Error handling for failed API calls.
