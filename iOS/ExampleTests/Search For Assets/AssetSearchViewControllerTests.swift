@@ -38,7 +38,6 @@ extension AssetSearchViewControllerTests {
     func test_viewDidLoad_configuresSearchController() {
         XCTAssertTrue(searchController.searchResultsUpdater === viewController)
         XCTAssertFalse(searchController.obscuresBackgroundDuringPresentation)
-        XCTAssertEqual(searchController.searchBar.placeholder, "enter title")
         XCTAssertTrue(viewController.definesPresentationContext)
     }
 

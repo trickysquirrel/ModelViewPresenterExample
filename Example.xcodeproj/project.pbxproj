@@ -45,6 +45,7 @@
 		30827CCE1F9689540090F021 /* AssetSearchViewControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30827CCD1F9689540090F021 /* AssetSearchViewControllerModel.swift */; };
 		30827CD11F968CCF0090F021 /* AssetSearchViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30827CD01F968CCF0090F021 /* AssetSearchViewControllerTests.swift */; };
 		30827CD51F96925B0090F021 /* AssetSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30827CD41F96925B0090F021 /* AssetSearchPresenter.swift */; };
+		308ED2D723A89BEA007CF529 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 308ED2D623A89BEA007CF529 /* README.md */; };
 		30910C6D1F9012E700440731 /* AssetDetailsScreenObjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30910C6C1F9012E700440731 /* AssetDetailsScreenObjectModel.swift */; };
 		30910C701F90159900440731 /* AssetDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30910C6F1F90159900440731 /* AssetDetailsViewController.swift */; };
 		30AA7F411F9DCDAC0034BEED /* Throttle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA7F401F9DCDAC0034BEED /* Throttle.swift */; };
@@ -132,6 +133,7 @@
 		30827CCD1F9689540090F021 /* AssetSearchViewControllerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetSearchViewControllerModel.swift; sourceTree = "<group>"; };
 		30827CD01F968CCF0090F021 /* AssetSearchViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetSearchViewControllerTests.swift; sourceTree = "<group>"; };
 		30827CD41F96925B0090F021 /* AssetSearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetSearchPresenter.swift; sourceTree = "<group>"; };
+		308ED2D623A89BEA007CF529 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		30910C6C1F9012E700440731 /* AssetDetailsScreenObjectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDetailsScreenObjectModel.swift; sourceTree = "<group>"; };
 		30910C6F1F90159900440731 /* AssetDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDetailsViewController.swift; sourceTree = "<group>"; };
 		30AA7F401F9DCDAC0034BEED /* Throttle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttle.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 		30115AE51F8436310042D614 = {
 			isa = PBXGroup;
 			children = (
+				308ED2D623A89BEA007CF529 /* README.md */,
 				301844CC1FD5F87B000A9B59 /* iOS */,
 				30115B111F84364A0042D614 /* info */,
 				30115AEF1F8436310042D614 /* Products */,
@@ -589,6 +592,7 @@
 			files = (
 				3081791B1F84F300001F44FD /* movies.json in Resources */,
 				30115B121F84364A0042D614 /* info in Resources */,
+				308ED2D723A89BEA007CF529 /* README.md in Resources */,
 				308179291F84FBCA001F44FD /* AssetCollectionViewCell.xib in Resources */,
 				302867551F97305F00AC53B5 /* AssetSearchViewController.xib in Resources */,
 				308179111F84EAA6001F44FD /* AssetCollectionViewController.xib in Resources */,

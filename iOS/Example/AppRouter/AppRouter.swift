@@ -31,16 +31,19 @@ class AppRouter {
 	private let navigationController: UINavigationController
 	private let viewControllerFactory: ViewControllerFactory
     private let informationAlert: InformationAlertProtocol
+    private let animateTransitions: Bool
 
 
 	init(window: UIWindow,
          navigationController: UINavigationController,
          viewControllerFactory: ViewControllerFactory,
-         informationAlert: InformationAlertProtocol) {
+         informationAlert: InformationAlertProtocol,
+         animateTransitions: Bool) {
 		self.window = window
 		self.viewControllerFactory = viewControllerFactory
 		self.navigationController = navigationController
         self.informationAlert = informationAlert
+        self.animateTransitions = animateTransitions
 		window.rootViewController = navigationController
 		window.makeKeyAndVisible()
 	}
@@ -56,9 +59,9 @@ class AppRouter {
         // Large scale application that push and pop whilst animating can suffer random failures when used alot in unit tests as the system can get confused,
         // by removing the animation we make the test simpler by not needing an expectation and more robust as timing is not involded which
         // causes the majority of flaky tests of these kind
-        let isRunningTests = NSClassFromString("XCTestCase") != nil
-        let shouldAnimate = isRunningTests ? false : animated
-        navigationController.pushViewController(viewController, animated: shouldAnimate)
+        //let isRunningTests = NSClassFromString("XCTestCase") != nil
+        //let shouldAnimate = isRunningTests ? false : animated
+        navigationController.pushViewController(viewController, animated: animateTransitions)
     }
 }
 

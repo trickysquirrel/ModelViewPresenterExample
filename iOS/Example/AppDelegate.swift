@@ -25,7 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appCoordinator = AppRouter(window: window,
                                             navigationController: navigationController,
                                             viewControllerFactory: viewControllerFactory,
-                                            informationAlert: InformationAlert())
+                                            informationAlert: InformationAlert(),
+                                            animateTransitions: true)
         
         appCoordinator?.start()
 

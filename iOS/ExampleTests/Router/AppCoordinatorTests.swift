@@ -22,9 +22,10 @@ class AppCoordinatorTests: XCTestCase {
         let analyticsReporterFactory = AnalyticsReporterFactory(reporter: stubAnalyticsReporter)
         let viewControllerFactory = ViewControllerFactory(analyticsFactory: analyticsReporterFactory)
         appCoordinator = AppRouter(window: window,
-                                            navigationController: navigationController,
-                                            viewControllerFactory: viewControllerFactory,
-                                            informationAlert: stubAlert)
+                                   navigationController: navigationController,
+                                   viewControllerFactory: viewControllerFactory,
+                                   informationAlert: stubAlert,
+                                   animateTransitions: false)
     }
 
 

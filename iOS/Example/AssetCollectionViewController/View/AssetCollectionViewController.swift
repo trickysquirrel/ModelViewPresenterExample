@@ -82,6 +82,10 @@ private extension AssetCollectionViewController {
 
     private func reloadDataSource(viewModelList: [AssetViewModel]) {
         let sections = CollectionSection<AssetViewModel>(rows: viewModelList)
+        // There so many ways to do this.
+        // This is just one example, the main idea is to keep the flow of the code close together making is easier for the
+        // reader to follow the flow of the code and hiding the variable that holds the source of truth so it cannot be accidentally
+        // manipulated and cause alot of those bugs we experience around data being out of sync with collection views
         dataSource.reload(
             sections: [sections],
             cellIdentifier: { viewModel in
